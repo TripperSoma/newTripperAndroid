@@ -69,7 +69,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
         }
     }
 
-    fun changeActionBar(color: Int) {
+    private fun changeActionBar(color: Int) {
         val menuBtn: Drawable = resources.getDrawable(R.drawable.ic_menu)
         menuBtn.setColorFilter(color, PorterDuff.Mode.SRC_ATOP)
 
