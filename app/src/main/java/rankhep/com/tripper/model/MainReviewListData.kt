@@ -1,6 +1,6 @@
 package rankhep.com.tripper.model
 
-class MainReviewListData(var content: String,
+data class MainReviewListData(var content: String,
                          var photolist: ArrayList<String>,
                          var rating: Float,
                          var schedulenum: Int,

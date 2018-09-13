@@ -6,17 +6,27 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_main.view.*
+import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
+import rankhep.com.tripper.adapter.MainReviewAdapter
+import rankhep.com.tripper.model.MainReviewListData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
 
     private lateinit var v: View
+    private var mAdapter = MainReviewAdapter()
+    private var items = ArrayList<MainReviewListData>()
 
     companion object {
         fun newInstance(): MainFragment {
@@ -35,10 +45,16 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.fragment_main, null)
+        mAdapter.items = items
 
+        getMainListData()
         v.apply {
             main_toolbar_menu_btn.setOnClickListener(this@MainFragment)
             toolbar_container.addOnOffsetChangedListener(this@MainFragment)
+            review_list.run{
+                layoutManager = GridLayoutManager(context, 2)
+                adapter = mAdapter
+            }
         }
         return v
     }
@@ -52,7 +68,6 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-        Log.d("MainToolbarOffset", "" + verticalOffset)
         when {
             Math.abs(verticalOffset) == appBarLayout.totalScrollRange -> {  //닫혔을때
                 changeActionBar(Color.BLACK)
@@ -81,5 +96,28 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
             main_toolbar_search_btn.setImageDrawable(searchBtn)
             main_toolbar_title_text.setTextColor(color)
         }
+    }
+
+    private fun getMainListData() {
+        NetworkHelper.networkInstance.getMainReviewData().enqueue(object : Callback<List<MainReviewListData>> {
+            override fun onFailure(call: Call<List<MainReviewListData>>?, t: Throwable?) {
+                t?.printStackTrace()
+            }
+
+            override fun onResponse(call: Call<List<MainReviewListData>>?, response: Response<List<MainReviewListData>>?) {
+                Log.e("asd", "" + response?.code())
+                response?.run {
+                    when (this.code()) {
+                        200 -> {
+                            this.body()?.let { items.addAll(it) }
+                            mAdapter.notifyDataSetChanged()
+                        }
+                        else -> {
+                        }
+                    }
+                }
+            }
+
+        })
     }
 }
