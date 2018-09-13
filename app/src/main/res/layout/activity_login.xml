@@ -22,13 +22,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:src="@drawable/ic_typo"
-        app:layout_constraintBottom_toTopOf="@+id/emailEdit"
+        app:layout_constraintBottom_toTopOf="@+id/loginEmailEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <EditText
-        android:id="@+id/emailEdit"
+        android:id="@+id/loginEmailEditText"
         android:layout_width="220dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
@@ -36,13 +36,13 @@
         android:hint="이메인"
         android:paddingHorizontal="12dp"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/pwdEdit"
+        app:layout_constraintBottom_toTopOf="@+id/loginPwdEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/typo" />
 
     <EditText
-        android:id="@+id/pwdEdit"
+        android:id="@+id/loginPwdEditText"
         android:layout_width="220dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
@@ -55,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailEdit" />
+        app:layout_constraintTop_toBottomOf="@id/loginEmailEditText" />
 
     <Button
         android:id="@+id/loginBtn"
@@ -71,7 +71,7 @@
         app:layout_constraintBottom_toTopOf="@+id/detectId"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pwdEdit" />
+        app:layout_constraintTop_toBottomOf="@id/loginPwdEditText" />
 
     <TextView
         android:id="@+id/detectId"
