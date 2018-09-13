@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/set_taste_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+    <ScrollView
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/recommend_container"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@color/colorPrimary">
+
+                <TextView
+                    android:id="@+id/recommend_city_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="추천도시"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/recommend_city_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/recommend_city_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="오사카 도쿄" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/period_container"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="#ff5b2c">
+
+                <TextView
+                    android:id="@+id/period_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="여행 기간"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/period"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="3일"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/period_text"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="어떤 스타일로\n여행을 즐기고 싶으신가요?" />
+
+            <rankhep.com.tripper.custom.TasteProgressBar
+                android:id="@+id/shopping_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:subTitle="여행을 하면서 쇼핑을 하는게 좋아요!"
+                app:title="shopping" />
+
+            <rankhep.com.tripper.custom.TasteProgressBar
+                android:id="@+id/food_progressbar"
+                android:layout_marginTop="32dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:subTitle="먹으러 가는게 여행 아니겠어요?"
+                app:title="Food" />
+
+            <rankhep.com.tripper.custom.TasteProgressBar
+                android:id="@+id/tourist_progressbar"
+                android:layout_width="match_parent"
+                android:layout_marginTop="32dp"
+                android:layout_height="wrap_content"
+                app:subTitle="직접 발로 찾는 여행이 좋아요!"
+                app:title="Tourist" />
+
+            <rankhep.com.tripper.custom.TasteProgressBar
+                android:id="@+id/culture_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:subTitle="그 나라의 문화를 느끼는 여행이 좋아요!"
+                android:layout_marginTop="32dp"
+                app:title="Culture" />
+
+            <rankhep.com.tripper.custom.TasteProgressBar
+                android:id="@+id/entertainment_progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:subTitle="그 나라만의 오락을 느끼고 싶어요!"
+                app:title="Entertainment" />
+
+            <rankhep.com.tripper.custom.CheckYesOrNoView
+                android:layout_marginTop="42dp"
+                android:id="@+id/with_child"
+                android:layout_width="match_parent"
+                app:withTitle="아이 동반 여부"
+                app:imgSrc="@drawable/ic_child_friendly_black_24dp"
+                app:withSubTitle="아이를 동반하는 경우를 참고해\n동선을 추천합니다."
+                android:layout_height="wrap_content" />
+
+            <rankhep.com.tripper.custom.CheckYesOrNoView
+                android:id="@+id/with_old"
+                android:layout_width="match_parent"
+                android:layout_marginTop="32dp"
+                app:withTitle="노약자 동반 여부"
+                app:imgSrc="@drawable/ic_accessible_black_24dp"
+                app:withSubTitle="노약자를 동반하는 경우를 참고해\n동선을 추천합니다."
+                android:layout_height="wrap_content" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/next_fab"
+                android:layout_gravity="right"
+                android:layout_marginTop="32dp"
+                android:layout_width="wrap_content"
+                app:borderWidth="0dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:src="@mipmap/ic_next"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:tint="#ffffff"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

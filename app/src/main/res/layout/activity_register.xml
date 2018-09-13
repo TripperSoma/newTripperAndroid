@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <ImageView
+        android:id="@+id/logo_img"
+        android:layout_width="133dp"
+        android:layout_height="173dp"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <com.loopeer.shadow.ShadowView
+        android:id="@+id/create_tripper_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:elevation="10dp"
+        app:cornerRadius="4dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo_img"
+        app:shadowMarginBottom="10dp"
+        app:shadowMarginRight="10dp"
+        app:shadowRadius="72dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/tripper_container"
+            android:layout_width="220dp"
+            android:layout_height="33dp"
+            android:background="@drawable/bg_round_square"
+
+            android:backgroundTint="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/tripper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tripper"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tripper_start"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tripper_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="으로 시작하기"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/tripper"
+                app:layout_constraintLeft_toRightOf="@id/tripper"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tripper" />
+        </android.support.constraint.ConstraintLayout>
+    </com.loopeer.shadow.ShadowView>
+
+    <com.loopeer.shadow.ShadowView
+        android:id="@+id/start_facebook_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:elevation="10dp"
+        app:cornerRadius="4dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create_tripper_account"
+        app:shadowMarginBottom="10dp"
+        app:shadowMarginRight="10dp"
+        app:shadowRadius="72dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="220dp"
+            android:layout_height="33dp"
+            android:background="@drawable/bg_round_square"
+
+            android:backgroundTint="#466fe9">
+
+            <TextView
+                android:id="@+id/facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="페이스북"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/facebook_start"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/facebook_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="으로 시작하기"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/facebook"
+                app:layout_constraintLeft_toRightOf="@id/facebook"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/facebook" />
+        </android.support.constraint.ConstraintLayout>
+    </com.loopeer.shadow.ShadowView>
+
+    <com.loopeer.shadow.ShadowView
+        android:id="@+id/start_naver_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:elevation="10dp"
+        app:cornerRadius="4dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_facebook_btn"
+        app:shadowMarginBottom="10dp"
+        app:shadowMarginRight="10dp"
+        app:shadowRadius="72dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="220dp"
+            android:layout_height="33dp"
+            android:background="@drawable/bg_round_square"
+
+            android:backgroundTint="#44d838">
+
+            <TextView
+                android:id="@+id/naver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="네이버"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/naver_start"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/naver_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로 시작하기"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/naver"
+                app:layout_constraintLeft_toRightOf="@id/naver"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/naver" />
+        </android.support.constraint.ConstraintLayout>
+
+
+    </com.loopeer.shadow.ShadowView>
+
+    <TextView
+        android:id="@+id/do_you_have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center_horizontal"
+        android:text="계정이 있으신가요?"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/login_btn"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_naver_btn" />
+
+    <TextView
+        android:id="@+id/login_btn"
+        android:text="@string/login"
+        android:textStyle="bold"
+        android:textSize="10sp"
+        android:textColor="@color/textBlackColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/do_you_have_account"
+        app:layout_constraintLeft_toRightOf="@id/do_you_have_account"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/do_you_have_account" />
+</android.support.constraint.ConstraintLayout>

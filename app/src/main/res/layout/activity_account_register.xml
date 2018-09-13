@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.account_register.AccountRegisterActivity">
+
+    <include
+        android:id="@+id/account_toolbar"
+        layout="@layout/toolbar_account" />
+
+    <TextView
+        android:id="@+id/register_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="회원가입"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_toolbar" />
+
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="이름"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/register_text"
+        app:layout_constraintTop_toBottomOf="@id/register_text"
+        tools:layout_editor_absoluteY="4dp" />
+
+    <EditText
+        android:id="@+id/name_edit_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="이름을 입력해주세요."
+        android:textSize="12sp"
+        android:theme="@style/EditTextRegisterTheme"
+        app:layout_constraintLeft_toLeftOf="@id/name_text"
+        app:layout_constraintTop_toBottomOf="@id/name_text" />
+
+    <TextView
+        android:id="@+id/email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="이메일"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/name_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/name_edit_text"
+        tools:layout_editor_absoluteY="4dp" />
+
+    <EditText
+        android:id="@+id/email_edit_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="이메일을 입력해주세요."
+        android:textSize="12sp"
+        android:theme="@style/EditTextRegisterTheme"
+        app:layout_constraintLeft_toLeftOf="@id/email_text"
+        app:layout_constraintTop_toBottomOf="@id/email_text" />
+
+    <TextView
+        android:id="@+id/pwd_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="비밀번호"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/email_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/email_edit_text"
+        tools:layout_editor_absoluteY="4dp" />
+
+    <EditText
+        android:id="@+id/pwd_edit_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="비밀번호를 입력해주세요."
+        android:inputType="textPassword"
+        android:textSize="12sp"
+        android:theme="@style/EditTextRegisterTheme"
+        app:layout_constraintLeft_toLeftOf="@id/pwd_text"
+        app:layout_constraintTop_toBottomOf="@id/pwd_text" />
+
+
+    <TextView
+        android:id="@+id/pwd_check_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="비밀번호 확인"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/pwd_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/pwd_edit_text"
+        tools:layout_editor_absoluteY="4dp" />
+
+    <EditText
+        android:id="@+id/pwd_check_edit_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="비밀번를 한 번 더 입력해주세요."
+        android:inputType="textPassword"
+        android:textSize="12sp"
+        android:theme="@style/EditTextRegisterTheme"
+        app:layout_constraintLeft_toLeftOf="@id/pwd_check_text"
+        app:layout_constraintTop_toBottomOf="@id/pwd_check_text" />
+
+    <TextView
+        android:id="@+id/gender_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="성별"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/pwd_check_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/pwd_check_edit_text"
+        tools:layout_editor_absoluteY="4dp" />
+
+    <RadioGroup
+        android:id="@+id/toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/control_switch_background_border"
+        android:checkedButton="@+id/man"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="@id/gender_text"
+        app:layout_constraintTop_toBottomOf="@id/gender_text">
+
+        <RadioButton
+            android:id="@+id/man"
+            android:layout_width="36dp"
+            android:layout_height="22dp"
+            android:background="@drawable/control_switch_background_selector_left"
+            android:button="@null"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="남자"
+            android:textColor="@color/control_switch_color_selector"
+            android:textSize="8sp" />
+
+        <RadioButton
+            android:id="@+id/girl"
+            android:layout_width="36dp"
+            android:layout_height="22dp"
+            android:background="@drawable/control_switch_background_selector_right"
+            android:button="@null"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="여자"
+            android:textColor="@color/control_switch_color_selector"
+            android:textSize="8sp" />
+    </RadioGroup>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/finish_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@mipmap/ic_next"
+        android:tint="@android:color/white"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>

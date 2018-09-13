@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TasteProgressBar">
+        <attr name="title" format="string" />
+        <attr name="subTitle" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="CheckYesOrNoView">
+        <attr name="withTitle" format="string" />
+        <attr name="withSubTitle" format="string" />
+        <attr name="imgSrc" format="reference|integer"/>
+    </declare-styleable>
+</resources>

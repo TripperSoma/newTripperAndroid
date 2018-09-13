@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tripper</string>
+    <string name="nav_item_home">홈</string>
+    <string name="nav_item_my_daily">나의 일정</string>
+    <string name="nav_item_hotel_reservation">호텔 예약</string>
+    <string name="nav_item_airplane_reservation">비행기 예약</string>
+    <string name="login"><u>로그인하기</u></string>
+</resources>
