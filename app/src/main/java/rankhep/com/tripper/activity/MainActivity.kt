@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         settingBtn.setOnClickListener(this)
         myPlanBtn.setOnClickListener(this)
         homeBtn.setOnClickListener(this)
+
     }
 
 

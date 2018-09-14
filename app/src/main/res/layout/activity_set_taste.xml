@@ -30,7 +30,7 @@
                 android:background="@color/colorPrimary">
 
                 <TextView
-                    android:id="@+id/recommend_city_text"
+                    android:id="@+id/recommendCityText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -50,7 +50,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/recommend_city_text"
+                    app:layout_constraintLeft_toRightOf="@+id/recommendCityText"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="오사카 도쿄" />
             </android.support.constraint.ConstraintLayout>

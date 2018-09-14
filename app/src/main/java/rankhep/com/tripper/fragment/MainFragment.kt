@@ -1,5 +1,6 @@
 package rankhep.com.tripper.fragment
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
+import rankhep.com.tripper.activity.MakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
 import rankhep.com.tripper.model.MainReviewListData
 import retrofit2.Call
@@ -51,10 +53,11 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
         v.apply {
             main_toolbar_menu_btn.setOnClickListener(this@MainFragment)
             toolbar_container.addOnOffsetChangedListener(this@MainFragment)
-            review_list.run{
+            review_list.run {
                 layoutManager = GridLayoutManager(context, 2)
                 adapter = mAdapter
             }
+            set_location_btn.setOnClickListener(this@MainFragment)
         }
         return v
     }
@@ -63,6 +66,11 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
         when (p0.id) {
             R.id.main_toolbar_menu_btn -> {
                 (activity as MainActivity).openDrawer()
+            }
+
+            R.id.set_location_btn -> {
+                val intent = Intent(context, MakeScheduleActivity::class.java)
+                startActivityForResult(intent, 555)
             }
         }
     }
