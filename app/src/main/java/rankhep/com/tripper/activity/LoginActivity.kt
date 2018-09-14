@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.MediaType
@@ -12,6 +13,7 @@ import org.json.JSONObject
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.User
+import rankhep.com.tripper.utils.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,9 +52,9 @@ class LoginActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call<User>?, response: Response<User>?) {
                         if (response?.code() == 200) {
-                            val intent = Intent()
-                            intent.putExtra("user", response.body())
-                            setResult(Activity.RESULT_OK, intent)
+                            SharedPrefManager(applicationContext).setLoginState(true, response.body())
+                            Toast.makeText(applicationContext,"로그인 성공", Toast.LENGTH_SHORT).show()
+                            setResult(Activity.RESULT_OK)
                             finish()
                         } else {
                             Toast.makeText(applicationContext,"로그인 실패", Toast.LENGTH_SHORT).show()

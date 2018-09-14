@@ -1,34 +1,65 @@
 package rankhep.com.tripper.activity
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import android.opengl.Visibility
 import android.os.Bundle
-import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
-import android.view.MenuItem
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import rankhep.com.tripper.fragment.MainFragment
+import kotlinx.android.synthetic.main.menu_bottom.*
+import kotlinx.android.synthetic.main.menu_header.*
 import rankhep.com.tripper.R
+import rankhep.com.tripper.fragment.MainFragment
+import rankhep.com.tripper.model.User
+import rankhep.com.tripper.utils.SharedPrefManager
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.title){
-            "로그인"->{
-                val intent = Intent(this@MainActivity, LoginActivity::class.java)
-                startActivityForResult(intent, 333)
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-            }
-        }
-        return true
-    }
+    private val LOGIN_REQUEST_CODE = 333
+    lateinit var dataManager: SharedPrefManager
+    var user: User? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        replaceFragment(MainFragment.newInstance())
+        dataManager = SharedPrefManager(applicationContext)
+        initView()
+    }
 
-        navigation_view.setNavigationItemSelectedListener(this)
+    private fun initView() {
+        replaceFragment(MainFragment.newInstance())
+        checkUser()
+        loginBtn.setOnClickListener(this)
+        hotelReservationBtn.setOnClickListener(this)
+        airplaneReservationBtn.setOnClickListener(this)
+        settingBtn.setOnClickListener(this)
+        myPlanBtn.setOnClickListener(this)
+        homeBtn.setOnClickListener(this)
+    }
+
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.loginBtn -> {
+                val intent = Intent(this@MainActivity, LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+                }
+                startActivityForResult(intent, LOGIN_REQUEST_CODE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            333 -> {
+                checkUser()
+            }
+        }
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -37,14 +68,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fragmentTransaction.replace(R.id.fragment_container, fragment).commit()
     }
 
+
+    private fun checkUser() {
+        if (dataManager.isLogin()) {
+            user = dataManager.getUserData()
+            headerContainer.visibility = View.VISIBLE
+            loginBtn.visibility = View.GONE
+            idText.text = user?.email
+            nameText.text = user?.name
+        } else {
+            headerContainer.visibility = View.GONE
+            loginBtn.visibility = View.VISIBLE
+        }
+    }
+
     fun openDrawer() {
         drawer_layout.openDrawer(GravityCompat.START)
 
     }
-
-    fun closeDrawer() {
-        drawer_layout.closeDrawers()
-    }
-
 
 }
