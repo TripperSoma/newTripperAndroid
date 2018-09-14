@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun sendRequest(email: String, pwd: String) {
-        var paramObject = JSONObject()
+        val paramObject = JSONObject()
         paramObject.put("email", email)
         paramObject.put("password", pwd)
         NetworkHelper.networkInstance

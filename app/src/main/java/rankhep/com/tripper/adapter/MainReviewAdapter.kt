@@ -11,7 +11,7 @@ import rankhep.com.tripper.model.MainReviewListData
 
 
 class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>() {
-    public var items: ArrayList<MainReviewListData> = ArrayList()
+    var items: ArrayList<MainReviewListData> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_list, parent, false))

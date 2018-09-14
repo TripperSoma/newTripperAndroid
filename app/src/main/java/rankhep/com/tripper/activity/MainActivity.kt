@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             "로그인"->{
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 startActivityForResult(intent, 333)
+
             }
         }
         return true
