@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/account_toolbar"
+        android:id="@+id/accountToolbar"
         layout="@layout/toolbar_account" />
 
     <TextView
-        android:id="@+id/register_text"
+        android:id="@+id/registerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -18,7 +18,7 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/account_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/accountToolbar" />
 
     <TextView
         android:id="@+id/nameText"
@@ -29,12 +29,12 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/register_text"
-        app:layout_constraintTop_toBottomOf="@id/register_text"
+        app:layout_constraintLeft_toLeftOf="@id/registerText"
+        app:layout_constraintTop_toBottomOf="@id/registerText"
         tools:layout_editor_absoluteY="4dp" />
 
     <EditText
-        android:id="@+id/name_edit_text"
+        android:id="@+id/nameEditText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/nameText" />
 
     <TextView
-        android:id="@+id/email_text"
+        android:id="@+id/emailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -53,23 +53,23 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/name_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/name_edit_text"
+        app:layout_constraintLeft_toLeftOf="@id/nameEditText"
+        app:layout_constraintTop_toBottomOf="@id/nameEditText"
         tools:layout_editor_absoluteY="4dp" />
 
     <EditText
-        android:id="@+id/email_edit_text"
+        android:id="@+id/emailEditText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="이메일을 입력해주세요."
         android:textSize="12sp"
         android:theme="@style/EditTextRegisterTheme"
-        app:layout_constraintLeft_toLeftOf="@id/email_text"
-        app:layout_constraintTop_toBottomOf="@id/email_text" />
+        app:layout_constraintLeft_toLeftOf="@id/emailText"
+        app:layout_constraintTop_toBottomOf="@id/emailText" />
 
     <TextView
-        android:id="@+id/pwd_text"
+        android:id="@+id/pwdText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -77,12 +77,12 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/email_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/email_edit_text"
+        app:layout_constraintLeft_toLeftOf="@id/emailEditText"
+        app:layout_constraintTop_toBottomOf="@id/emailEditText"
         tools:layout_editor_absoluteY="4dp" />
 
     <EditText
-        android:id="@+id/pwd_edit_text"
+        android:id="@+id/pwdEditText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -90,12 +90,12 @@
         android:inputType="textPassword"
         android:textSize="12sp"
         android:theme="@style/EditTextRegisterTheme"
-        app:layout_constraintLeft_toLeftOf="@id/pwd_text"
-        app:layout_constraintTop_toBottomOf="@id/pwd_text" />
+        app:layout_constraintLeft_toLeftOf="@id/pwdText"
+        app:layout_constraintTop_toBottomOf="@id/pwdText" />
 
 
     <TextView
-        android:id="@+id/pwd_check_text"
+        android:id="@+id/pwdCheckText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -103,12 +103,12 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/pwd_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/pwd_edit_text"
+        app:layout_constraintLeft_toLeftOf="@id/pwdEditText"
+        app:layout_constraintTop_toBottomOf="@id/pwdEditText"
         tools:layout_editor_absoluteY="4dp" />
 
     <EditText
-        android:id="@+id/pwd_check_edit_text"
+        android:id="@+id/pwdCheckEditText"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -116,11 +116,11 @@
         android:inputType="textPassword"
         android:textSize="12sp"
         android:theme="@style/EditTextRegisterTheme"
-        app:layout_constraintLeft_toLeftOf="@id/pwd_check_text"
-        app:layout_constraintTop_toBottomOf="@id/pwd_check_text" />
+        app:layout_constraintLeft_toLeftOf="@id/pwdCheckText"
+        app:layout_constraintTop_toBottomOf="@id/pwdCheckText" />
 
     <TextView
-        android:id="@+id/gender_text"
+        android:id="@+id/genderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -128,8 +128,8 @@
         android:textColor="@android:color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/pwd_check_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/pwd_check_edit_text"
+        app:layout_constraintLeft_toLeftOf="@id/pwdCheckEditText"
+        app:layout_constraintTop_toBottomOf="@id/pwdCheckEditText"
         tools:layout_editor_absoluteY="4dp" />
 
     <RadioGroup
@@ -141,8 +141,8 @@
         android:background="@drawable/control_switch_background_border"
         android:checkedButton="@+id/man"
         android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="@id/gender_text"
-        app:layout_constraintTop_toBottomOf="@id/gender_text">
+        app:layout_constraintLeft_toLeftOf="@id/genderText"
+        app:layout_constraintTop_toBottomOf="@id/genderText">
 
         <RadioButton
             android:id="@+id/man"
@@ -170,7 +170,7 @@
     </RadioGroup>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/finish_btn"
+        android:id="@+id/accountRegisterFinishBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

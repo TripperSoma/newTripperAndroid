@@ -23,8 +23,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MakeScheduleActivity"/>
-        <activity android:name=".activity.SetMakeScheduleActivity"/>
+        <activity android:name=".activity.MakeScheduleActivity" />
+        <activity android:name=".activity.SetMakeScheduleActivity" />
+        <activity android:name=".activity.AccountRegister" />
     </application>
 
 </manifest>

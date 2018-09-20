@@ -28,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
         loginBtn.setOnClickListener {
             checkBlank(loginEmailEditText.text.toString(), loginPwdEditText.text.toString())
         }
+
+
     }
 
     private fun checkBlank(email: String, pwd: String) {
