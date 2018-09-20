@@ -25,7 +25,8 @@
 
         <activity android:name=".activity.MakeScheduleActivity" />
         <activity android:name=".activity.SetMakeScheduleActivity" />
-        <activity android:name=".activity.AccountRegister" />
+        <activity android:name=".activity.AccountRegisterActivity" />
+        <activity android:name=".activity.RegisterActivity"/>
     </application>
 
 </manifest>

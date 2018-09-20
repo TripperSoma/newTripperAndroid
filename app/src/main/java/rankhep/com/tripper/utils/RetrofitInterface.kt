@@ -17,7 +17,7 @@ import retrofit2.http.POST
 
 interface RetrofitInterface {
 
-    @POST("user/create/")
+    @POST("user/create")
     fun registerUser(@Body body: RequestBody): Call<User>
 //    @Header("Content-Type") contentType: String = "application/json",
 //    @Header("Accept") Accept: String = "*/*"

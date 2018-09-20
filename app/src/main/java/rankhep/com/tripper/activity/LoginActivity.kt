@@ -1,10 +1,8 @@
 package rankhep.com.tripper.activity
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.MediaType
@@ -25,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        loginBtn.setOnClickListener {
+        registerBtn.setOnClickListener {
             checkBlank(loginEmailEditText.text.toString(), loginPwdEditText.text.toString())
         }
 

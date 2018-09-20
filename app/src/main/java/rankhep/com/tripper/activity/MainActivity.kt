@@ -1,12 +1,10 @@
 package rankhep.com.tripper.activity
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_bottom.*
@@ -33,7 +31,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun initView() {
         replaceFragment(MainFragment.newInstance())
         checkUser()
-        loginBtn.setOnClickListener(this)
+        registerBtn.setOnClickListener(this)
         hotelReservationBtn.setOnClickListener(this)
         airplaneReservationBtn.setOnClickListener(this)
         settingBtn.setOnClickListener(this)
@@ -45,8 +43,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.loginBtn -> {
-                val intent = Intent(this@MainActivity, LoginActivity::class.java).apply {
+            R.id.registerBtn -> {
+                val intent = Intent(this@MainActivity, RegisterActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
                 }
                 startActivityForResult(intent, LOGIN_REQUEST_CODE)
@@ -74,12 +72,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (dataManager.isLogin()) {
             user = dataManager.getUserData()
             headerContainer.visibility = View.VISIBLE
-            loginBtn.visibility = View.GONE
+            registerBtn.visibility = View.GONE
             idText.text = user?.email
             nameText.text = user?.name
         } else {
             headerContainer.visibility = View.GONE
-            loginBtn.visibility = View.VISIBLE
+            registerBtn.visibility = View.VISIBLE
         }
     }
 
