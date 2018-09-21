@@ -98,7 +98,7 @@
                 android:text="어떤 스타일로\n여행을 즐기고 싶으신가요?" />
 
             <rankhep.com.tripper.custom.TasteProgressBar
-                android:id="@+id/shopping_progressbar"
+                android:id="@+id/shoppingProgressbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -106,31 +106,31 @@
                 app:title="shopping" />
 
             <rankhep.com.tripper.custom.TasteProgressBar
-                android:id="@+id/food_progressbar"
-                android:layout_marginTop="32dp"
+                android:id="@+id/foodProgressbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 app:subTitle="먹으러 가는게 여행 아니겠어요?"
                 app:title="Food" />
 
             <rankhep.com.tripper.custom.TasteProgressBar
-                android:id="@+id/tourist_progressbar"
+                android:id="@+id/touristProgressbar"
                 android:layout_width="match_parent"
-                android:layout_marginTop="32dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 app:subTitle="직접 발로 찾는 여행이 좋아요!"
                 app:title="Tourist" />
 
             <rankhep.com.tripper.custom.TasteProgressBar
-                android:id="@+id/culture_progressbar"
+                android:id="@+id/cultureProgressbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:subTitle="그 나라의 문화를 느끼는 여행이 좋아요!"
                 android:layout_marginTop="32dp"
+                app:subTitle="그 나라의 문화를 느끼는 여행이 좋아요!"
                 app:title="Culture" />
 
             <rankhep.com.tripper.custom.TasteProgressBar
-                android:id="@+id/entertainment_progressbar"
+                android:id="@+id/entertainmentProgressbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -138,35 +138,35 @@
                 app:title="Entertainment" />
 
             <rankhep.com.tripper.custom.CheckYesOrNoView
-                android:layout_marginTop="42dp"
-                android:id="@+id/with_child"
+                android:id="@+id/withChild"
                 android:layout_width="match_parent"
-                app:withTitle="아이 동반 여부"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
                 app:imgSrc="@drawable/ic_child_friendly_black_24dp"
                 app:withSubTitle="아이를 동반하는 경우를 참고해\n동선을 추천합니다."
-                android:layout_height="wrap_content" />
+                app:withTitle="아이 동반 여부" />
 
             <rankhep.com.tripper.custom.CheckYesOrNoView
-                android:id="@+id/with_old"
+                android:id="@+id/withOld"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                app:withTitle="노약자 동반 여부"
                 app:imgSrc="@drawable/ic_accessible_black_24dp"
                 app:withSubTitle="노약자를 동반하는 경우를 참고해\n동선을 추천합니다."
-                android:layout_height="wrap_content" />
+                app:withTitle="노약자 동반 여부" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/next_fab"
-                android:layout_gravity="right"
-                android:layout_marginTop="32dp"
+                android:id="@+id/nextFab"
                 android:layout_width="wrap_content"
-                app:borderWidth="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="32dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:src="@mipmap/ic_next"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
                 android:tint="#ffffff"
-                android:layout_height="wrap_content" />
+                app:borderWidth="0dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

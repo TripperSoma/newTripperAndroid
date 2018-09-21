@@ -71,7 +71,7 @@
                     app:layout_constraintTop_toBottomOf="@id/name_welcome_text" />
 
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/set_location_btn"
+                    android:id="@+id/setLocationBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#ffffff"

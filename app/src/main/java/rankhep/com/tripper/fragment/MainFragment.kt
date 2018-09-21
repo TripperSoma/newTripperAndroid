@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
-import rankhep.com.tripper.activity.MakeScheduleActivity
+import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
 import rankhep.com.tripper.model.MainReviewListData
 import retrofit2.Call
@@ -57,7 +57,8 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
                 layoutManager = GridLayoutManager(context, 2)
                 adapter = mAdapter
             }
-            set_location_btn.setOnClickListener(this@MainFragment)
+            setLocationBtn.setOnClickListener(this@MainFragment)
+
         }
         return v
     }
@@ -68,8 +69,9 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
                 (activity as MainActivity).openDrawer()
             }
 
-            R.id.set_location_btn -> {
-                val intent = Intent(context, MakeScheduleActivity::class.java)
+            R.id.setLocationBtn
+            -> {
+                val intent = Intent(context, SetMakeScheduleActivity::class.java)
                 startActivityForResult(intent, 555)
             }
         }
