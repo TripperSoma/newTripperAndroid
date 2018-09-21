@@ -3,6 +3,7 @@
     package="rankhep.com.tripper">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,24 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.SplashActivity">
 
         </activity>
-        <activity android:name=".activity.LoginActivity" />
-
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.SetMakeScheduleActivity" />
+        <activity android:name=".activity.AccountRegisterActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.SetTasteActivity" />
+        <activity android:name=".activity.TouristInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.MakeScheduleActivity" />
-        <activity android:name=".activity.SetMakeScheduleActivity" />
-        <activity android:name=".activity.AccountRegisterActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.SetTasteActivity" />
     </application>
 
 </manifest>

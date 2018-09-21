@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,3:2">
+
+        <ImageView
+            android:id="@+id/firstImg"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            android:layout_marginVertical="2dp"
+            android:scaleType="centerCrop"
+            app:layout_goneMarginRight="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/secondImg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/secondImg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="2dp"
+            android:scaleType="centerCrop"
+            android:layout_marginVertical="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/thirdImg"
+            app:layout_constraintLeft_toRightOf="@+id/firstImg"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/thirdImg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_japan"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/secondImg"
+            app:layout_constraintRight_toRightOf="@id/secondImg"
+            app:layout_constraintTop_toBottomOf="@+id/secondImg" />
+
+        <TextView
+            android:id="@+id/moreImgText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#7000"
+            android:gravity="center"
+            android:text="+1"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/thirdImg"
+            app:layout_constraintLeft_toLeftOf="@id/thirdImg"
+            app:layout_constraintRight_toRightOf="@id/thirdImg"
+            app:layout_constraintTop_toTopOf="@id/thirdImg" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
