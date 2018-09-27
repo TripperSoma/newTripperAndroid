@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="@drawable/bg_cardview">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/reviewProfileImage"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/reviewNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/reviewProfileImage"
+        app:layout_constraintTop_toTopOf="@id/reviewProfileImage"
+        tools:text="최동근" />
+
+    <TextView
+        android:id="@+id/reviewCreatedTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/textGray"
+        android:textSize="10sp"
+        app:layout_constraintLeft_toLeftOf="@id/reviewNameText"
+        app:layout_constraintTop_toBottomOf="@id/reviewNameText"
+        tools:text="2018-07-26" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="6dp"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/reviewNameText"
+        app:layout_constraintTop_toBottomOf="@id/reviewCreatedTimeText"
+        tools:text="인터넷에서 엄청 유명한 맛집이라고 들어서
+가봤어요. 확실히 맛은 있었지만 너무 한국적인
+스타일이 강해 일본 본토의 맛은 좀 부족한 것 같네요." />
+</android.support.constraint.ConstraintLayout>
