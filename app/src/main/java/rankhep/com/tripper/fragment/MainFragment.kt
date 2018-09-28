@@ -69,8 +69,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
                 (activity as MainActivity).openDrawer()
             }
 
-            R.id.setLocationBtn
-            -> {
+            R.id.setLocationBtn -> {
                 val intent = Intent(context, SetMakeScheduleActivity::class.java)
                 startActivityForResult(intent, 555)
             }

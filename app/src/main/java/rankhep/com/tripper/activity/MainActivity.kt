@@ -3,6 +3,7 @@ package rankhep.com.tripper.activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -11,14 +12,18 @@ import kotlinx.android.synthetic.main.menu_bottom.*
 import kotlinx.android.synthetic.main.menu_header.*
 import rankhep.com.tripper.R
 import rankhep.com.tripper.fragment.MainFragment
+import rankhep.com.tripper.fragment.TrippingFragment
 import rankhep.com.tripper.model.User
 import rankhep.com.tripper.utils.SharedPrefManager
+import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private val LOGIN_REQUEST_CODE = 333
     lateinit var dataManager: SharedPrefManager
     var user: User? = null
+    lateinit var nowFragment: Fragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,10 +31,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         dataManager = SharedPrefManager(applicationContext)
         initView()
+
+        supportFragmentManager.addOnBackStackChangedListener {
+            nowFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        }
     }
 
     private fun initView() {
-        replaceFragment(MainFragment.newInstance())
+        nowFragment = MainFragment.newInstance()
+        replaceFragment(nowFragment)
         checkUser()
         registerBtn.setOnClickListener(this)
         hotelReservationBtn.setOnClickListener(this)
@@ -37,7 +47,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         settingBtn.setOnClickListener(this)
         myPlanBtn.setOnClickListener(this)
         homeBtn.setOnClickListener(this)
-
     }
 
 
@@ -48,6 +57,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
                 }
                 startActivityForResult(intent, LOGIN_REQUEST_CODE)
+            }
+            R.id.myPlanBtn -> {
+                if (nowFragment !is TrippingFragment)
+                    replaceFragment(TrippingFragment.newInstance())
+                closeDrawer()
+            }
+            R.id.homeBtn -> {
+                if (nowFragment !is MainFragment)
+                    replaceFragment(MainFragment.newInstance())
+                closeDrawer()
             }
         }
     }
@@ -63,8 +82,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment).commit()
+        if (fragment is MainFragment) {
+            val count = fragmentManager.backStackEntryCount
+            for (i in 0 until count) {
+                fragmentManager.popBackStack()
+            }
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment).commit()
+        } else {
+            fragmentManager.popBackStack()
+            fragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, fragment).commit()
+        }
+
     }
 
 
@@ -83,7 +114,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun openDrawer() {
         drawer_layout.openDrawer(GravityCompat.START)
-
     }
 
+    private fun closeDrawer() {
+        drawer_layout.closeDrawer(GravityCompat.START)
+    }
+
+
+    private val FINISH_INTERVAL_TIME: Long = 2000
+    private var backPressedTime: Long = 0
+
+    override fun onBackPressed() {
+        val tempTime = System.currentTimeMillis()
+        val intervalTime = tempTime - backPressedTime
+        if (nowFragment is MainFragment) {
+            if (intervalTime in 0..FINISH_INTERVAL_TIME) super.onBackPressed()
+            else {
+                backPressedTime = tempTime
+                Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
