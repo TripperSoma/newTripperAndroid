@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.SplashActivity">
             <intent-filter>
@@ -24,9 +24,8 @@
         <activity android:name=".activity.AccountRegisterActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SetTasteActivity" />
-        <activity android:name=".activity.TouristInfoActivity">
-
-        </activity>
+        <activity android:name=".activity.TouristInfoActivity"></activity>
+        <activity android:name=".ReviewViewerActivity"></activity>
     </application>
 
 </manifest>
