@@ -1,12 +1,14 @@
 package rankhep.com.tripper.activity
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_bottom.*
 import kotlinx.android.synthetic.main.menu_header.*
@@ -61,11 +63,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.myPlanBtn -> {
                 if (nowFragment !is TrippingFragment)
                     replaceFragment(TrippingFragment.newInstance())
+                changeMenuTextStyle(myPlanBtn)
                 closeDrawer()
             }
             R.id.homeBtn -> {
                 if (nowFragment !is MainFragment)
                     replaceFragment(MainFragment.newInstance())
+                changeMenuTextStyle(homeBtn)
                 closeDrawer()
             }
         }
@@ -118,6 +122,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun closeDrawer() {
         drawer_layout.closeDrawer(GravityCompat.START)
+    }
+
+    private fun changeMenuTextStyle(view: TextView) {
+        homeBtn.setTypeface(null, Typeface.NORMAL)
+        myPlanBtn.setTypeface(null, Typeface.NORMAL)
+        hotelReservationBtn.setTypeface(null, Typeface.NORMAL)
+        airplaneReservationBtn.setTypeface(null, Typeface.NORMAL)
+
+        view.setTypeface(null, Typeface.BOLD)
     }
 
 
