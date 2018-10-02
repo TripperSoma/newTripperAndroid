@@ -25,7 +25,7 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SetTasteActivity" />
         <activity android:name=".activity.TouristInfoActivity"></activity>
-        <activity android:name=".ReviewViewerActivity"></activity>
+        <activity android:name=".activity.ReviewViewerActivity"></activity>
     </application>
 
 </manifest>

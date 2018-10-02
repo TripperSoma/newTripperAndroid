@@ -12,12 +12,12 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_bottom.*
 import kotlinx.android.synthetic.main.menu_header.*
-import rankhep.com.tripper.R
 import rankhep.com.tripper.fragment.MainFragment
 import rankhep.com.tripper.fragment.TrippingFragment
 import rankhep.com.tripper.model.User
 import rankhep.com.tripper.utils.SharedPrefManager
 import android.widget.Toast
+import rankhep.com.tripper.R
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {

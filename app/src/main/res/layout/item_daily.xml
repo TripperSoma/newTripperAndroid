@@ -34,7 +34,7 @@
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/daily_sub_title"
+            app:layout_constraintBottom_toTopOf="@+id/daily_sub_title"
             app:layout_constraintLeft_toRightOf="@id/theme_img"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />

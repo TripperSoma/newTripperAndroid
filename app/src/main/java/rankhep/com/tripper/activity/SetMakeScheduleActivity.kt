@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_make_schedule.*
+import kotlinx.android.synthetic.main.toolbar_account.*
 import rankhep.com.tripper.R
 
 class SetMakeScheduleActivity : AppCompatActivity() {
@@ -15,6 +16,10 @@ class SetMakeScheduleActivity : AppCompatActivity() {
             startActivity(Intent(this@SetMakeScheduleActivity, SetTasteActivity::class.java).apply {
                 putExtra("date", timeInputEditText.text.toString())
             })
+        }
+
+        backBtn.setOnClickListener {
+            finish()
         }
     }
 }

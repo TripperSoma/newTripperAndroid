@@ -1,7 +1,8 @@
-package rankhep.com.tripper
+package rankhep.com.tripper.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import rankhep.com.tripper.R
 
 class ReviewViewerActivity : AppCompatActivity() {
 
