@@ -72,6 +72,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
             R.id.setLocationBtn -> {
                 val intent = Intent(context, SetMakeScheduleActivity::class.java)
                 startActivityForResult(intent, 555)
+                activity?.overridePendingTransition(R.anim.leftin, R.anim.left_out)
             }
         }
     }
