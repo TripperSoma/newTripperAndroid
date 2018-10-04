@@ -1,18 +1,33 @@
 package rankhep.com.tripper.model
 
-data class MainReviewListData(var content: String,
-                         var photolist: ArrayList<String>,
-                         var rating: Float,
-                         var schedulenum: Int,
-                         var usernum: Int,
-                         var userEmail:String,
-                         var createTime:String)
+data class MainReviewListData(var photo:String,
+                              var reviewnum:Int,
+                              var time:String,
+                              var title:String,
+                              var writer:String)
 
-//"userEmail": "string",
-//"schedulenum": 0,
-//"content": "나 홀로 꽉찬 2박 3일 여수 여행",
-//"rating": 4.5,
-//"photolist": [
-//"https://s3.ap-northeast-2.amazonaws.com/tripper-bucket/2018/8/22/1534944508431-dummy2.jpg"
-//],
-//"createTime": "2018-08-22T13:28:29"
+
+//[
+//{
+//    "photo": "string",
+//    "reviewnum": 0,
+//    "time": {
+//    "chronology": {
+//    "calendarType": "string",
+//    "id": "string"
+//},
+//    "dayOfMonth": 0,
+//    "dayOfWeek": "MONDAY",
+//    "dayOfYear": 0,
+//    "hour": 0,
+//    "minute": 0,
+//    "month": "JANUARY",
+//    "monthValue": 0,
+//    "nano": 0,
+//    "second": 0,
+//    "year": 0
+//},
+//    "title": "string",
+//    "writer": "string"
+//}
+//]

@@ -1,10 +1,9 @@
 package rankhep.com.dhlwn.utils
 
 
-import com.google.gson.JsonObject
 import okhttp3.RequestBody
-import org.json.JSONObject
 import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.Review
 import rankhep.com.tripper.model.User
 import retrofit2.Call
 import retrofit2.http.*
@@ -32,8 +31,8 @@ interface RetrofitInterface {
     @POST("user/login/")
     fun loginUser(@Body body: RequestBody): Call<User>
 
-    @GET("/review/loadMainReview")
-    fun getMainReviewData(): Call<List<MainReviewListData>>
+    @GET("/review/loadMainReviewByPaging/{page}/{version}")
+    fun getMainReviewData(@Path("page") page: Int, @Path("version") version: Int): Call<List<MainReviewListData>>
 
 //    {
 //        "user_num": 23,

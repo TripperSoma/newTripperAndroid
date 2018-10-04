@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.item_review_list.view.*
 import rankhep.com.tripper.R
 import com.squareup.picasso.Picasso
 import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.Review
 
 
 class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>() {
@@ -20,10 +21,10 @@ class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>()
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemView.run {
-            Picasso.get().load(items[position].photolist[0]).into(img)
-            name.text = items[position].userEmail
-            title.text = items[position].content
-            date_text.text = items[position].createTime
+            Picasso.get().load(items[position].photo).into(img)
+            name.text = items[position].writer
+            title.text = items[position].title
+            date_text.text = items[position].time
         }
     }
 

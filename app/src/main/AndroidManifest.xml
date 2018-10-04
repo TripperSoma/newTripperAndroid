@@ -26,6 +26,7 @@
         <activity android:name=".activity.SetTasteActivity" />
         <activity android:name=".activity.TouristInfoActivity"></activity>
         <activity android:name=".activity.ReviewViewerActivity"></activity>
+        <activity android:name=".activity.CalenderActivity"></activity>
     </application>
 
 </manifest>

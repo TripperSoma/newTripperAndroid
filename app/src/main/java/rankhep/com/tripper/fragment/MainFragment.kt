@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +19,7 @@ import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
 import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.Review
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -108,7 +108,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
     }
 
     private fun getMainListData() {
-        NetworkHelper.networkInstance.getMainReviewData().enqueue(object : Callback<List<MainReviewListData>> {
+        NetworkHelper.networkInstance.getMainReviewData(0, 0).enqueue(object : Callback<List<MainReviewListData>> {
             override fun onFailure(call: Call<List<MainReviewListData>>?, t: Throwable?) {
                 t?.printStackTrace()
             }
