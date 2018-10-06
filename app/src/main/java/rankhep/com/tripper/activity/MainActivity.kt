@@ -37,7 +37,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         supportFragmentManager.addOnBackStackChangedListener {
             nowFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            changeMenuTextStyle(nowFragment)
         }
+
     }
 
     private fun initView() {
@@ -64,19 +66,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.myPlanBtn -> {
                 if (nowFragment !is TrippingFragment)
                     replaceFragment(TrippingFragment.newInstance())
-                changeMenuTextStyle(myPlanBtn)
+                changeMenuTextStyle(nowFragment)
                 closeDrawer()
             }
             R.id.homeBtn -> {
                 if (nowFragment !is MainFragment)
                     replaceFragment(MainFragment.newInstance())
-                changeMenuTextStyle(homeBtn)
+                changeMenuTextStyle(nowFragment)
                 closeDrawer()
             }
             R.id.airplaneReservationBtn -> {
                 if (nowFragment !is AirplaneReservationFragment)
                     replaceFragment(AirplaneReservationFragment.newInstance())
-                changeMenuTextStyle(airplaneReservationBtn)
+                changeMenuTextStyle(nowFragment)
                 closeDrawer()
             }
         }
@@ -131,13 +133,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer_layout.closeDrawer(GravityCompat.START)
     }
 
-    private fun changeMenuTextStyle(view: TextView) {
+    private fun changeMenuTextStyle(nowFragment: Fragment) {
         homeBtn.setTypeface(null, Typeface.NORMAL)
         myPlanBtn.setTypeface(null, Typeface.NORMAL)
         hotelReservationBtn.setTypeface(null, Typeface.NORMAL)
         airplaneReservationBtn.setTypeface(null, Typeface.NORMAL)
 
-        view.setTypeface(null, Typeface.BOLD)
+        when (nowFragment) {
+            is AirplaneReservationFragment -> airplaneReservationBtn.setTypeface(null, Typeface.BOLD)
+            is TrippingFragment -> myPlanBtn.setTypeface(null, Typeface.BOLD)
+            is MainFragment -> homeBtn.setTypeface(null, Typeface.BOLD)
+        }
     }
 
 
