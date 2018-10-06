@@ -18,6 +18,7 @@ import rankhep.com.tripper.model.User
 import rankhep.com.tripper.utils.SharedPrefManager
 import android.widget.Toast
 import rankhep.com.tripper.R
+import rankhep.com.tripper.fragment.AirplaneReservationFragment
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -70,6 +71,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (nowFragment !is MainFragment)
                     replaceFragment(MainFragment.newInstance())
                 changeMenuTextStyle(homeBtn)
+                closeDrawer()
+            }
+            R.id.airplaneReservationBtn -> {
+                if (nowFragment !is AirplaneReservationFragment)
+                    replaceFragment(AirplaneReservationFragment.newInstance())
+                changeMenuTextStyle(airplaneReservationBtn)
                 closeDrawer()
             }
         }
