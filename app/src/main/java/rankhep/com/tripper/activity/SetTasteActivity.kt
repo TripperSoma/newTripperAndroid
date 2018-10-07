@@ -13,11 +13,12 @@ class SetTasteActivity : AppCompatActivity() {
         setContentView(R.layout.activity_set_taste)
         backBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.right_in, R.anim.right_out)
         }
 
         nextFab.setOnClickListener {
             startActivity(Intent(this@SetTasteActivity, CalenderActivity::class.java))
-            overridePendingTransition(R.anim.leftin, R.anim.left_out)
+            overridePendingTransition(R.anim.left_in, R.anim.left_out)
 
         }
     }

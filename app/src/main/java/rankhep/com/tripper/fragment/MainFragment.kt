@@ -19,7 +19,6 @@ import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
 import rankhep.com.tripper.model.MainReviewListData
-import rankhep.com.tripper.model.Review
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,7 +71,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
             R.id.setLocationBtn -> {
                 val intent = Intent(context, SetMakeScheduleActivity::class.java)
                 startActivityForResult(intent, 555)
-                activity?.overridePendingTransition(R.anim.leftin, R.anim.left_out)
+                activity?.overridePendingTransition(R.anim.left_in, R.anim.left_out)
             }
         }
     }
