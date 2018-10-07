@@ -85,7 +85,7 @@
                 android:background="#ff5b2c">
 
                 <TextView
-                    android:id="@+id/period_text"
+                    android:id="@+id/periodText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -106,7 +106,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/period_text"
+                    app:layout_constraintLeft_toRightOf="@id/periodText"
                     app:layout_constraintTop_toTopOf="parent" />
             </android.support.constraint.ConstraintLayout>
 

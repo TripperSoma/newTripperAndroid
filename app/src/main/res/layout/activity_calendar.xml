@@ -1,22 +1,392 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:theme="@style/CalenderTheme">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/calender_list"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/calenderToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/finishBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="완료" />
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/topInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/calenderToolbar"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/recommendContainer"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/recommendCityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="추천도시"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/recommendCityList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/recommendCityText"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="오사카 도쿄" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/periodContainer"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="#ff5b2c">
+
+            <TextView
+                android:id="@+id/periodText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="여행 기간"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="3일"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/periodText"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/priceContainer"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="#e7418e">
+
+            <TextView
+                android:id="@+id/priceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="예상 비용"
+                android:textColor="#ffffff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="1,500,000원"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/priceText"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toBottomOf="@id/topInfoLayout">
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:background="@drawable/shadow"
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/calenderList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:src="@drawable/ic_add_black_24dp"
+        android:tint="#fff"
+        android:visibility="visible"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/addContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#a000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</android.support.design.widget.CoordinatorLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_thin_round_square"
+            android:backgroundTint="#ffffff"
+            android:rowCount="3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="H,2:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <LinearLayout
+                android:id="@+id/cafeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/restaurantBtn"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/shoppingBtn"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_local_cafe_black_24dp"
+                    android:tint="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:text="카페 일정"
+                    android:textColor="@color/textGray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/restaurantBtn"
+                android:layout_width="wrap_content"
+                app:layout_constraintLeft_toRightOf="@id/cafeBtn"
+                app:layout_constraintRight_toLeftOf="@id/touristBtn"
+                app:layout_constraintTop_toTopOf="@id/cafeBtn"
+                app:layout_constraintBottom_toBottomOf="@id/cafeBtn"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_restaurant_black_24dp"
+                    android:tint="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:text="음식점 일정"
+                    android:textColor="@color/textGray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/touristBtn"
+                app:layout_constraintTop_toTopOf="@id/cafeBtn"
+                app:layout_constraintBottom_toBottomOf="@id/cafeBtn"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/restaurantBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_location_on_black_24dp"
+                    android:tint="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:text="관광지 일정"
+                    android:textColor="@color/textGray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shoppingBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cafeBtn"
+                app:layout_constraintRight_toLeftOf="@id/museumBtn">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_shopping_cart_black_24dp"
+                    android:tint="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:text="쇼핑 일정"
+                    android:textColor="@color/textGray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/museumBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/shoppingBtn"
+                app:layout_constraintLeft_toRightOf="@+id/shoppingBtn"
+                app:layout_constraintRight_toLeftOf="@+id/playingBtn"
+                app:layout_constraintTop_toTopOf="@id/shoppingBtn">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_insert_photo_black_24dp"
+                    android:tint="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:text="미술관 일정"
+                    android:textColor="@color/textGray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/playingBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/shoppingBtn"
+                app:layout_constraintLeft_toRightOf="@id/museumBtn"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/shoppingBtn">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_circle"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_local_play_black_24dp"
+                    android:tint="#fff" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:text="오락 일정"
+                    android:textColor="@color/textGray"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
 
 
