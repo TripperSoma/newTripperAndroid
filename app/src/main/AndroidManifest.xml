@@ -24,9 +24,10 @@
         <activity android:name=".activity.AccountRegisterActivity" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SetTasteActivity" />
-        <activity android:name=".activity.TouristInfoActivity"></activity>
-        <activity android:name=".activity.ReviewViewerActivity"></activity>
-        <activity android:name=".activity.CalenderActivity"></activity>
+        <activity android:name=".activity.TouristInfoActivity" />
+        <activity android:name=".activity.ReviewViewerActivity" />
+        <activity android:name=".activity.CalenderActivity" />
+        <activity android:name=".AddCompleteActivity"></activity>
     </application>
 
 </manifest>

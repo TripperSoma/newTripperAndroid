@@ -28,5 +28,11 @@ class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>()
         }
     }
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v)
+    class ViewHolder(v: View) : RecyclerView.ViewHolder(v){
+        init {
+            v.setOnClickListener {
+
+            }
+        }
+    }
 }
