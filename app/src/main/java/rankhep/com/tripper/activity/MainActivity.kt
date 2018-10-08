@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_bottom.*
@@ -103,12 +104,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             fragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment).commit()
         } else {
-            fragmentManager.popBackStack()
             fragmentManager.beginTransaction()
                     .addToBackStack(null)
                     .replace(R.id.fragment_container, fragment).commit()
         }
 
+//        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
 
@@ -153,7 +157,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onBackPressed() {
         val tempTime = System.currentTimeMillis()
         val intervalTime = tempTime - backPressedTime
-        if (nowFragment is MainFragment) {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            closeDrawer()
+        } else if (nowFragment is MainFragment) {
             if (intervalTime in 0..FINISH_INTERVAL_TIME) super.onBackPressed()
             else {
                 backPressedTime = tempTime

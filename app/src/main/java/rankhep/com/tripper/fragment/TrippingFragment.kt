@@ -39,6 +39,7 @@ class TrippingFragment : Fragment(), View.OnClickListener {
         v.run {
             trippingToolbarMenuBtn.setOnClickListener(this@TrippingFragment)
         }
+
         return v
     }
 }

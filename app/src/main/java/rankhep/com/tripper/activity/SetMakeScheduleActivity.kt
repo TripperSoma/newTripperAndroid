@@ -23,4 +23,9 @@ class SetMakeScheduleActivity : AppCompatActivity() {
             overridePendingTransition(R.anim.right_in, R.anim.right_out)
         }
     }
+
+    override fun onBackPressed() {
+        finish()
+        overridePendingTransition(R.anim.right_in, R.anim.right_out)
+    }
 }

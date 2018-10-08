@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10">
+    android:background="#fff">
 
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_height="?attr/actionBarSize">
 
         <ImageView
@@ -37,479 +39,513 @@
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:background="@drawable/shadow"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        android:orientation="vertical">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/infoContainer"
+        <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/searchBtn"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/airportNameText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="28dp"
-                android:gravity="center_horizontal"
-                android:text="ICN"
-                android:textColor="#222222"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/planeGoingImg"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/startLocationText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:text="출발지"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/airportNameText"
-                app:layout_constraintLeft_toLeftOf="@id/airportNameText"
-                app:layout_constraintRight_toRightOf="@id/airportNameText" />
-
-
-            <TextView
-                android:id="@+id/startingPointText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center_horizontal"
-                android:text="인천"
-                android:textColor="@color/textGray"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="@id/airportNameText"
-                app:layout_constraintRight_toRightOf="@id/airportNameText"
-                app:layout_constraintTop_toBottomOf="@id/airportNameText" />
-
-            <ImageView
-                android:id="@+id/planeGoingImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_airplane_going"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/peopleImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_people_black_24dp"
-                android:tint="@color/colorPrimary"
-                app:layout_constraintLeft_toLeftOf="@id/planeGoingImg"
-                app:layout_constraintRight_toRightOf="@id/planeGoingImg"
-                app:layout_constraintTop_toBottomOf="@id/planeGoingImg" />
-
-            <TextView
-                android:id="@+id/peopleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center_horizontal"
-                android:text="성인 1명, 소아 1명"
-                android:textColor="#222222"
-                android:textSize="8sp"
-                app:layout_constraintLeft_toLeftOf="@id/peopleImg"
-                app:layout_constraintRight_toRightOf="@id/peopleImg"
-                app:layout_constraintTop_toBottomOf="@id/peopleImg" />
-
-
-            <TextView
-                android:id="@+id/destinationAirportName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="28dp"
-                android:gravity="center_horizontal"
-                android:text="FUK"
-                android:textColor="#222222"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/planeGoingImg"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/destinationText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:text="출발지"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/destinationAirportName"
-                app:layout_constraintLeft_toLeftOf="@id/destinationAirportName"
-                app:layout_constraintRight_toRightOf="@id/destinationAirportName" />
-
-
-            <TextView
-                android:id="@+id/endPointText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:gravity="center_horizontal"
-                android:text="후쿠오카"
-                android:textColor="@color/textGray"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toLeftOf="@id/destinationAirportName"
-                app:layout_constraintRight_toRightOf="@id/destinationAirportName"
-                app:layout_constraintTop_toBottomOf="@id/destinationAirportName" />
-        </android.support.constraint.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            android:weightSum="13">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/peopleContainer"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginVertical="8dp"
-                android:layout_weight="4"
-                android:background="@drawable/bg_thin_round_square"
-                app:layout_constraintBottom_toTopOf="@+id/startingPointContainer"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="spread_inside">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:weightSum="10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-                <ImageView
-                    android:id="@+id/peoplePickImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:src="@drawable/ic_people_black_24dp"
-                    android:tint="@color/colorPrimary"
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/infoContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    app:layout_constraintDimensionRatio="H,2:1"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/adultText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="6dp"
-                    android:text="성인"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/adultSpinner"
-                    app:layout_constraintLeft_toLeftOf="@id/adultSpinner"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <Spinner
-                    android:id="@+id/adultSpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="11dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@drawable/bg_thin_round_square"
-                    android:backgroundTint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintLeft_toRightOf="@+id/peoplePickImg"
-                    app:layout_constraintRight_toLeftOf="@+id/kidsSpinner"
-                    app:layout_constraintTop_toBottomOf="@+id/adultText" />
-
-                <TextView
-                    android:id="@+id/adultPersonnelText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1명"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/adultSpinner"
-                    app:layout_constraintLeft_toLeftOf="@id/adultSpinner"
-                    app:layout_constraintRight_toRightOf="@id/adultSpinner"
-                    app:layout_constraintTop_toTopOf="@id/adultSpinner" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="@id/adultSpinner"
-                    app:layout_constraintRight_toRightOf="@id/adultSpinner"
-                    app:layout_constraintTop_toTopOf="@id/adultSpinner" />
-
-                <TextView
-                    android:id="@+id/kidsText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="6dp"
-                    android:text="소아 (만 12세 미만)"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/kidsSpinner"
-                    app:layout_constraintLeft_toLeftOf="@id/kidsSpinner"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <Spinner
-                    android:id="@+id/kidsSpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:layout_marginHorizontal="6dp"
-                    android:background="@drawable/bg_thin_round_square"
-                    android:backgroundTint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/adultSpinner"
-                    app:layout_constraintRight_toLeftOf="@+id/babySpinner"
-                    app:layout_constraintTop_toBottomOf="@+id/kidsText" />
-
-                <TextView
-                    android:id="@+id/kidsPersonnelText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1명"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/kidsSpinner"
-                    app:layout_constraintLeft_toLeftOf="@id/kidsSpinner"
-                    app:layout_constraintRight_toRightOf="@id/kidsSpinner"
-                    app:layout_constraintTop_toTopOf="@id/kidsSpinner" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="@android:color/white"
-                    app:layout_constraintBottom_toBottomOf="@id/kidsSpinner"
-                    app:layout_constraintRight_toRightOf="@id/kidsSpinner"
-                    app:layout_constraintTop_toTopOf="@id/kidsSpinner" />
-
-                <TextView
-                    android:id="@+id/babyText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="6dp"
-                    android:text="성인"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/babySpinner"
-                    app:layout_constraintLeft_toLeftOf="@+id/babySpinner"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <Spinner
-                    android:id="@+id/babySpinner"
-                    android:layout_width="0dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginRight="12dp"
-                    android:background="@drawable/bg_thin_round_square"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@id/kidsSpinner"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/babyText" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/babyPersonnelText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1명"
-                    android:textColor="@color/textGray"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/babySpinner"
-                    app:layout_constraintLeft_toLeftOf="@id/babySpinner"
-                    app:layout_constraintRight_toRightOf="@id/babySpinner"
-                    app:layout_constraintTop_toTopOf="@id/babySpinner" />
+                    <TextView
+                        android:id="@+id/airportNameText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="28dp"
+                        android:gravity="center_horizontal"
+                        android:text="ICN"
+                        android:textColor="#222222"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/planeGoingImg"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/startLocationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="출발지"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/airportNameText"
+                        app:layout_constraintLeft_toLeftOf="@id/airportNameText"
+                        app:layout_constraintRight_toRightOf="@id/airportNameText" />
+
+
+                    <TextView
+                        android:id="@+id/startingPointText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center_horizontal"
+                        android:text="인천"
+                        android:textColor="@color/textGray"
+                        android:textSize="12sp"
+                        app:layout_constraintLeft_toLeftOf="@id/airportNameText"
+                        app:layout_constraintRight_toRightOf="@id/airportNameText"
+                        app:layout_constraintTop_toBottomOf="@id/airportNameText" />
+
+                    <ImageView
+                        android:id="@+id/planeGoingImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_airplane_going"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/peopleImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:src="@drawable/ic_people_black_24dp"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintLeft_toLeftOf="@id/planeGoingImg"
+                        app:layout_constraintRight_toRightOf="@id/planeGoingImg"
+                        app:layout_constraintTop_toBottomOf="@id/planeGoingImg" />
+
+                    <TextView
+                        android:id="@+id/peopleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_horizontal"
+                        android:text="성인 1명, 소아 1명"
+                        android:textColor="#222222"
+                        android:textSize="8sp"
+                        app:layout_constraintLeft_toLeftOf="@id/peopleImg"
+                        app:layout_constraintRight_toRightOf="@id/peopleImg"
+                        app:layout_constraintTop_toBottomOf="@id/peopleImg" />
+
+
+                    <TextView
+                        android:id="@+id/destinationAirportName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="28dp"
+                        android:gravity="center_horizontal"
+                        android:text="FUK"
+                        android:textColor="#222222"
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/planeGoingImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/destinationText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="출발지"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/destinationAirportName"
+                        app:layout_constraintLeft_toLeftOf="@id/destinationAirportName"
+                        app:layout_constraintRight_toRightOf="@id/destinationAirportName" />
+
+
+                    <TextView
+                        android:id="@+id/endPointText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center_horizontal"
+                        android:text="후쿠오카"
+                        android:textColor="@color/textGray"
+                        android:textSize="12sp"
+                        app:layout_constraintLeft_toLeftOf="@id/destinationAirportName"
+                        app:layout_constraintRight_toRightOf="@id/destinationAirportName"
+                        app:layout_constraintTop_toBottomOf="@id/destinationAirportName" />
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_arrow_drop_down_black_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@id/babySpinner"
-                    app:layout_constraintRight_toRightOf="@id/babySpinner"
-                    app:layout_constraintTop_toTopOf="@id/babySpinner" />
+                    android:layout_weight="6"
+                    app:layout_constraintTop_toBottomOf="@id/infoContainer"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:weightSum="13">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/peopleContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginVertical="8dp"
+                        app:layout_constraintDimensionRatio="h,4.5:1"
+                        android:background="@drawable/bg_thin_round_square"
+                        app:layout_constraintBottom_toTopOf="@+id/startingPointContainer"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="spread_inside">
+
+                        <ImageView
+                            android:id="@+id/peoplePickImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="15dp"
+                            android:src="@drawable/ic_people_black_24dp"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <TextView
+                            android:id="@+id/adultText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:text="성인"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/adultSpinner"
+                            app:layout_constraintLeft_toLeftOf="@id/adultSpinner"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <Spinner
+                            android:id="@+id/adultSpinner"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="11dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/bg_thin_round_square"
+                            android:backgroundTint="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="spread"
+                            app:layout_constraintLeft_toRightOf="@+id/peoplePickImg"
+                            app:layout_constraintRight_toLeftOf="@+id/kidsSpinner"
+                            app:layout_constraintTop_toBottomOf="@+id/adultText" />
+
+                        <TextView
+                            android:id="@+id/adultPersonnelText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1명"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@id/adultSpinner"
+                            app:layout_constraintLeft_toLeftOf="@id/adultSpinner"
+                            app:layout_constraintRight_toRightOf="@id/adultSpinner"
+                            app:layout_constraintTop_toTopOf="@id/adultSpinner" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:tint="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="@id/adultSpinner"
+                            app:layout_constraintRight_toRightOf="@id/adultSpinner"
+                            app:layout_constraintTop_toTopOf="@id/adultSpinner" />
+
+                        <TextView
+                            android:id="@+id/kidsText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:text="소아 (만 12세 미만)"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/kidsSpinner"
+                            app:layout_constraintLeft_toLeftOf="@id/kidsSpinner"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <Spinner
+                            android:id="@+id/kidsSpinner"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_marginHorizontal="6dp"
+                            android:background="@drawable/bg_thin_round_square"
+                            android:backgroundTint="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@+id/adultSpinner"
+                            app:layout_constraintRight_toLeftOf="@+id/babySpinner"
+                            app:layout_constraintTop_toBottomOf="@+id/kidsText" />
+
+                        <TextView
+                            android:id="@+id/kidsPersonnelText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1명"
+                            android:textColor="@android:color/white"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@id/kidsSpinner"
+                            app:layout_constraintLeft_toLeftOf="@id/kidsSpinner"
+                            app:layout_constraintRight_toRightOf="@id/kidsSpinner"
+                            app:layout_constraintTop_toTopOf="@id/kidsSpinner" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:tint="@android:color/white"
+                            app:layout_constraintBottom_toBottomOf="@id/kidsSpinner"
+                            app:layout_constraintRight_toRightOf="@id/kidsSpinner"
+                            app:layout_constraintTop_toTopOf="@id/kidsSpinner" />
+
+                        <TextView
+                            android:id="@+id/babyText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:text="성인"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/babySpinner"
+                            app:layout_constraintLeft_toLeftOf="@+id/babySpinner"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <Spinner
+                            android:id="@+id/babySpinner"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_marginLeft="6dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@drawable/bg_thin_round_square"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/kidsSpinner"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/babyText" />
+
+                        <TextView
+                            android:id="@+id/babyPersonnelText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1명"
+                            android:textColor="@color/textGray"
+                            android:textSize="14sp"
+                            app:layout_constraintBottom_toBottomOf="@id/babySpinner"
+                            app:layout_constraintLeft_toLeftOf="@id/babySpinner"
+                            app:layout_constraintRight_toRightOf="@id/babySpinner"
+                            app:layout_constraintTop_toTopOf="@id/babySpinner" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="@id/babySpinner"
+                            app:layout_constraintRight_toRightOf="@id/babySpinner"
+                            app:layout_constraintTop_toTopOf="@id/babySpinner" />
+                    </android.support.constraint.ConstraintLayout>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/startingPointContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="h,6:1"
+                        android:layout_marginVertical="8dp"
+                        android:layout_weight="3"
+                        android:background="@drawable/bg_thin_round_square"
+                        app:layout_constraintBottom_toTopOf="@id/endPointContainer"
+                        app:layout_constraintTop_toBottomOf="@id/peopleContainer">
+
+                        <ImageView
+                            android:id="@+id/locationImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:src="@drawable/ic_location_on_black_24dp"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/startPoint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="출발지"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/startPointAirport"
+                            app:layout_constraintLeft_toRightOf="@id/locationImg"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/startPointAirport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ICN (인천공항)"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="@id/startPoint"
+                            app:layout_constraintTop_toBottomOf="@id/startPoint" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/endPointContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="h,6:1"
+                        android:layout_marginVertical="8dp"
+                        android:layout_weight="3"
+                        android:background="@drawable/bg_thin_round_square"
+                        app:layout_constraintBottom_toTopOf="@+id/dateContainer"
+                        app:layout_constraintTop_toBottomOf="@id/startingPointContainer">
+
+                        <ImageView
+                            android:id="@+id/planeImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:src="@drawable/ic_location_on_black_24dp"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/endPoint"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="도착지"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/endPointAirport"
+                            app:layout_constraintLeft_toRightOf="@id/planeImg"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/endPointAirport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FUK (후쿠오카 공항)"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="@id/endPoint"
+                            app:layout_constraintTop_toBottomOf="@id/endPoint" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/dateContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintDimensionRatio="h,6:1"
+                        android:layout_marginVertical="8dp"
+                        android:layout_weight="3"
+                        android:background="@drawable/bg_thin_round_square"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/endPointContainer">
+
+                        <ImageView
+                            android:id="@+id/calenderImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:src="@drawable/ic_event_note_black_24dp"
+                            android:tint="@color/colorPrimary"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/dateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="4dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="출발지"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="8sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/dateRangeText"
+                            app:layout_constraintLeft_toRightOf="@id/calenderImg"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed" />
+
+                        <TextView
+                            android:id="@+id/dateRangeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2019.01.07 ~ 2019.01.10"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="@id/dateText"
+                            app:layout_constraintTop_toBottomOf="@id/dateText" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.constraint.ConstraintLayout>
+
             </android.support.constraint.ConstraintLayout>
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/startingPointContainer"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginVertical="8dp"
-                android:layout_weight="3"
-                android:background="@drawable/bg_thin_round_square"
-                app:layout_constraintBottom_toTopOf="@id/endPointContainer"
-                app:layout_constraintTop_toBottomOf="@id/peopleContainer">
-
-                <ImageView
-                    android:id="@+id/locationImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ic_location_on_black_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/startPoint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="15dp"
-                    android:text="출발지"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/startPointAirport"
-                    app:layout_constraintLeft_toRightOf="@id/locationImg"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <TextView
-                    android:id="@+id/startPointAirport"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ICN (인천공항)"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/startPoint"
-                    app:layout_constraintTop_toBottomOf="@id/startPoint" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/endPointContainer"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginVertical="8dp"
-                android:layout_weight="3"
-                android:background="@drawable/bg_thin_round_square"
-                app:layout_constraintBottom_toTopOf="@+id/dateContainer"
-                app:layout_constraintTop_toBottomOf="@id/startingPointContainer">
-
-                <ImageView
-                    android:id="@+id/planeImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ic_location_on_black_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/endPoint"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="15dp"
-                    android:text="도착지"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/endPointAirport"
-                    app:layout_constraintLeft_toRightOf="@id/planeImg"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <TextView
-                    android:id="@+id/endPointAirport"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FUK (후쿠오카 공항)"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/endPoint"
-                    app:layout_constraintTop_toBottomOf="@id/endPoint" />
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/dateContainer"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginVertical="8dp"
-                android:layout_weight="3"
-                android:background="@drawable/bg_thin_round_square"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/endPointContainer">
-
-                <ImageView
-                    android:id="@+id/calenderImg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/ic_event_note_black_24dp"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/dateText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginLeft="15dp"
-                    android:text="출발지"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@id/dateRangeText"
-                    app:layout_constraintLeft_toRightOf="@id/calenderImg"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
-
-                <TextView
-                    android:id="@+id/dateRangeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2019.01.07 ~ 2019.01.10"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/dateText"
-                    app:layout_constraintTop_toBottomOf="@id/dateText" />
-            </android.support.constraint.ConstraintLayout>
-        </LinearLayout>
-
+        </ScrollView>
 
         <TextView
+            android:id="@+id/searchBtn"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="항공권 조회하기"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
     </LinearLayout>
 
 
