@@ -1,8 +1,9 @@
-package rankhep.com.tripper
+package rankhep.com.tripper.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_add_complete.*
+import rankhep.com.tripper.R
 
 class AddCompleteActivity : AppCompatActivity() {
 

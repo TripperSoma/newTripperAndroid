@@ -94,6 +94,7 @@
                 android:id="@+id/period_container"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
+                android:elevation="3dp"
                 android:background="#ff5b2c">
 
                 <TextView

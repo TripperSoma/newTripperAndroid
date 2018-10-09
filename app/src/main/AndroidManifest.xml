@@ -27,7 +27,7 @@
         <activity android:name=".activity.TouristInfoActivity" />
         <activity android:name=".activity.ReviewViewerActivity" />
         <activity android:name=".activity.CalenderActivity" />
-        <activity android:name=".AddCompleteActivity"></activity>
+        <activity android:name=".activity.AddCompleteActivity"></activity>
     </application>
 
 </manifest>

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_calendar.*
-import rankhep.com.tripper.AddCompleteActivity
 import rankhep.com.tripper.R
 
 class CalenderActivity : AppCompatActivity(), View.OnClickListener {
