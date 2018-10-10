@@ -13,14 +13,11 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_bottom.*
 import kotlinx.android.synthetic.main.menu_header.*
-import rankhep.com.tripper.fragment.MainFragment
-import rankhep.com.tripper.fragment.TrippingFragment
 import rankhep.com.tripper.model.User
 import rankhep.com.tripper.utils.SharedPrefManager
 import android.widget.Toast
 import rankhep.com.tripper.R
-import rankhep.com.tripper.fragment.AirplaneReservationFragment
-import rankhep.com.tripper.fragment.HotelReservationFragment
+import rankhep.com.tripper.fragment.*
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -33,6 +30,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var airplaneReservationFragment: AirplaneReservationFragment
     lateinit var mainFragment: MainFragment
     lateinit var trippingFragment: TrippingFragment
+    lateinit var settingFragment: SettingFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +42,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         hotelReservationFragment = HotelReservationFragment.newInstance()
         airplaneReservationFragment = AirplaneReservationFragment.newInstance()
         trippingFragment = TrippingFragment.newInstance()
+        settingFragment = SettingFragment.newInstance()
 
         initView()
 
@@ -64,11 +63,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         settingBtn.setOnClickListener(this)
         myPlanBtn.setOnClickListener(this)
         homeBtn.setOnClickListener(this)
+        logoutBtn.setOnClickListener(this)
     }
 
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.logoutBtn->{
+                dataManager.setLoginState(false, null)
+                checkUser()
+            }
             R.id.registerBtn -> {
                 val intent = Intent(this@MainActivity, RegisterActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
@@ -86,6 +90,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.hotelReservationBtn -> {
                 replaceFragment(hotelReservationFragment)
+            }
+            R.id.settingBtn->{
+                replaceFragment(settingFragment)
             }
         }
     }
@@ -123,12 +130,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (dataManager.isLogin()) {
             user = dataManager.getUserData()
             headerContainer.visibility = View.VISIBLE
-            registerBtn.visibility = View.GONE
             idText.text = user?.email
             nameText.text = user?.name
+
+            registerBtn.visibility = View.GONE
+            logoutBtn.visibility = View.VISIBLE
         } else {
             headerContainer.visibility = View.GONE
             registerBtn.visibility = View.VISIBLE
+            logoutBtn.visibility = View.GONE
         }
     }
 
