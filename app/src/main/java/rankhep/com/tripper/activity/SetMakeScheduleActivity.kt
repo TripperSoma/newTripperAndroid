@@ -16,6 +16,7 @@ class SetMakeScheduleActivity : AppCompatActivity() {
                 putExtra("date", timeInputEditText.text.toString())
             })
             overridePendingTransition(R.anim.left_in, R.anim.left_out)
+            finish()
         }
 
         backBtn.setOnClickListener {

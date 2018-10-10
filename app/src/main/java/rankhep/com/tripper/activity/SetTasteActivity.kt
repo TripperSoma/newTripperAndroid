@@ -23,6 +23,7 @@ class SetTasteActivity : AppCompatActivity() {
         nextFab.setOnClickListener {
             startActivity(Intent(this@SetTasteActivity, CalenderActivity::class.java))
             overridePendingTransition(R.anim.left_in, R.anim.left_out)
+            finish()
         }
 
     }

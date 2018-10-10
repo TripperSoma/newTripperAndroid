@@ -36,10 +36,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:max="100"
-        android:splitTrack="false"
-        android:progress="25"
+        android:max="10"
+        android:progress="3"
         android:progressDrawable="@drawable/custom_seekbar"
+        android:splitTrack="false"
         android:thumb="@drawable/ic_seekbar_thumb"
         android:thumbOffset="10dp"
         app:layout_constraintTop_toBottomOf="@id/taste_sub_title" />

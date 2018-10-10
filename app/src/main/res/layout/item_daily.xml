@@ -32,7 +32,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/timeImg"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="09:00 AM" />
+            android:hint="09:00 AM" />
 
         <ImageView
             android:id="@+id/deleteBtn"

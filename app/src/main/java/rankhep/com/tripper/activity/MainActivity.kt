@@ -20,6 +20,7 @@ import rankhep.com.tripper.utils.SharedPrefManager
 import android.widget.Toast
 import rankhep.com.tripper.R
 import rankhep.com.tripper.fragment.AirplaneReservationFragment
+import rankhep.com.tripper.fragment.HotelReservationFragment
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -28,12 +29,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var dataManager: SharedPrefManager
     var user: User? = null
     lateinit var nowFragment: Fragment
+    lateinit var hotelReservationFragment: HotelReservationFragment
+    lateinit var airplaneReservationFragment: AirplaneReservationFragment
+    lateinit var mainFragment: MainFragment
+    lateinit var trippingFragment: TrippingFragment
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dataManager = SharedPrefManager(applicationContext)
+
+        mainFragment = MainFragment.newInstance()
+        hotelReservationFragment = HotelReservationFragment.newInstance()
+        airplaneReservationFragment = AirplaneReservationFragment.newInstance()
+        trippingFragment = TrippingFragment.newInstance()
+
         initView()
 
         supportFragmentManager.addOnBackStackChangedListener {
@@ -44,9 +55,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun initView() {
-        nowFragment = MainFragment.newInstance()
-        replaceFragment(nowFragment)
-        checkUser()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, mainFragment).commit()
+        nowFragment = mainFragment
         registerBtn.setOnClickListener(this)
         hotelReservationBtn.setOnClickListener(this)
         airplaneReservationBtn.setOnClickListener(this)
@@ -65,22 +76,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivityForResult(intent, LOGIN_REQUEST_CODE)
             }
             R.id.myPlanBtn -> {
-                if (nowFragment !is TrippingFragment)
-                    replaceFragment(TrippingFragment.newInstance())
-                changeMenuTextStyle(nowFragment)
-                closeDrawer()
+                replaceFragment(trippingFragment)
             }
             R.id.homeBtn -> {
-                if (nowFragment !is MainFragment)
-                    replaceFragment(MainFragment.newInstance())
-                changeMenuTextStyle(nowFragment)
-                closeDrawer()
+                replaceFragment(mainFragment)
             }
             R.id.airplaneReservationBtn -> {
-                if (nowFragment !is AirplaneReservationFragment)
-                    replaceFragment(AirplaneReservationFragment.newInstance())
-                changeMenuTextStyle(nowFragment)
-                closeDrawer()
+                replaceFragment(airplaneReservationFragment)
+            }
+            R.id.hotelReservationBtn -> {
+                replaceFragment(hotelReservationFragment)
             }
         }
     }
@@ -95,24 +100,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        if (fragment is MainFragment) {
-            val count = fragmentManager.backStackEntryCount
-            for (i in 0 until count) {
-                fragmentManager.popBackStack()
+        if (nowFragment != fragment) {
+            val fragmentManager = supportFragmentManager
+            if (fragment is MainFragment) {
+                val count = fragmentManager.backStackEntryCount
+                for (i in 0 until count) {
+                    fragmentManager.popBackStack()
+                }
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment).commit()
+            } else {
+                fragmentManager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, fragment).commit()
             }
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment).commit()
-        } else {
-            fragmentManager.beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.fragment_container, fragment).commit()
         }
-
-//        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
-//        window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
-//        window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
-//        window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        closeDrawer()
     }
 
 
@@ -133,7 +136,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer_layout.openDrawer(GravityCompat.START)
     }
 
-    private fun closeDrawer() {
+    fun closeDrawer() {
         drawer_layout.closeDrawer(GravityCompat.START)
     }
 

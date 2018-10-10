@@ -36,6 +36,7 @@
             app:layout_constraintTop_toTopOf="@id/backBtn" />
 
     </android.support.constraint.ConstraintLayout>
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
