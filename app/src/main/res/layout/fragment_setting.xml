@@ -191,10 +191,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <Switch
+            android:id="@+id/monitoringSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/monitoringSwitch"
             android:layout_marginRight="22dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"

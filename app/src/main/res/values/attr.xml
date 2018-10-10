@@ -8,7 +8,7 @@
     <declare-styleable name="CheckYesOrNoView">
         <attr name="withTitle" format="string" />
         <attr name="withSubTitle" format="string" />
-        <attr name="imgSrc" format="reference|integer"/>
+        <attr name="imgSrc" format="reference|integer" />
     </declare-styleable>
 
 

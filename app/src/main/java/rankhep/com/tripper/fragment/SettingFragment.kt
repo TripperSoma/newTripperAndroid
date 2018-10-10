@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_setting.view.*
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
 
-class SettingFragment: Fragment(), View.OnClickListener {
+class SettingFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {

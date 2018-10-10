@@ -53,11 +53,11 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<User>?, response: Response<User>?) {
                         if (response?.code() == 200) {
                             SharedPrefManager(applicationContext).setLoginState(true, response.body())
-                            Toast.makeText(applicationContext,"로그인 성공", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
                             setResult(Activity.RESULT_OK)
                             finish()
                         } else {
-                            Toast.makeText(applicationContext,"로그인 실패", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, "로그인 실패", Toast.LENGTH_SHORT).show()
                         }
                     }
                 })

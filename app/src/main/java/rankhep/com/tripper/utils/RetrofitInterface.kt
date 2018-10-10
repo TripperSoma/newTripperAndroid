@@ -3,11 +3,12 @@ package rankhep.com.dhlwn.utils
 
 import okhttp3.RequestBody
 import rankhep.com.tripper.model.MainReviewListData
-import rankhep.com.tripper.model.Review
 import rankhep.com.tripper.model.User
 import retrofit2.Call
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 
 /**

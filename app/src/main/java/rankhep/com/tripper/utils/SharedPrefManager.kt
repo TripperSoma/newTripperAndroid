@@ -2,8 +2,8 @@ package rankhep.com.tripper.utils
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import rankhep.com.tripper.model.User
 import com.google.gson.Gson
+import rankhep.com.tripper.model.User
 
 
 class SharedPrefManager(private var context: Context) {

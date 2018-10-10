@@ -1,17 +1,13 @@
 package rankhep.com.tripper.custom
 
 import android.content.Context
-import android.support.v4.content.res.TypedArrayUtils.getResourceId
 import android.content.res.TypedArray
-import android.widget.TextView
-import android.widget.LinearLayout
-import android.view.LayoutInflater
-import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.SeekBar
+import android.widget.TextView
 import rankhep.com.tripper.R
 
 
@@ -78,7 +74,7 @@ class TasteProgressBar : ConstraintLayout {
         typedArray.recycle()
     }
 
-    fun getTaste(){
+    fun getTaste() {
 
     }
 

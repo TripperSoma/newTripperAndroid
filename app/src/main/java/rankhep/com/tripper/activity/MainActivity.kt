@@ -4,20 +4,17 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.view.WindowManager
-import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.menu_bottom.*
 import kotlinx.android.synthetic.main.menu_header.*
-import rankhep.com.tripper.model.User
-import rankhep.com.tripper.utils.SharedPrefManager
-import android.widget.Toast
 import rankhep.com.tripper.R
 import rankhep.com.tripper.fragment.*
+import rankhep.com.tripper.model.User
+import rankhep.com.tripper.utils.SharedPrefManager
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -69,7 +66,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.logoutBtn->{
+            R.id.logoutBtn -> {
                 dataManager.setLoginState(false, null)
                 checkUser()
             }
@@ -91,7 +88,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.hotelReservationBtn -> {
                 replaceFragment(hotelReservationFragment)
             }
-            R.id.settingBtn->{
+            R.id.settingBtn -> {
                 replaceFragment(settingFragment)
             }
         }

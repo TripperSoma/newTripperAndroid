@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_account_register.*
-import kotlinx.android.synthetic.main.menu_header.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -64,7 +63,7 @@ class AccountRegisterActivity : AppCompatActivity(), View.OnClickListener {
                     }
 
                     override fun onResponse(call: Call<User>, response: Response<User>) {
-                        Log.e("sd", ""+response.code()+""+ response.message())
+                        Log.e("sd", "" + response.code() + "" + response.message())
                         when (response.code()) {
                             400 -> Toast.makeText(applicationContext, "잘못된 요청입니다.", Toast.LENGTH_SHORT).show()
                             403 -> Toast.makeText(applicationContext, "권한이 없습니다.", Toast.LENGTH_SHORT).show()

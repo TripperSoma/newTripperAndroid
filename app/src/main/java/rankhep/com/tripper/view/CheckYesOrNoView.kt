@@ -70,5 +70,5 @@ class CheckYesOrNoView : ConstraintLayout {
         typedArray.recycle()
     }
 
-    public fun getIsChecked():Boolean = yes.isChecked
+    public fun getIsChecked(): Boolean = yes.isChecked
 }

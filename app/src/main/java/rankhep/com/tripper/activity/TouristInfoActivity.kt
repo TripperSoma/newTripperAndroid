@@ -1,7 +1,7 @@
 package rankhep.com.tripper.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_tourist_info.*
 import rankhep.com.tripper.R
 import java.util.*

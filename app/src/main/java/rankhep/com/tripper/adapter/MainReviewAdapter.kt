@@ -4,11 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_review_list.view.*
 import rankhep.com.tripper.R
-import com.squareup.picasso.Picasso
 import rankhep.com.tripper.model.MainReviewListData
-import rankhep.com.tripper.model.Review
 
 
 class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>() {
@@ -28,7 +27,7 @@ class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>()
         }
     }
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v){
+    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         init {
             v.setOnClickListener {
 

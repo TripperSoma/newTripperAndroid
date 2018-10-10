@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#fff"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fff">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/makeScheduleToolbar"
@@ -91,11 +91,11 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:inputType="number"
         android:text="3"
         android:textColor="@android:color/black"
         android:textSize="42sp"
         android:textStyle="bold"
-        android:inputType="number"
         android:theme="@style/EditTextRegisterTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/howLongTimeText"

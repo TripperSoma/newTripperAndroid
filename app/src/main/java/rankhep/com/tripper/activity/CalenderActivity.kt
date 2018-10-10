@@ -70,11 +70,11 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-        if (addContainer.visibility == View.VISIBLE){
+        if (addContainer.visibility == View.VISIBLE) {
 
             addContainer.visibility = View.GONE
             addFab.visibility = View.VISIBLE
-        }else {
+        } else {
             finish()
             overridePendingTransition(R.anim.right_in, R.anim.right_out)
         }

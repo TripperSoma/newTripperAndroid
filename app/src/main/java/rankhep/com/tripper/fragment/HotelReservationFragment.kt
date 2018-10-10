@@ -9,10 +9,10 @@ import kotlinx.android.synthetic.main.fragment_hotel_reservation.view.*
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
 
-class HotelReservationFragment: Fragment(), View.OnClickListener {
+class HotelReservationFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
-        when(v.id){
-            R.id.toolbarMenuBtn->{
+        when (v.id) {
+            R.id.toolbarMenuBtn -> {
                 (activity as MainActivity).openDrawer()
             }
         }
@@ -25,6 +25,7 @@ class HotelReservationFragment: Fragment(), View.OnClickListener {
         }
 
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_hotel_reservation, null)
 

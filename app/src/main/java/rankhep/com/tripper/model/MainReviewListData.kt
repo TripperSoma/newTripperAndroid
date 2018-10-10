@@ -1,10 +1,10 @@
 package rankhep.com.tripper.model
 
-data class MainReviewListData(var photo:String,
-                              var reviewnum:Int,
-                              var time:String,
-                              var title:String,
-                              var writer:String)
+data class MainReviewListData(var photo: String,
+                              var reviewnum: Int,
+                              var time: String,
+                              var title: String,
+                              var writer: String)
 
 
 //[
