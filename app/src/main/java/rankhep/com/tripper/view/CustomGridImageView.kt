@@ -17,7 +17,7 @@ class CustomGridImageView : ConstraintLayout {
     private lateinit var secondImageView: ImageView
     private lateinit var thirdImageView: ImageView
     private lateinit var moreImageText: TextView
-    private lateinit var imgList: ArrayList<Any>
+    private lateinit var imgList: List<Any>
     private val imgViews = ArrayList<ImageView>()
 
     constructor(context: Context) : super(context) {
@@ -68,6 +68,9 @@ class CustomGridImageView : ConstraintLayout {
 
     private fun checkImageLength() {
         when (imgList.size) {
+            0 -> {
+                firstImageView.visibility = View.GONE
+            }
             1 -> {
                 secondImageView.visibility = View.GONE
                 thirdImageView.visibility = View.GONE
@@ -89,7 +92,7 @@ class CustomGridImageView : ConstraintLayout {
     }
 
 
-    fun setImageList(imgs: ArrayList<Any>) {
+    fun setImageList(imgs: List<Any>) {
         imgList = imgs
         checkImageLength()
         for (i in 0 until if (imgs.size >= 3) 3 else imgs.size) {

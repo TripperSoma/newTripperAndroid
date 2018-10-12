@@ -11,9 +11,7 @@ data class Place (val city:String,
                   val price:Int,
                   val rating:Double,
                   val thumb:Thumbnail,
-                  val type:Int){
-}
-
+                  val type:Int)
 
 //{
 //    "city": "string",

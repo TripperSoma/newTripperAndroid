@@ -1,8 +1,9 @@
 package rankhep.com.tripper.model
 
-data class PlaceSearchModel(val name:String,
-                            val picture:String,
-                            val city:String) {
+data class PlaceSearchModel(val name: String,
+                            val picture: String,
+                            val city: String,
+                            val placenum: Int) {
 }
 
 

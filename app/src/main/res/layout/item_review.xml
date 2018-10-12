@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
     android:background="@drawable/bg_cardview"
     android:padding="12dp">
 
@@ -38,9 +39,12 @@
         tools:text="2018-07-26" />
 
     <TextView
+        android:id="@+id/reviewContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
+        android:maxLines="3"
+        android:maxWidth="300dp"
         android:textColor="@android:color/black"
         android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@id/reviewNameText"

@@ -3,6 +3,7 @@ package rankhep.com.tripper.utils
 
 import okhttp3.RequestBody
 import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.PlaceDetailInfo
 import rankhep.com.tripper.model.PlaceSearchModel
 import rankhep.com.tripper.model.User
 import retrofit2.Call
@@ -39,5 +40,9 @@ interface RetrofitInterface {
 
     @GET("/schedule/SearchingByCategory/{version}/{beforePlaceNum}/{page}")
     fun searchPlaceByCategory(@Path("version") version: Int, @Path("beforePlaceNum") beforePlaceNum: Int, @Path("page") page: Int = 0)
-    :Call<List<PlaceSearchModel>>
+            : Call<List<PlaceSearchModel>>
+
+
+    @GET("/place/detail/{num}/{page}")
+    fun getPlaceDetailInfo(@Path("num") placeNum: Int, @Path("page") page: Int = 0): Call<PlaceDetailInfo>
 }
