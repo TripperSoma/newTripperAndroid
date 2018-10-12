@@ -7,13 +7,16 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_calendar.*
 import rankhep.com.tripper.R
+import rankhep.com.tripper.utils.CustomApplication
 
 class CalenderActivity : AppCompatActivity(), View.OnClickListener {
     val PLACE_SEARCH_REQUEST_CODE = 111
+    private lateinit var customApplication: CustomApplication
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
+        customApplication = application as CustomApplication
 
         iniView()
 
@@ -51,22 +54,22 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v) {
             nightPlaceBtn -> {
-                startSearchActivity(7)
+                startSearchActivity(customApplication.NIGHT_CATEGORY)
             }
             playingBtn -> {
-                startSearchActivity(3)
+                startSearchActivity(customApplication.PLAYING_CATEGORY)
             }
             restaurantBtn -> {
-                startSearchActivity(2)
+                startSearchActivity(customApplication.RESTAURANT_CATEGORY)
             }
             touristBtn -> {
-                startSearchActivity(1)
+                startSearchActivity(customApplication.TOURIST_CATEGORY)
             }
             shoppingBtn -> {
-                startSearchActivity(4)
+                startSearchActivity(customApplication.SHOPPING_CATEGORY)
             }
             parkBtn -> {
-                startSearchActivity(6)
+                startSearchActivity(customApplication.PARK_CATEGORY)
             }
         }
     }
@@ -82,7 +85,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun startSearchActivity(category: Int){
+    private fun startSearchActivity(category: Int) {
         val intent = Intent(this@CalenderActivity, PlaceSearchActivity::class.java)
         intent.putExtra("version", category)
         startActivityForResult(intent, PLACE_SEARCH_REQUEST_CODE)
@@ -90,11 +93,11 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
-            PLACE_SEARCH_REQUEST_CODE->{
-                if (resultCode == Activity.RESULT_OK){
+        when (requestCode) {
+            PLACE_SEARCH_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
 
-                }else{
+                } else {
 
                 }
             }

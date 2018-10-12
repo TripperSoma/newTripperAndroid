@@ -24,8 +24,8 @@ class TouristInfoActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-//        val placeNum = intent.getIntExtra("placeNum", 0)
-        NetworkHelper.networkInstance.getPlaceDetailInfo(4).enqueue(object : Callback<PlaceDetailInfo> {
+        val placeNum = intent.getIntExtra("placeNum", 0)
+        NetworkHelper.networkInstance.getPlaceDetailInfo(placeNum).enqueue(object : Callback<PlaceDetailInfo> {
             override fun onFailure(call: Call<PlaceDetailInfo>, t: Throwable) {
                 t.printStackTrace()
             }
