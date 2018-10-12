@@ -28,7 +28,8 @@
         <activity android:name=".activity.ReviewViewerActivity" />
         <activity android:name=".activity.CalenderActivity" />
         <activity android:name=".activity.AddCompleteActivity" />
-        <activity android:name=".activity.ProfileSettingActivity"></activity>
+        <activity android:name=".activity.ProfileSettingActivity" />
+        <activity android:name=".activity.PlaceSearchActivity"></activity>
     </application>
 
 </manifest>

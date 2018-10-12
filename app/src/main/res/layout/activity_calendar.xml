@@ -205,7 +205,7 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <LinearLayout
-                android:id="@+id/cafeBtn"
+                android:id="@+id/nightPlaceBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -221,7 +221,7 @@
                     android:background="@drawable/bg_circle"
                     android:backgroundTint="@color/colorPrimary"
                     android:padding="12dp"
-                    android:src="@drawable/ic_local_cafe_black_24dp"
+                    android:src="@drawable/ic_brightness_3_black_24dp"
                     android:tint="#fff" />
 
                 <TextView
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:gravity="center_horizontal"
-                    android:text="카페 일정"
+                    android:text="야경 일정"
                     android:textColor="@color/textGray"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -240,10 +240,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@id/cafeBtn"
-                app:layout_constraintLeft_toRightOf="@id/cafeBtn"
+                app:layout_constraintBottom_toBottomOf="@id/nightPlaceBtn"
+                app:layout_constraintLeft_toRightOf="@id/nightPlaceBtn"
                 app:layout_constraintRight_toLeftOf="@id/touristBtn"
-                app:layout_constraintTop_toTopOf="@id/cafeBtn">
+                app:layout_constraintTop_toTopOf="@id/nightPlaceBtn">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -270,10 +270,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@id/cafeBtn"
+                app:layout_constraintBottom_toBottomOf="@id/nightPlaceBtn"
                 app:layout_constraintLeft_toRightOf="@id/restaurantBtn"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/cafeBtn">
+                app:layout_constraintTop_toTopOf="@id/nightPlaceBtn">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -302,8 +302,8 @@
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/museumBtn"
-                app:layout_constraintTop_toBottomOf="@id/cafeBtn">
+                app:layout_constraintRight_toLeftOf="@id/parkBtn"
+                app:layout_constraintTop_toBottomOf="@id/nightPlaceBtn">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -325,7 +325,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/museumBtn"
+                android:id="@+id/parkBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -349,7 +349,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:gravity="center_horizontal"
-                    android:text="미술관 일정"
+                    android:text="공원 일정"
                     android:textColor="@color/textGray"
                     android:textSize="10sp" />
             </LinearLayout>
@@ -361,7 +361,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="@id/shoppingBtn"
-                app:layout_constraintLeft_toRightOf="@id/museumBtn"
+                app:layout_constraintLeft_toRightOf="@id/parkBtn"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@id/shoppingBtn">
 

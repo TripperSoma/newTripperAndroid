@@ -1,8 +1,9 @@
-package rankhep.com.dhlwn.utils
+package rankhep.com.tripper.utils
 
 
 import okhttp3.RequestBody
 import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.PlaceSearchModel
 import rankhep.com.tripper.model.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -35,11 +36,8 @@ interface RetrofitInterface {
     @GET("/review/loadMainReviewByPaging/{page}/{version}")
     fun getMainReviewData(@Path("page") page: Int, @Path("version") version: Int): Call<List<MainReviewListData>>
 
-//    {
-//        "user_num": 23,
-//        "email": "string",
-//        "name": "string",
-//        "sex": 0,
-//        "device_token": "string"
-//    }
+
+    @GET("/schedule/SearchingByCategory/{version}/{beforePlaceNum}/{page}")
+    fun searchPlaceByCategory(@Path("version") version: Int, @Path("beforePlaceNum") beforePlaceNum: Int, @Path("page") page: Int = 0)
+    :Call<List<PlaceSearchModel>>
 }

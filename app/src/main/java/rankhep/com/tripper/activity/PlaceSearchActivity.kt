@@ -1,0 +1,48 @@
+package rankhep.com.tripper.activity
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import kotlinx.android.synthetic.main.activity_place_search.*
+import rankhep.com.dhlwn.utils.NetworkHelper
+import rankhep.com.tripper.R
+import rankhep.com.tripper.adapter.PlaceSearchListAdapter
+import rankhep.com.tripper.model.Place
+import rankhep.com.tripper.model.PlaceSearchModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemClickListener {
+
+    val placeItem = ArrayList<PlaceSearchModel>()
+    private lateinit var mAdapter: PlaceSearchListAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_place_search)
+
+        mAdapter = PlaceSearchListAdapter(placeItem, this)
+        searchList.adapter = mAdapter
+
+
+        val version = intent.getIntExtra("version", 1)
+        NetworkHelper.networkInstance.searchPlaceByCategory(version,12)
+                .enqueue(object : Callback<List<PlaceSearchModel>>{
+                    override fun onFailure(call: Call<List<PlaceSearchModel>>, t: Throwable) {
+                        t.printStackTrace()
+                    }
+
+                    override fun onResponse(call: Call<List<PlaceSearchModel>>, response: Response<List<PlaceSearchModel>>) {
+                        if(response.code() == 200){
+                            response.body()?.let { placeItem.addAll(it) }
+                            mAdapter.notifyDataSetChanged()
+                        }
+                    }
+
+                })
+    }
+
+    override fun onItemClick(v: View, position: Int) {
+
+    }
+}
