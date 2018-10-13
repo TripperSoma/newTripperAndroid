@@ -7,11 +7,13 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_main.view.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
@@ -19,6 +21,7 @@ import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
 import rankhep.com.tripper.model.MainReviewListModel
+import rankhep.com.tripper.utils.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,9 +72,13 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
             }
 
             R.id.setLocationBtn -> {
-                val intent = Intent(context, SetMakeScheduleActivity::class.java)
-                startActivityForResult(intent, 555)
-                activity?.overridePendingTransition(R.anim.left_in, R.anim.left_out)
+                if(SharedPrefManager(context!!).isLogin()) {
+                    val intent = Intent(context, SetMakeScheduleActivity::class.java)
+                    startActivityForResult(intent, 555)
+                    activity?.overridePendingTransition(R.anim.left_in, R.anim.left_out)
+                }else{
+                    Toast.makeText(context,"로그인해주세요",Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

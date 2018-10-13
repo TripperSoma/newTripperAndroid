@@ -74,8 +74,9 @@ class TasteProgressBar : ConstraintLayout {
         typedArray.recycle()
     }
 
-    fun getTaste() {
+    fun getTaste() :Int{
 
+        return progressBar.progress
     }
 
 }

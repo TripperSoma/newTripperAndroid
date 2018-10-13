@@ -2,10 +2,7 @@ package rankhep.com.tripper.utils
 
 
 import okhttp3.RequestBody
-import rankhep.com.tripper.model.MainReviewListModel
-import rankhep.com.tripper.model.PlaceDetailInfo
-import rankhep.com.tripper.model.PlaceSearchModel
-import rankhep.com.tripper.model.User
+import rankhep.com.tripper.model.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -45,4 +42,7 @@ interface RetrofitInterface {
 
     @GET("/place/detail/{num}/{page}")
     fun getPlaceDetailInfo(@Path("num") placeNum: Int, @Path("page") page: Int = 0): Call<PlaceDetailInfo>
+
+    @POST("/schedule/inputPurpose")
+fun sendTaste(@Body body:RequestBody): Call<PlanModel>
 }

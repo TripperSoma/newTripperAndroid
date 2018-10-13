@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_set_taste.*
 import rankhep.com.tripper.R
+import rankhep.com.tripper.model.TasteSendModel
 
 class SetTasteActivity : AppCompatActivity() {
 
@@ -17,7 +18,19 @@ class SetTasteActivity : AppCompatActivity() {
         }
 
         nextFab.setOnClickListener {
-            startActivity(Intent(this@SetTasteActivity, CalenderActivity::class.java))
+            val tasteSendModel = TasteSendModel(intent.getIntExtra("date", 3),
+                    cultureProgressbar.getTaste(),
+                    entertainmentProgressbar.getTaste(),
+                    foodProgressbar.getTaste(),
+                    0,
+                    shoppingProgressbar.getTaste(),
+                    touristProgressbar.getTaste(),
+                    "string",
+                    withChild.getIsChecked(),
+                    withOld.getIsChecked())
+            val intent = Intent(this@SetTasteActivity, CalenderActivity::class.java)
+            intent.putExtra("taste",tasteSendModel)
+            startActivity(intent)
             overridePendingTransition(R.anim.left_in, R.anim.left_out)
             finish()
         }

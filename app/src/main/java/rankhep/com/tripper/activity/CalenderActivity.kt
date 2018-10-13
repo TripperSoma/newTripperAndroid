@@ -4,19 +4,30 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_calendar.*
+import okhttp3.MediaType
+import okhttp3.RequestBody
+import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.adapter.CalenderListAdapter
 import rankhep.com.tripper.model.Place
+import rankhep.com.tripper.model.PlanModel
 import rankhep.com.tripper.model.ScheduleModel
+import rankhep.com.tripper.model.TasteSendModel
 import rankhep.com.tripper.utils.CustomApplication
-import java.util.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.sql.Date
+import java.text.SimpleDateFormat
 
 class CalenderActivity : AppCompatActivity(), View.OnClickListener {
     val PLACE_SEARCH_REQUEST_CODE = 111
     private lateinit var customApplication: CustomApplication
     private lateinit var mAdapter: CalenderListAdapter
+    private lateinit var planModel: PlanModel
     private var items: ArrayList<ScheduleModel> = ArrayList<ScheduleModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +36,32 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         customApplication = application as CustomApplication
         mAdapter = CalenderListAdapter(items)
         iniView()
+
+        val taste: TasteSendModel? = intent.getSerializableExtra("taste") as TasteSendModel
+        Log.e("taste", taste?.toString())
+        taste?.let {
+            val paramObject = TasteSendModel.toJson(taste)
+            Log.e("asd", paramObject.toString())
+            NetworkHelper.networkInstance.sendTaste(RequestBody.create(MediaType.parse("application/json"), paramObject.toString()))
+                    .enqueue(object : Callback<PlanModel> {
+                        override fun onFailure(call: Call<PlanModel>, t: Throwable) {
+                            t.printStackTrace()
+                            Log.e("asd", t.message)
+                        }
+
+                        override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
+                            Log.e("taste input come", response.message() + response.code())
+                            if (response.code() == 200) {
+                                response.body()?.let {
+                                    planModel = it
+                                    items.addAll(planModel.dayList[0].schedulelist)
+                                    mAdapter.notifyDataSetChanged()
+                                }
+                            }
+                        }
+
+                    })
+        }
     }
 
     private fun iniView() {
@@ -54,6 +91,22 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
             finish()
         }
+
+        firstDay.setOnClickListener {
+            items.clear()
+            items.addAll(planModel.dayList[0].schedulelist)
+            mAdapter.notifyDataSetChanged()
+        }
+        secondDay.setOnClickListener {
+            items.clear()
+            items.addAll(planModel.dayList[1].schedulelist)
+            mAdapter.notifyDataSetChanged()
+        }
+        thirdDay.setOnClickListener {
+            items.clear()
+            items.addAll(planModel.dayList[2].schedulelist)
+            mAdapter.notifyDataSetChanged()
+        }
     }
 
 
@@ -61,21 +114,33 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         when (v) {
             nightPlaceBtn -> {
                 startSearchActivity(customApplication.NIGHT_CATEGORY)
+                addContainer.visibility = View.GONE
+                addFab.visibility = View.VISIBLE
             }
             playingBtn -> {
                 startSearchActivity(customApplication.PLAYING_CATEGORY)
+                addContainer.visibility = View.GONE
+                addFab.visibility = View.VISIBLE
             }
             restaurantBtn -> {
                 startSearchActivity(customApplication.RESTAURANT_CATEGORY)
+                addContainer.visibility = View.GONE
+                addFab.visibility = View.VISIBLE
             }
             touristBtn -> {
                 startSearchActivity(customApplication.TOURIST_CATEGORY)
+                addContainer.visibility = View.GONE
+                addFab.visibility = View.VISIBLE
             }
             shoppingBtn -> {
                 startSearchActivity(customApplication.SHOPPING_CATEGORY)
+                addContainer.visibility = View.GONE
+                addFab.visibility = View.VISIBLE
             }
             parkBtn -> {
                 startSearchActivity(customApplication.PARK_CATEGORY)
+                addContainer.visibility = View.GONE
+                addFab.visibility = View.VISIBLE
             }
         }
     }
@@ -103,14 +168,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
             PLACE_SEARCH_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val place: Place = data?.getSerializableExtra("place") as Place
-                    val startTime: Date = if (items.isEmpty())
-                        Date(2018, 9, 10, 9, 0, 0)
-                    else
-                        Date(items[items.size - 1].startTime.year,
-                                items[items.size - 1].startTime.month,
-                                items[items.size - 1].startTime.day,
-                                items[items.size - 1].startTime.hours + 1, 0, 0)
-                    val scheduleModel = ScheduleModel(place, startTime)
+                    val scheduleModel = ScheduleModel(place, getStartDate().toString())
                     items.add(scheduleModel)
                     mAdapter.notifyDataSetChanged()
                 } else {
@@ -118,5 +176,26 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    private fun getStartDate():Date {
+        val time:List<String> = items[items.size-1].startTime.split("T")
+        val lastTime:Date = Date(Integer.parseInt(time[0].split("-")[0]),
+                Integer.parseInt(time[0].split("-")[1]),
+                Integer.parseInt(time[0].split("-")[2])).apply {
+            hours = Integer.parseInt(time[1].split(":")[0])
+            minutes = Integer.parseInt(time[1].split(":")[1])
+        }
+        val startTime: Date = if (items.isEmpty())
+            Date(2018, 9, 10).apply {
+            }
+        else
+            Date(lastTime.year,
+                    lastTime.month,
+                    lastTime.day).apply {
+                hours = lastTime.hours + 1
+            }
+        Log.e("asd", startTime.toString())
+        return startTime
     }
 }

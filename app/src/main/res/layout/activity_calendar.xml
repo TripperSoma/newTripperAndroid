@@ -116,7 +116,8 @@
             android:id="@+id/priceContainer"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:background="#e7418e">
+            android:background="#e7418e"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/priceText"
@@ -149,8 +150,40 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintTop_toBottomOf="@id/topInfoLayout">
 
+        <TextView
+            android:id="@+id/firstDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1일차"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/secondDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2일차"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/thirdDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="3일차"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <View
@@ -160,12 +193,13 @@
         app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
     <android.support.v7.widget.RecyclerView
+        app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/calenderList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         android:layout_marginTop="8dp"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
     <android.support.design.widget.FloatingActionButton
@@ -185,9 +219,9 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/addContainer"
         android:layout_width="0dp"
-        android:visibility="gone"
         android:layout_height="0dp"
         android:background="#a000"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

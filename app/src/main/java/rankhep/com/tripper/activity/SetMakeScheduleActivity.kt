@@ -13,7 +13,7 @@ class SetMakeScheduleActivity : AppCompatActivity() {
 
         nextFab.setOnClickListener {
             startActivity(Intent(this@SetMakeScheduleActivity, SetTasteActivity::class.java).apply {
-                putExtra("date", hourInputEditText.text.toString())
+                putExtra("date", Integer.parseInt(hourInputEditText.text.toString()))
             })
             overridePendingTransition(R.anim.left_in, R.anim.left_out)
             finish()

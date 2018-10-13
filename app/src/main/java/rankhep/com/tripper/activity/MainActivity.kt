@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer_layout.openDrawer(GravityCompat.START)
     }
 
-    fun closeDrawer() {
+    private fun closeDrawer() {
         drawer_layout.closeDrawer(GravityCompat.START)
     }
 
