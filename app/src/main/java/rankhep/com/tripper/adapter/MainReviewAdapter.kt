@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_review_list.view.*
 import rankhep.com.tripper.R
-import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.MainReviewListModel
 
 
 class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>() {
-    var items: ArrayList<MainReviewListData> = ArrayList()
+    var items: ArrayList<MainReviewListModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_list, parent, false))

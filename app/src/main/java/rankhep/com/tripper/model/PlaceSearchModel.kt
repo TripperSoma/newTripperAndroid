@@ -1,9 +1,11 @@
 package rankhep.com.tripper.model
 
+import java.io.Serializable
+
 data class PlaceSearchModel(val name: String,
                             val picture: String,
                             val city: String,
-                            val placenum: Int) {
+                            val placenum: Int):Serializable {
 }
 
 

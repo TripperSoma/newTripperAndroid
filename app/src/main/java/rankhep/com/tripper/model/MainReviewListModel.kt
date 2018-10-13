@@ -1,10 +1,12 @@
 package rankhep.com.tripper.model
 
-data class MainReviewListData(var photo: String,
-                              var reviewnum: Int,
-                              var time: String,
-                              var title: String,
-                              var writer: String)
+import java.io.Serializable
+
+data class MainReviewListModel(var photo: String,
+                               var reviewnum: Int,
+                               var time: String,
+                               var title: String,
+                               var writer: String):Serializable
 
 
 //[

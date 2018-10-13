@@ -14,25 +14,27 @@ import kotlinx.android.synthetic.main.menu_header.*
 import rankhep.com.tripper.R
 import rankhep.com.tripper.fragment.*
 import rankhep.com.tripper.model.User
+import rankhep.com.tripper.utils.CustomApplication
 import rankhep.com.tripper.utils.SharedPrefManager
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val LOGIN_REQUEST_CODE = 333
-    lateinit var dataManager: SharedPrefManager
-    var user: User? = null
-    lateinit var nowFragment: Fragment
-    lateinit var hotelReservationFragment: HotelReservationFragment
-    lateinit var airplaneReservationFragment: AirplaneReservationFragment
-    lateinit var mainFragment: MainFragment
-    lateinit var trippingFragment: TrippingFragment
-    lateinit var settingFragment: SettingFragment
 
+    private lateinit var dataManager: SharedPrefManager
+    private var user: User? = null
+    private lateinit var nowFragment: Fragment
+    private lateinit var hotelReservationFragment: HotelReservationFragment
+    private lateinit var airplaneReservationFragment: AirplaneReservationFragment
+    private lateinit var mainFragment: MainFragment
+    private lateinit var trippingFragment: TrippingFragment
+    private lateinit var settingFragment: SettingFragment
+    private lateinit var customApplication: CustomApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        customApplication = application as CustomApplication
         dataManager = SharedPrefManager(applicationContext)
 
         mainFragment = MainFragment.newInstance()
@@ -74,7 +76,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this@MainActivity, RegisterActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
                 }
-                startActivityForResult(intent, LOGIN_REQUEST_CODE)
+                startActivityForResult(intent, customApplication.LOGIN_REQUEST_CODE)
             }
             R.id.myPlanBtn -> {
                 replaceFragment(trippingFragment)

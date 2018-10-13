@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import rankhep.com.tripper.R
+import rankhep.com.tripper.model.Photo
 
 
 class CustomGridImageView : ConstraintLayout {
@@ -99,6 +100,10 @@ class CustomGridImageView : ConstraintLayout {
             if (imgList[i] is String) {
                 Picasso.get()
                         .load(imgList[i] as String)
+                        .into(imgViews[i])
+            }else if(imgList[i] is Photo){
+                Picasso.get()
+                        .load((imgList[i] as Photo).bucket)
                         .into(imgViews[i])
             }
         }

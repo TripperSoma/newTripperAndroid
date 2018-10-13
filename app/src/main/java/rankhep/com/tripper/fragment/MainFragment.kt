@@ -18,7 +18,7 @@ import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
-import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.MainReviewListModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +27,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
 
     private lateinit var v: View
     private var mAdapter = MainReviewAdapter()
-    private var items = ArrayList<MainReviewListData>()
+    private var items = ArrayList<MainReviewListModel>()
 
     companion object {
         fun newInstance(): MainFragment {
@@ -108,12 +108,12 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
     }
 
     private fun getMainListData() {
-        NetworkHelper.networkInstance.getMainReviewData(0, 0).enqueue(object : Callback<List<MainReviewListData>> {
-            override fun onFailure(call: Call<List<MainReviewListData>>?, t: Throwable?) {
+        NetworkHelper.networkInstance.getMainReviewData(0, 0).enqueue(object : Callback<List<MainReviewListModel>> {
+            override fun onFailure(call: Call<List<MainReviewListModel>>?, t: Throwable?) {
                 t?.printStackTrace()
             }
 
-            override fun onResponse(call: Call<List<MainReviewListData>>?, response: Response<List<MainReviewListData>>?) {
+            override fun onResponse(call: Call<List<MainReviewListModel>>?, response: Response<List<MainReviewListModel>>?) {
                 Log.e("asd", "" + response?.code())
                 response?.run {
                     when (this.code()) {

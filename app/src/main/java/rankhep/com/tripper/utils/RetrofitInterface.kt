@@ -2,7 +2,7 @@ package rankhep.com.tripper.utils
 
 
 import okhttp3.RequestBody
-import rankhep.com.tripper.model.MainReviewListData
+import rankhep.com.tripper.model.MainReviewListModel
 import rankhep.com.tripper.model.PlaceDetailInfo
 import rankhep.com.tripper.model.PlaceSearchModel
 import rankhep.com.tripper.model.User
@@ -35,7 +35,7 @@ interface RetrofitInterface {
     fun loginUser(@Body body: RequestBody): Call<User>
 
     @GET("/review/loadMainReviewByPaging/{page}/{version}")
-    fun getMainReviewData(@Path("page") page: Int, @Path("version") version: Int): Call<List<MainReviewListData>>
+    fun getMainReviewData(@Path("page") page: Int, @Path("version") version: Int): Call<List<MainReviewListModel>>
 
 
     @GET("/schedule/SearchingByCategory/{version}/{beforePlaceNum}/{page}")

@@ -81,13 +81,13 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/timeInputEditText"
+        app:layout_constraintBottom_toTopOf="@+id/hourInputEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/container"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
-        android:id="@+id/timeInputEditText"
+        android:id="@+id/hourInputEditText"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -108,9 +108,9 @@
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/timeInputEditText"
-        app:layout_constraintLeft_toRightOf="@+id/timeInputEditText"
-        app:layout_constraintTop_toTopOf="@+id/timeInputEditText"
+        app:layout_constraintBottom_toBottomOf="@+id/hourInputEditText"
+        app:layout_constraintLeft_toRightOf="@+id/hourInputEditText"
+        app:layout_constraintTop_toTopOf="@+id/hourInputEditText"
         app:layout_constraintVertical_bias="0.8" />
 
     <android.support.design.widget.FloatingActionButton

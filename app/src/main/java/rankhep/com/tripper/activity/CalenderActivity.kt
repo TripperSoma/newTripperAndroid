@@ -7,19 +7,24 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_calendar.*
 import rankhep.com.tripper.R
+import rankhep.com.tripper.adapter.CalenderListAdapter
+import rankhep.com.tripper.model.Place
+import rankhep.com.tripper.model.ScheduleModel
 import rankhep.com.tripper.utils.CustomApplication
+import java.util.*
 
 class CalenderActivity : AppCompatActivity(), View.OnClickListener {
     val PLACE_SEARCH_REQUEST_CODE = 111
     private lateinit var customApplication: CustomApplication
+    private lateinit var mAdapter: CalenderListAdapter
+    private var items: ArrayList<ScheduleModel> = ArrayList<ScheduleModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
         customApplication = application as CustomApplication
-
+        mAdapter = CalenderListAdapter(items)
         iniView()
-
     }
 
     private fun iniView() {
@@ -43,6 +48,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         touristBtn.setOnClickListener(this)
         shoppingBtn.setOnClickListener(this)
         parkBtn.setOnClickListener(this)
+        calenderList.adapter = mAdapter
 
         finishBtn.setOnClickListener {
             startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
@@ -96,7 +102,17 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         when (requestCode) {
             PLACE_SEARCH_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK) {
-
+                    val place: Place = data?.getSerializableExtra("place") as Place
+                    val startTime: Date = if (items.isEmpty())
+                        Date(2018, 9, 10, 9, 0, 0)
+                    else
+                        Date(items[items.size - 1].startTime.year,
+                                items[items.size - 1].startTime.month,
+                                items[items.size - 1].startTime.day,
+                                items[items.size - 1].startTime.hours + 1, 0, 0)
+                    val scheduleModel = ScheduleModel(place, startTime)
+                    items.add(scheduleModel)
+                    mAdapter.notifyDataSetChanged()
                 } else {
 
                 }
