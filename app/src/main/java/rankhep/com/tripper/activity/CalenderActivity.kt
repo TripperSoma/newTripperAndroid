@@ -21,7 +21,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.sql.Date
-import java.text.SimpleDateFormat
+import java.util.*
 
 class CalenderActivity : AppCompatActivity(), View.OnClickListener {
     val PLACE_SEARCH_REQUEST_CODE = 111
@@ -178,24 +178,31 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun getStartDate():Date {
-        val time:List<String> = items[items.size-1].startTime.split("T")
-        val lastTime:Date = Date(Integer.parseInt(time[0].split("-")[0]),
-                Integer.parseInt(time[0].split("-")[1]),
-                Integer.parseInt(time[0].split("-")[2])).apply {
-            hours = Integer.parseInt(time[1].split(":")[0])
-            minutes = Integer.parseInt(time[1].split(":")[1])
-        }
+    private fun getStartDate(): Date {
+
         val startTime: Date = if (items.isEmpty())
             Date(2018, 9, 10).apply {
             }
-        else
-            Date(lastTime.year,
-                    lastTime.month,
-                    lastTime.day).apply {
-                hours = lastTime.hours + 1
-            }
+        else {
+            val time: List<String> = items[items.size - 1].startTime.split("T")
+            getDate(Integer.parseInt(time[0].split("-")[0]),
+                    Integer.parseInt(time[0].split("-")[1]),
+                    Integer.parseInt(time[0].split("-")[2]),
+                    Integer.parseInt(time[1].split(":")[0])+1,
+                    Integer.parseInt(time[1].split(":")[1]),
+                    Integer.parseInt(time[1].split(":")[2]))
+
+        }
         Log.e("asd", startTime.toString())
+        var cal= Calendar.getInstance().time
         return startTime
+    }
+
+    fun getDate(year: Int, month: Int, date: Int, hour: Int, minute: Int, second: Int): Date {
+        var cal = Calendar.getInstance()
+        cal.set(year, month - 1, date, hour, minute, second);
+        cal.set(Calendar.MILLISECOND, 0)
+        return Date(cal.time.time)
+
     }
 }

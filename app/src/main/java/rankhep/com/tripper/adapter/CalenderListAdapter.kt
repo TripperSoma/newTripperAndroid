@@ -47,8 +47,10 @@ class CalenderListAdapter(private val items: ArrayList<ScheduleModel>) : Recycle
 
         val place = items[position].place
         holder.run {
-            hourEditText.setText("${items[position].startTime.split("T")[1].split(":")[0]}")
-            minuteEditText.setText("${items[position].startTime.split("T")[1].split(":")[1]}0")
+            var hour :String? = items[position].startTime.split("T")[1].split(":")[0]
+            hourEditText.setText("$hour")
+            val minute:String?=items[position].startTime.split("T")[1].split(":")[1]
+            minuteEditText.setText("${minute}0")
             title.text = place.name
             subTitle.text = place.city
             when (place.type) {
