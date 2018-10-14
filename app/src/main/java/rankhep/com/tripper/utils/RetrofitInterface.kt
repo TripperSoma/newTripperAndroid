@@ -31,6 +31,7 @@ interface RetrofitInterface {
     @POST("user/login/")
     fun loginUser(@Body body: RequestBody): Call<User>
 
+
     @GET("/review/loadMainReviewByPaging/{page}/{version}")
     fun getMainReviewData(@Path("page") page: Int, @Path("version") version: Int): Call<List<MainReviewListModel>>
 
@@ -45,4 +46,7 @@ interface RetrofitInterface {
 
     @POST("/schedule/inputPurpose")
 fun sendTaste(@Body body:RequestBody): Call<PlanModel>
+
+    @POST()
+fun addSchedule(@Body body: RequestBody):Call<PlanModel>
 }

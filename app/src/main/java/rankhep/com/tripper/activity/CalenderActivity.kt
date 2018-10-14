@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_calendar.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -20,7 +21,7 @@ import rankhep.com.tripper.utils.CustomApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.sql.Date
+import java.time.LocalDateTime
 import java.util.*
 
 class CalenderActivity : AppCompatActivity(), View.OnClickListener {
@@ -37,6 +38,11 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         mAdapter = CalenderListAdapter(items)
         iniView()
 
+
+        getMLData()
+    }
+
+    private fun getMLData() {
         val taste: TasteSendModel? = intent.getSerializableExtra("taste") as TasteSendModel
         Log.e("taste", taste?.toString())
         taste?.let {
@@ -88,8 +94,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         calenderList.adapter = mAdapter
 
         finishBtn.setOnClickListener {
-            startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
-            finish()
+            addSchedule()
         }
 
         firstDay.setOnClickListener {
@@ -168,7 +173,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
             PLACE_SEARCH_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val place: Place = data?.getSerializableExtra("place") as Place
-                    val scheduleModel = ScheduleModel(place, getStartDate().toString())
+                    val scheduleModel = ScheduleModel(place, getStartDate())
                     items.add(scheduleModel)
                     mAdapter.notifyDataSetChanged()
                 } else {
@@ -178,31 +183,35 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun getStartDate(): Date {
-
-        val startTime: Date = if (items.isEmpty())
-            Date(2018, 9, 10).apply {
-            }
+    private fun getStartDate(): String {
+        val startTime: String = if (items.isEmpty())
+            LocalDateTime.parse("2018-10-13T09:00:00").toString()
         else {
-            val time: List<String> = items[items.size - 1].startTime.split("T")
-            getDate(Integer.parseInt(time[0].split("-")[0]),
-                    Integer.parseInt(time[0].split("-")[1]),
-                    Integer.parseInt(time[0].split("-")[2]),
-                    Integer.parseInt(time[1].split(":")[0])+1,
-                    Integer.parseInt(time[1].split(":")[1]),
-                    Integer.parseInt(time[1].split(":")[2]))
-
+            val strDatewithTime = items[items.size - 1].startTime
+            val aLDT = LocalDateTime.parse(strDatewithTime).plusHours(1)
+            Log.e("asd", "Date with Time: $aLDT")
+            aLDT.toString()
         }
         Log.e("asd", startTime.toString())
-        var cal= Calendar.getInstance().time
         return startTime
     }
 
-    fun getDate(year: Int, month: Int, date: Int, hour: Int, minute: Int, second: Int): Date {
-        var cal = Calendar.getInstance()
-        cal.set(year, month - 1, date, hour, minute, second);
-        cal.set(Calendar.MILLISECOND, 0)
-        return Date(cal.time.time)
+    private fun addSchedule() {
+        NetworkHelper.networkInstance.addSchedule(RequestBody.create(MediaType.parse("application/json"),
+                PlanModel.toJson(planModel))).enqueue(object : Callback<PlanModel> {
+            override fun onFailure(call: Call<PlanModel>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("Complete Error", t.message)
+            }
 
+            override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
+                if (response.code() == 200) {
+                    startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(applicationContext, "저장에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 }
