@@ -72,13 +72,13 @@
                 android:id="@+id/moreInfoText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
                 android:layout_marginTop="4dp"
                 android:text=""
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginRight="16dp"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="@id/infoText"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/infoText" />
 
             <TextView

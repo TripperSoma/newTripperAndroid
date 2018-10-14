@@ -9,10 +9,10 @@ import android.widget.TextView
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.PlanModel
 
-class TrippingAdapter(val items:ArrayList<PlanModel>) : RecyclerView.Adapter<TrippingAdapter.ViewHolder>() {
+class TrippingAdapter(val items: ArrayList<PlanModel>) : RecyclerView.Adapter<TrippingAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_tripping, parent, false))
-        vh.run{
+        vh.run {
             tripDeleteImg.setOnClickListener {
                 items.removeAt(adapterPosition)
                 notifyDataSetChanged()
@@ -28,7 +28,7 @@ class TrippingAdapter(val items:ArrayList<PlanModel>) : RecyclerView.Adapter<Tri
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.run{
+        holder.run {
             tripTitleText.text = items[position].dayList[position].schedulelist[0].place.country
         }
     }

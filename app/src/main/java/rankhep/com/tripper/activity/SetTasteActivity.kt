@@ -29,7 +29,7 @@ class SetTasteActivity : AppCompatActivity() {
                     withChild.getIsChecked(),
                     withOld.getIsChecked())
             val intent = Intent(this@SetTasteActivity, CalenderActivity::class.java)
-            intent.putExtra("taste",tasteSendModel)
+            intent.putExtra("taste", tasteSendModel)
             startActivity(intent)
             overridePendingTransition(R.anim.left_in, R.anim.left_out)
             finish()

@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.activity_place_search.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.adapter.PlaceSearchListAdapter
-import rankhep.com.tripper.model.PlaceDetailInfo
 import rankhep.com.tripper.model.PlaceSearchModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,11 +51,11 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 222){
-            if(resultCode == Activity.RESULT_OK){
+        if (requestCode == 222) {
+            if (resultCode == Activity.RESULT_OK) {
                 setResult(Activity.RESULT_OK, data)
                 finish()
-            }else{
+            } else {
 
             }
         }

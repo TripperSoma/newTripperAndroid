@@ -1,15 +1,15 @@
 package rankhep.com.tripper.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_profile_setting.*
 import rankhep.com.tripper.R
 
 class ProfileSettingActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
-        when(v.id){
-            R.id.toolbarBackBtn ->{
+        when (v.id) {
+            R.id.toolbarBackBtn -> {
                 finish()
                 overridePendingTransition(R.anim.right_in, R.anim.right_out)
             }

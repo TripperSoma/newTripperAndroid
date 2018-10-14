@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginTop="16dp"
-    android:layout_height="wrap_content">
+    android:layout_marginTop="16dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,8 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:maxWidth="200dp"
             android:maxLines="1"
+            android:maxWidth="200dp"
             android:text="유니버셜 스튜디오 재팬"
             android:textColor="@android:color/black"
             android:textSize="14sp"
@@ -49,9 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:maxLines="2"
             android:maxWidth="165dp"
             android:text="일본 〒554-0031 大阪府大阪市此花区桜島２丁目１−33"
-            android:maxLines="2"
             android:textColor="@color/textGray"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="parent"

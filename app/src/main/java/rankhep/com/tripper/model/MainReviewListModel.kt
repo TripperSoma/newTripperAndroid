@@ -6,7 +6,7 @@ data class MainReviewListModel(var photo: String,
                                var reviewnum: Int,
                                var time: String,
                                var title: String,
-                               var writer: String):Serializable
+                               var writer: String) : Serializable
 
 
 //[

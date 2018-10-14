@@ -12,7 +12,6 @@ import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.adapter.TrippingAdapter
 import rankhep.com.tripper.model.PlanModel
-import rankhep.com.tripper.utils.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

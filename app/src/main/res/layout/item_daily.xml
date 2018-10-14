@@ -23,31 +23,31 @@
             android:id="@+id/hourInputEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_marginLeft="8dp"
             android:background="#fff"
+            android:gravity="right"
             android:hint="09"
+            android:inputType="number"
+            android:maxLength="2"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:inputType="number"
-            android:maxLength="2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/timeImg"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:text=":"
             android:id="@+id/colon"
-            app:layout_constraintTop_toTopOf="@id/hourInputEditText"
-            app:layout_constraintBottom_toBottomOf="@id/hourInputEditText"
-            app:layout_constraintLeft_toRightOf="@id/hourInputEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text=":"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:layout_marginLeft="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:layout_constraintBottom_toBottomOf="@id/hourInputEditText"
+            app:layout_constraintLeft_toRightOf="@id/hourInputEditText"
+            app:layout_constraintTop_toTopOf="@id/hourInputEditText" />
 
 
         <EditText
@@ -58,14 +58,15 @@
             android:background="#fff"
             android:hint="00"
 
+            android:inputType="number"
+            android:maxLength="2"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:maxLength="2"
-            android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/colon"
             app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/deleteBtn"
             android:layout_width="wrap_content"

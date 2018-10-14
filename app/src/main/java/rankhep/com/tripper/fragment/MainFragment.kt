@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -72,12 +71,12 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
             }
 
             R.id.setLocationBtn -> {
-                if(SharedPrefManager(context!!).isLogin()) {
+                if (SharedPrefManager(context!!).isLogin()) {
                     val intent = Intent(context, SetMakeScheduleActivity::class.java)
                     startActivityForResult(intent, 555)
                     activity?.overridePendingTransition(R.anim.left_in, R.anim.left_out)
-                }else{
-                    Toast.makeText(context,"로그인해주세요",Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "로그인해주세요", Toast.LENGTH_SHORT).show()
                 }
             }
         }

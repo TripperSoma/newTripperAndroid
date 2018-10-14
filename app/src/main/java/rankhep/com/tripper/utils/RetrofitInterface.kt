@@ -51,5 +51,5 @@ interface RetrofitInterface {
     fun addSchedule(@Body body: RequestBody): Call<PlanModel>
 
     @GET("/schedule/load/{userid}")
-    fun getScheduleList(@Path("userid") userid: String):Call<List<PlanModel>>
+    fun getScheduleList(@Path("userid") userid: String): Call<List<PlanModel>>
 }

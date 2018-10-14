@@ -13,5 +13,5 @@ data class LocalDateTime(
         var monthValue: Int,
         var nano: Int,
         var second: Int,
-        var year: Int):Serializable {
+        var year: Int) : Serializable {
 }

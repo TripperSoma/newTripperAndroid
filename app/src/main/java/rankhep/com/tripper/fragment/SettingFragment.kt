@@ -8,16 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_setting.view.*
-import rankhep.com.tripper.activity.ProfileSettingActivity
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
+import rankhep.com.tripper.activity.ProfileSettingActivity
 
 class SettingFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.toolbarMenuBtn -> {
-                Log.e("asd","asd")
+                Log.e("asd", "asd")
                 (activity as MainActivity).openDrawer()
             }
             R.id.profileSettingBtn -> {

@@ -12,7 +12,7 @@ import rankhep.com.tripper.model.ReviewDTO
 
 class DetailInfoReviewAdapter(val items: List<ReviewDTO>) : RecyclerView.Adapter<DetailInfoReviewAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.run{
+        holder.run {
             reviewNameText.text = items[position].name
             Picasso.get().load(items[position].url).into(profileImg)
             content.text = items[position].content

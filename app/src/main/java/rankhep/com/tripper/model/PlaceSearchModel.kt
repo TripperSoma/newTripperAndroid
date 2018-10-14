@@ -5,7 +5,7 @@ import java.io.Serializable
 data class PlaceSearchModel(val name: String,
                             val picture: String,
                             val city: String,
-                            val placenum: Int):Serializable {
+                            val placenum: Int) : Serializable {
 }
 
 

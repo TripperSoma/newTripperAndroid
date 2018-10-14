@@ -101,7 +101,7 @@ class CustomGridImageView : ConstraintLayout {
                 Picasso.get()
                         .load(imgList[i] as String)
                         .into(imgViews[i])
-            }else if(imgList[i] is Photo){
+            } else if (imgList[i] is Photo) {
                 Picasso.get()
                         .load((imgList[i] as Photo).bucket)
                         .into(imgViews[i])

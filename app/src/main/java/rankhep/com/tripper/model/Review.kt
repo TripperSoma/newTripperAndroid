@@ -5,4 +5,4 @@ import java.io.Serializable
 data class Review(var days: ArrayList<ReviewDay>,
                   var seqnum: Int,
                   var thumb: String,
-                  var user: String):Serializable
+                  var user: String) : Serializable
