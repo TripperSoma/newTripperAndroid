@@ -45,8 +45,11 @@ interface RetrofitInterface {
     fun getPlaceDetailInfo(@Path("num") placeNum: Int, @Path("page") page: Int = 0): Call<PlaceDetailInfo>
 
     @POST("/schedule/inputPurpose")
-fun sendTaste(@Body body:RequestBody): Call<PlanModel>
+    fun sendTaste(@Body body: RequestBody): Call<PlanModel>
 
-    @POST()
-fun addSchedule(@Body body: RequestBody):Call<PlanModel>
+    @POST("/schedule/add")
+    fun addSchedule(@Body body: RequestBody): Call<PlanModel>
+
+    @GET("/schedule/load/{userid}")
+    fun getScheduleList(@Path("userid") userid: String):Call<List<PlanModel>>
 }
