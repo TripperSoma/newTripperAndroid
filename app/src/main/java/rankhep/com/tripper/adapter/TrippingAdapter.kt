@@ -9,17 +9,28 @@ import android.widget.TextView
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.PlanModel
 
-class TrippingAdapter(val items: ArrayList<PlanModel>) : RecyclerView.Adapter<TrippingAdapter.ViewHolder>() {
+class TrippingAdapter(val items: ArrayList<PlanModel>, val listener: OnClickListener) : RecyclerView.Adapter<TrippingAdapter.ViewHolder>() {
+
+    interface OnClickListener {
+        fun onDeleteButtonClickedListener(v: View, position: Int, item: PlanModel)
+        fun onChangeButtonClickedListener(v: View, position: Int, item: PlanModel)
+        fun onReviewButtonClickedListener(v: View, position: Int, item: PlanModel)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_tripping, parent, false))
         vh.run {
             tripDeleteImg.setOnClickListener {
-                items.removeAt(adapterPosition)
-                notifyDataSetChanged()
+                listener.onDeleteButtonClickedListener(it, adapterPosition, items[adapterPosition])
+
             }
 
             tripChangeImg.setOnClickListener {
+                listener.onChangeButtonClickedListener(it, adapterPosition, items[adapterPosition])
+            }
 
+            tripReviewImg.setOnClickListener {
+                listener.onReviewButtonClickedListener(it, adapterPosition, items[adapterPosition])
             }
         }
         return vh

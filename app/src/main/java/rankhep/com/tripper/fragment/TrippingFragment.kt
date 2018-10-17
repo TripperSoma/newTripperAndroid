@@ -16,7 +16,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TrippingFragment : Fragment(), View.OnClickListener {
+class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnClickListener {
+    override fun onChangeButtonClickedListener(v: View, position: Int, item: PlanModel) {
+    }
+
+    override fun onReviewButtonClickedListener(v: View, position: Int, item: PlanModel) {
+    }
+
+    override fun onDeleteButtonClickedListener(v: View, position: Int, item: PlanModel) {
+    }
+
     private lateinit var mAdapter: TrippingAdapter
     private val items = ArrayList<PlanModel>()
     override fun onClick(v: View?) {
@@ -43,7 +52,7 @@ class TrippingFragment : Fragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_tripping, null)
-        mAdapter = TrippingAdapter(items)
+        mAdapter = TrippingAdapter(items,this@TrippingFragment)
 
         v.run {
             trippingToolbarMenuBtn.setOnClickListener(this@TrippingFragment)
