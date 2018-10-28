@@ -24,18 +24,22 @@ import retrofit2.Response
 import java.time.LocalDateTime
 import java.util.*
 
-class CalenderActivity : AppCompatActivity(), View.OnClickListener {
-    val PLACE_SEARCH_REQUEST_CODE = 111
+class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderListAdapter.OnButtonClickedListener {
+    private val ADD_PLACE_REQUEST_CODE = 111
+    private val EDIT_PLACE_REQUEST_CODE = 222
     private lateinit var customApplication: CustomApplication
     private lateinit var mAdapter: CalenderListAdapter
     private lateinit var planModel: PlanModel
     private var items: ArrayList<ScheduleModel> = ArrayList<ScheduleModel>()
+    private var changePosition = -1
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
 
         customApplication = application as CustomApplication
-        mAdapter = CalenderListAdapter(items)
+        mAdapter = CalenderListAdapter(items, this)
         iniView()
 
 
@@ -97,53 +101,55 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
             addSchedule()
         }
 
-        firstDay.setOnClickListener {
-            items.clear()
-            items.addAll(planModel.dayList[0].schedulelist)
-            mAdapter.notifyDataSetChanged()
-        }
-        secondDay.setOnClickListener {
-            items.clear()
-            items.addAll(planModel.dayList[1].schedulelist)
-            mAdapter.notifyDataSetChanged()
-        }
-        thirdDay.setOnClickListener {
-            items.clear()
-            items.addAll(planModel.dayList[2].schedulelist)
-            mAdapter.notifyDataSetChanged()
-        }
+        //TODO : 탭 생성
+
+//        firstDay.setOnClickListener {
+//            items.clear()
+//            items.addAll(planModel.dayList[0].schedulelist)
+//            mAdapter.notifyDataSetChanged()
+//        }
+//        secondDay.setOnClickListener {
+//            items.clear()
+//            items.addAll(planModel.dayList[1].schedulelist)
+//            mAdapter.notifyDataSetChanged()
+//        }
+//        thirdDay.setOnClickListener {
+//            items.clear()
+//            items.addAll(planModel.dayList[2].schedulelist)
+//            mAdapter.notifyDataSetChanged()
+//        }
     }
 
 
     override fun onClick(v: View) {
         when (v) {
             nightPlaceBtn -> {
-                startSearchActivity(customApplication.NIGHT_CATEGORY)
+                startSearchActivity(customApplication.NIGHT_CATEGORY, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             playingBtn -> {
-                startSearchActivity(customApplication.PLAYING_CATEGORY)
+                startSearchActivity(customApplication.PLAYING_CATEGORY, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             restaurantBtn -> {
-                startSearchActivity(customApplication.RESTAURANT_CATEGORY)
+                startSearchActivity(customApplication.RESTAURANT_CATEGORY, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             touristBtn -> {
-                startSearchActivity(customApplication.TOURIST_CATEGORY)
+                startSearchActivity(customApplication.TOURIST_CATEGORY, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             shoppingBtn -> {
-                startSearchActivity(customApplication.SHOPPING_CATEGORY)
+                startSearchActivity(customApplication.SHOPPING_CATEGORY, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             parkBtn -> {
-                startSearchActivity(customApplication.PARK_CATEGORY)
+                startSearchActivity(customApplication.PARK_CATEGORY, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
@@ -161,21 +167,38 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun startSearchActivity(category: Int) {
+    private fun startSearchActivity(category: Int, isEdit: Boolean) {
         val intent = Intent(this@CalenderActivity, PlaceSearchActivity::class.java)
         intent.putExtra("version", category)
-        startActivityForResult(intent, PLACE_SEARCH_REQUEST_CODE)
+
+        if (isEdit) {
+            startActivityForResult(intent, EDIT_PLACE_REQUEST_CODE)
+        } else {
+            startActivityForResult(intent, ADD_PLACE_REQUEST_CODE)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            PLACE_SEARCH_REQUEST_CODE -> {
+            ADD_PLACE_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val place: Place = data?.getSerializableExtra("place") as Place
                     val scheduleModel = ScheduleModel(place, getStartDate())
                     items.add(scheduleModel)
                     mAdapter.notifyDataSetChanged()
+                    //TODO : 서버연동
+                } else {
+
+                }
+            }
+            EDIT_PLACE_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val place: Place = data?.getSerializableExtra("place") as Place
+                    val scheduleModel = ScheduleModel(place, items[changePosition].startTime)
+                    items[changePosition] = scheduleModel
+                    mAdapter.notifyDataSetChanged()
+                    //TODO : 서버연동
                 } else {
 
                 }
@@ -184,7 +207,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getStartDate(): String {
-        val startTime: String = if (items.isEmpty())
+        return if (items.isEmpty())
             LocalDateTime.parse("2018-10-13T09:00:00").toString()
         else {
             val strDatewithTime = items[items.size - 1].startTime
@@ -192,8 +215,6 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
             Log.e("asd", "Date with Time: $aLDT")
             aLDT.toString()
         }
-        Log.e("asd", startTime.toString())
-        return startTime
     }
 
     private fun addSchedule() {
@@ -214,4 +235,16 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
+
+    override fun changeButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
+        startSearchActivity(item.place.type, true)
+        changePosition = position
+    }
+
+    override fun deleteButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
+        items.removeAt(position)
+        mAdapter.notifyDataSetChanged()
+        //TODO : 서버연동
+    }
+
 }

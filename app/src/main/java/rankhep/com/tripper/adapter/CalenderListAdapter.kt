@@ -13,18 +13,22 @@ import rankhep.com.tripper.R
 import rankhep.com.tripper.model.ScheduleModel
 import rankhep.com.tripper.utils.CustomApplication
 
-class CalenderListAdapter(private val items: ArrayList<ScheduleModel>) : RecyclerView.Adapter<CalenderListAdapter.ViewHolder>() {
+class CalenderListAdapter(private val items: ArrayList<ScheduleModel>, val listener: OnButtonClickedListener) : RecyclerView.Adapter<CalenderListAdapter.ViewHolder>() {
 
+    interface OnButtonClickedListener {
+        fun changeButtonClickedListener(v: View, position: Int, item: ScheduleModel)
+        fun deleteButtonClickedListener(v: View, position: Int, item: ScheduleModel)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_daily, parent, false))
 
         vh.run {
             changeBtn.setOnClickListener {
-
+                listener.changeButtonClickedListener(it, adapterPosition, items[adapterPosition])
             }
             deleteBtn.setOnClickListener {
-
+                listener.deleteButtonClickedListener(it, adapterPosition, items[adapterPosition])
             }
             hourEditText.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {

@@ -20,6 +20,8 @@ import rankhep.com.tripper.utils.SharedPrefManager
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
+    //TODO : 리뷰 액티비티
+    //TODO : 리뷰 작성
 
     private lateinit var dataManager: SharedPrefManager
     private var user: User? = null
@@ -79,7 +81,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivityForResult(intent, customApplication.LOGIN_REQUEST_CODE)
             }
             R.id.myPlanBtn -> {
-                replaceFragment(trippingFragment)
+//                replaceFragment(trippingFragment)
             }
             R.id.homeBtn -> {
                 replaceFragment(mainFragment)
