@@ -17,13 +17,18 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnClickListener {
+
     override fun onChangeButtonClickedListener(v: View, position: Int, item: PlanModel) {
+        //TODO : 일정 변경 액티비티 연동
+        //캘린더 액티비티에 일정 던지면 댐
     }
 
     override fun onReviewButtonClickedListener(v: View, position: Int, item: PlanModel) {
+        //TODO : 리뷰 작성 액티비티 연결
     }
 
     override fun onDeleteButtonClickedListener(v: View, position: Int, item: PlanModel) {
+        //TODO : 일정 삭제 서버연동
     }
 
     private lateinit var mAdapter: TrippingAdapter

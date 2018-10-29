@@ -10,11 +10,23 @@ import rankhep.com.tripper.R
 import rankhep.com.tripper.model.MainReviewListModel
 
 
-class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>() {
+class MainReviewAdapter(val listener: OnItemClickedListener) : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>() {
+    interface OnItemClickedListener {
+        fun onItemClicked(v: View, position: Int, item: MainReviewListModel)
+    }
+
     var items: ArrayList<MainReviewListModel> = ArrayList()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_list, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_list, parent, false))
+
+        vh.run {
+            itemView.setOnClickListener {
+                listener.onItemClicked(itemView, adapterPosition, items[adapterPosition])
+            }
+        }
+        return vh
+    }
 
     override fun getItemCount(): Int = items.size
 
@@ -29,9 +41,7 @@ class MainReviewAdapter() : RecyclerView.Adapter<MainReviewAdapter.ViewHolder>()
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         init {
-            v.setOnClickListener {
 
-            }
         }
     }
 }

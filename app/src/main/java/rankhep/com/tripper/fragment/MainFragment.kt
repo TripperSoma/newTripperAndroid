@@ -25,10 +25,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChangedListener {
+class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChangedListener, MainReviewAdapter.OnItemClickedListener {
+    override fun onItemClicked(v: View, position: Int, item: MainReviewListModel) {
+        //TODO : 리뷰 액티비티 연결
+    }
 
     private lateinit var v: View
-    private var mAdapter = MainReviewAdapter()
+    private var mAdapter = MainReviewAdapter(this)
     private var items = ArrayList<MainReviewListModel>()
 
     companion object {
