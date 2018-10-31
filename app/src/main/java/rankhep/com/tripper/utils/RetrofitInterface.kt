@@ -52,4 +52,7 @@ interface RetrofitInterface {
 
     @GET("/schedule/load/{userid}")
     fun getScheduleList(@Path("userid") userid: String): Call<List<PlanModel>>
+
+    @GET("/review/load/{reviewnum}")
+    fun getReviewDetail(@Path("reviewnum") reviewNum: Int = 1): Call<Review>
 }

@@ -32,3 +32,4 @@ data class Place(val city: String,
 //},
 //    "type": 0
 //}
+

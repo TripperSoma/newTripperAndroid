@@ -27,7 +27,7 @@ import retrofit2.Response
 
 class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChangedListener, MainReviewAdapter.OnItemClickedListener {
     override fun onItemClicked(v: View, position: Int, item: MainReviewListModel) {
-        //TODO : 리뷰 액티비티 연결
+
     }
 
     private lateinit var v: View
