@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import rankhep.com.tripper.R
+import rankhep.com.tripper.model.ReviewDetail
 import rankhep.com.tripper.model.ReviewListModel
 import rankhep.com.tripper.utils.CustomApplication
 import rankhep.com.tripper.view.CustomGridImageView
@@ -32,10 +33,21 @@ class ReviewViewerAdapter(var items: ArrayList<ReviewListModel>) : RecyclerView.
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             CustomApplication.REVIEW_DAY_VIEW_TYPE -> {
-
+                val item: Int = items[position].content as Int
+                (holder as DayViewHolder).run {
+                    dayText.text = item.toString()
+                }
             }
             CustomApplication.REVIEW_TOURIST_VIEW_TYPE -> {
-
+                val item: ReviewDetail = items[position].content as ReviewDetail
+                (holder as TouristViewHolder).run {
+                    item.schedule.startTime?.let { timeText.text = it }
+                    touristNameText.text = item.schedule.place.name
+                    touristReviewText.text = item.content
+                    gridImage.setImageList(item.photos)
+                    if(item.photos.isEmpty())
+                        gridImage.visibility = View.GONE
+                }
             }
         }
     }
@@ -49,7 +61,7 @@ class ReviewViewerAdapter(var items: ArrayList<ReviewListModel>) : RecyclerView.
 
     class TouristViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         var timeText: TextView = v.findViewById(R.id.timeText)
-        var touristNameText: TextView = v.findViewById(R.id.touristName)
+        var touristNameText: TextView = v.findViewById(R.id.touristNameText)
         var gridImage: CustomGridImageView = v.findViewById(R.id.gridImage)
         var touristReviewText: TextView = v.findViewById(R.id.touristReviewText)
     }

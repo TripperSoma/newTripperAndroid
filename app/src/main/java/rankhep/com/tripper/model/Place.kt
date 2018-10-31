@@ -13,7 +13,11 @@ data class Place(val city: String,
                  val price: Int,
                  val rating: Double,
                  val thumb: Thumbnail,
-                 val type: Int) : Serializable {}
+                 val type: Int) : Serializable {
+    override fun toString(): String {
+        return "Place(city='$city', country='$country', details='$details', latitude=$latitude, longtitude=$longtitude, name='$name', photos=$photos, place_num=$place_num, price=$price, rating=$rating, thumb=$thumb, type=$type)"
+    }
+}
 
 //{
 //    "city": "string",

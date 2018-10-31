@@ -17,8 +17,10 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.MainActivity
+import rankhep.com.tripper.activity.ReviewViewerActivity
 import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
+import rankhep.com.tripper.adapter.ReviewViewerAdapter
 import rankhep.com.tripper.model.MainReviewListModel
 import rankhep.com.tripper.utils.SharedPrefManager
 import retrofit2.Call
@@ -27,7 +29,9 @@ import retrofit2.Response
 
 class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChangedListener, MainReviewAdapter.OnItemClickedListener {
     override fun onItemClicked(v: View, position: Int, item: MainReviewListModel) {
-
+        val intent = Intent(context, ReviewViewerActivity::class.java)
+        intent.putExtra("reviewNum", item.reviewnum)
+        startActivityForResult(intent, 444)
     }
 
     private lateinit var v: View
