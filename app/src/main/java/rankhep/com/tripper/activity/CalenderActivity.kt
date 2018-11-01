@@ -2,10 +2,16 @@ package rankhep.com.tripper.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_calendar.*
 import okhttp3.MediaType
@@ -32,6 +38,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     private lateinit var planModel: PlanModel
     private var items: ArrayList<ScheduleModel> = ArrayList<ScheduleModel>()
     private var changePosition = -1
+    val tabs = ArrayList<TextView>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +48,6 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
         customApplication = application as CustomApplication
         mAdapter = CalenderListAdapter(items, this)
         iniView()
-
 
         getMLData()
     }
@@ -66,11 +72,64 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
                                     planModel = it
                                     items.addAll(planModel.dayList[0].schedulelist)
                                     mAdapter.notifyDataSetChanged()
+                                    setTab()
                                 }
                             }
                         }
 
                     })
+        }
+    }
+
+    private fun setTab() {
+        val param = LinearLayout.LayoutParams(120 * planModel.dayList.size, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        dayContainer.layoutParams = param
+        planModel.dayList.forEach {
+            val textView = TextView(this@CalenderActivity)
+            textView.run {
+                Log.e("asd", "as")
+                layoutParams = LinearLayout.LayoutParams(120, LinearLayout.LayoutParams.MATCH_PARENT)
+                text = "${it.day} day"
+                gravity = Gravity.CENTER
+                setTextColor(R.color.colorPrimary)
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+                typeface = Typeface.DEFAULT_BOLD
+                setOnClickListener { view: View ->
+                    items.clear()
+                    items.addAll(planModel.dayList[Integer.parseInt(it.day)].schedulelist)
+                    mAdapter.notifyDataSetChanged()
+                    setTextFocus(Integer.parseInt(it.day) - 1)
+                    setTabSpace(Integer.parseInt(it.day) - 1 as Float)
+                }
+            }
+            tabs.add(textView)
+            dayContainer.addView(textView)
+        }
+
+        tabSpaceContainer.run {
+            layoutParams = LinearLayout.LayoutParams(120 * planModel.dayList.size, 1)
+            weightSum = planModel.dayList.size as Float
+        }
+    }
+
+    private fun setTextFocus(position: Int) {
+        tabs.forEach {
+            it.setTypeface(Typeface.DEFAULT)
+            it.setTextColor(R.color.textGray)
+        }
+        tabs[position].typeface = Typeface.DEFAULT_BOLD
+        tabs[position].setTextColor(R.color.colorPrimary)
+    }
+
+    private fun setTabSpace(weight: Float, speed: Int = 150) {
+        val params = space.layoutParams as LinearLayout.LayoutParams
+        val startWeight = params.weight
+        var operand = params.weight - weight
+        (1..speed).forEach { i ->
+            Handler().postDelayed({
+                params.weight = startWeight - (operand / speed) * i
+                space.layoutParams = params
+            }, i.toLong())
         }
     }
 
@@ -101,23 +160,6 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
             addSchedule()
         }
 
-        //TODO : 탭 생성
-
-//        firstDay.setOnClickListener {
-//            items.clear()
-//            items.addAll(planModel.dayList[0].schedulelist)
-//            mAdapter.notifyDataSetChanged()
-//        }
-//        secondDay.setOnClickListener {
-//            items.clear()
-//            items.addAll(planModel.dayList[1].schedulelist)
-//            mAdapter.notifyDataSetChanged()
-//        }
-//        thirdDay.setOnClickListener {
-//            items.clear()
-//            items.addAll(planModel.dayList[2].schedulelist)
-//            mAdapter.notifyDataSetChanged()
-//        }
     }
 
 
