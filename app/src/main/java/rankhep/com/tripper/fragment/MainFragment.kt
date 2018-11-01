@@ -20,7 +20,6 @@ import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.activity.ReviewViewerActivity
 import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
-import rankhep.com.tripper.adapter.ReviewViewerAdapter
 import rankhep.com.tripper.model.MainReviewListModel
 import rankhep.com.tripper.utils.SharedPrefManager
 import retrofit2.Call
@@ -60,7 +59,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
         getMainListData()
         v.apply {
             main_toolbar_menu_btn.setOnClickListener(this@MainFragment)
-            toolbar_container.addOnOffsetChangedListener(this@MainFragment)
+            toolbarContainer.addOnOffsetChangedListener(this@MainFragment)
             review_list.run {
                 layoutManager = GridLayoutManager(context, 2)
                 adapter = mAdapter

@@ -8,7 +8,7 @@
 
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/toolbar_container"
+        android:id="@+id/toolbarContainer"
         android:layout_width="match_parent"
         android:layout_height="276dp"
         android:background="?attr/colorPrimary">
@@ -35,6 +35,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:id="@+id/thumbImg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="center"
@@ -59,25 +60,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="14dp"
+                    android:text="2018.07.25~2018.07.29"
                     android:textColor="#ffffff"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toTopOf="@+id/reviewTitleText"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:text="2018.07.25~2018.07.29" />
+                    app:layout_constraintRight_toRightOf="parent" />
 
                 <TextView
                     android:id="@+id/reviewTitleText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:text="나의 생애 첫 해외여행,\n오사카에서 일어난 일들"
                     android:textColor="#ffffff"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/guide"
-                    android:text="나의 생애 첫 해외여행,\n오사카에서 일어난 일들" />
+                    app:layout_constraintTop_toBottomOf="@id/guide" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -99,10 +100,10 @@
                         android:id="@+id/reviewNameText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="JinwonKim"
                         android:textColor="#ffffff"
                         android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:text="JinwonKim" />
+                        android:textStyle="bold" />
                 </LinearLayout>
             </android.support.constraint.ConstraintLayout>
 
@@ -119,24 +120,26 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:id="@+id/reviewViewerMenuButton"
+                        android:background="?attr/selectableItemBackground"
+                        android:id="@+id/backBtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_menu"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:src="@drawable/ic_arrow_back_black_24dp"
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/reviewViewerTitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:visibility="gone"
                         android:text="Tripper"
-                        android:textColor="#fff"
+                        android:textColor="@android:color/black"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@id/reviewViewerMenuButton"
+                        app:layout_constraintLeft_toRightOf="@id/backBtn"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
