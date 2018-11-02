@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:background="#fff"
+    android:layout_marginBottom="16dp"
+    android:minHeight="227dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/infoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/timeImage"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_access_time_black_24dp"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="09:00 AM"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/timeImage"
+            app:layout_constraintLeft_toRightOf="@id/timeImage"
+            app:layout_constraintTop_toTopOf="@id/timeImage" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_item_daily"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/infoContainer">
+
+        <ImageView
+            android:id="@+id/themeImg"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="28dp"
+            android:src="@drawable/ic_restaurant_black_24dp"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/guideLine"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dailyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="유니버셜 스튜디오 재팬"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/dailySubTitle"
+            app:layout_constraintLeft_toRightOf="@id/themeImg"
+            app:layout_constraintTop_toTopOf="@id/themeImg"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/dailySubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="2"
+            android:maxWidth="165dp"
+            android:text="일본 〒554-0031 大阪府大阪市此花区桜島２丁目１−33"
+            android:textColor="@color/textGray"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/themeImg"
+            app:layout_constraintLeft_toLeftOf="@id/dailyTitle"
+            app:layout_constraintTop_toBottomOf="@id/dailyTitle" />
+
+
+        <View
+            android:id="@+id/guideLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="28dp"
+            android:background="@color/textGray"
+            app:layout_constraintTop_toBottomOf="@id/themeImg" />
+
+        <ImageView
+            android:id="@+id/addPictureBtn"
+            android:layout_width="48dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_add_picture"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="12dp"
+            android:src="@drawable/ic_add_black_24dp"
+            android:tint="@android:color/white"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideLine" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/pictureList"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/addPictureBtn"
+            app:layout_constraintLeft_toRightOf="@id/addPictureBtn"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/addPictureBtn" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="16dp"
+            android:hint="이치란 라멘, 어땠나요?"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addPictureBtn" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
