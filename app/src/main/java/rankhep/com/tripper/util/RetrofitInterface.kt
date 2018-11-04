@@ -1,4 +1,4 @@
-package rankhep.com.tripper.utils
+package rankhep.com.tripper.util
 
 
 import okhttp3.RequestBody

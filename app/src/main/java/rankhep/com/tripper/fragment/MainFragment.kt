@@ -21,7 +21,7 @@ import rankhep.com.tripper.activity.ReviewViewerActivity
 import rankhep.com.tripper.activity.SetMakeScheduleActivity
 import rankhep.com.tripper.adapter.MainReviewAdapter
 import rankhep.com.tripper.model.MainReviewListModel
-import rankhep.com.tripper.utils.SharedPrefManager
+import rankhep.com.tripper.util.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

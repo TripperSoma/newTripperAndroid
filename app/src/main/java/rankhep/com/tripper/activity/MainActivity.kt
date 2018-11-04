@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.menu_header.*
 import rankhep.com.tripper.R
 import rankhep.com.tripper.fragment.*
 import rankhep.com.tripper.model.User
-import rankhep.com.tripper.utils.CustomApplication
-import rankhep.com.tripper.utils.SharedPrefManager
+import rankhep.com.tripper.util.CustomApplication
+import rankhep.com.tripper.util.SharedPrefManager
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {

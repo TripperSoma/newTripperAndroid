@@ -1,4 +1,4 @@
-package rankhep.com.tripper.utils
+package rankhep.com.tripper.util
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import rankhep.com.tripper.model.User
 
 
-class SharedPrefManager(private var context: Context) {
+class SharedPrefManager(context: Context) {
     private val pref = context.getSharedPreferences("pref", MODE_PRIVATE)
     private val editor = pref.edit()
 

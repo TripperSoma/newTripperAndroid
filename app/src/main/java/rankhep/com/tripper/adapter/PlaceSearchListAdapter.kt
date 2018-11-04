@@ -37,9 +37,10 @@ class PlaceSearchListAdapter(private val items: ArrayList<PlaceSearchModel>, pri
         }
     }
 
-    class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+    class ViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
         val thumbImg = v.findViewById<RoundedImageView>(R.id.thumbImg)
         val title = v.findViewById<TextView>(R.id.placeTitle)
         val subTitle = v.findViewById<TextView>(R.id.placeSubTitle)
+
     }
 }

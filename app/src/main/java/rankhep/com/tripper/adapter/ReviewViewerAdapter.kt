@@ -8,7 +8,7 @@ import android.widget.TextView
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.ReviewDetail
 import rankhep.com.tripper.model.ReviewListModel
-import rankhep.com.tripper.utils.CustomApplication
+import rankhep.com.tripper.util.CustomApplication
 import rankhep.com.tripper.view.CustomGridImageView
 
 

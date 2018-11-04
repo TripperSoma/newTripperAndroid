@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.ScheduleModel
-import rankhep.com.tripper.utils.CustomApplication
+import rankhep.com.tripper.util.CustomApplication
 
 class CalenderListAdapter(private val items: ArrayList<ScheduleModel>, val listener: OnButtonClickedListener) : RecyclerView.Adapter<CalenderListAdapter.ViewHolder>() {
 

@@ -6,7 +6,7 @@ package rankhep.com.dhlwn.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import rankhep.com.tripper.utils.RetrofitInterface
+import rankhep.com.tripper.util.RetrofitInterface
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

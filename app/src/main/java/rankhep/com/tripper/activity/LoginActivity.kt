@@ -11,7 +11,7 @@ import org.json.JSONObject
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.User
-import rankhep.com.tripper.utils.SharedPrefManager
+import rankhep.com.tripper.util.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

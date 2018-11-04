@@ -17,7 +17,7 @@ import rankhep.com.tripper.model.Review
 import rankhep.com.tripper.model.ReviewDay
 import rankhep.com.tripper.model.ReviewDetail
 import rankhep.com.tripper.model.ReviewListModel
-import rankhep.com.tripper.utils.CustomApplication
+import rankhep.com.tripper.util.CustomApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
