@@ -4,10 +4,7 @@ package rankhep.com.tripper.util
 import okhttp3.RequestBody
 import rankhep.com.tripper.model.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 /**
@@ -55,4 +52,9 @@ interface RetrofitInterface {
 
     @GET("/review/load/{reviewnum}")
     fun getReviewDetail(@Path("reviewnum") reviewNum: Int = 1): Call<Review>
+
+    @PUT("/schedule/update")
+    fun uploadSchedult(@Body body:RequestBody): Call<PlanModel>
+
+
 }
