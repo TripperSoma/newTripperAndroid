@@ -1,5 +1,6 @@
 package rankhep.com.tripper.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_tripping.view.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
+import rankhep.com.tripper.activity.CalenderActivity
 import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.adapter.TrippingAdapter
 import rankhep.com.tripper.model.PlanModel
@@ -20,7 +22,12 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
 
     override fun onChangeButtonClickedListener(v: View, position: Int, item: PlanModel) {
         //TODO : 일정 변경 액티비티 연동
+        val intent  = Intent(context, CalenderActivity::class.java)
+        intent.run{
+            putExtra("plan", item)
+        }
         //캘린더 액티비티에 일정 던지면 댐
+        startActivityForResult(intent, 300)
     }
 
     override fun onReviewButtonClickedListener(v: View, position: Int, item: PlanModel) {
@@ -29,6 +36,9 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
 
     override fun onDeleteButtonClickedListener(v: View, position: Int, item: PlanModel) {
         //TODO : 일정 삭제 서버연동
+        items.removeAt(position)
+        mAdapter.notifyDataSetChanged()
+        //NetworkHelper.networkInstance.uploadSchedult()
     }
 
     private lateinit var mAdapter: TrippingAdapter
@@ -57,7 +67,7 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_tripping, null)
-        mAdapter = TrippingAdapter(items,this@TrippingFragment)
+        mAdapter = TrippingAdapter(items, this@TrippingFragment)
 
         v.run {
             trippingToolbarMenuBtn.setOnClickListener(this@TrippingFragment)
