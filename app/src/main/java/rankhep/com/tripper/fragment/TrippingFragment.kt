@@ -38,7 +38,7 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
         //TODO : 일정 삭제 서버연동
         items.removeAt(position)
         mAdapter.notifyDataSetChanged()
-        //NetworkHelper.networkInstance.uploadSchedult()
+//        NetworkHelper.networkInstance.uploadSchedule()
     }
 
     private lateinit var mAdapter: TrippingAdapter

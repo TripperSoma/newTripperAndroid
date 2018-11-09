@@ -20,7 +20,6 @@ import rankhep.com.tripper.util.SharedPrefManager
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-
     private lateinit var dataManager: SharedPrefManager
     private var user: User? = null
     private lateinit var nowFragment: Fragment
@@ -30,6 +29,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var trippingFragment: TrippingFragment
     private lateinit var settingFragment: SettingFragment
     private lateinit var customApplication: CustomApplication
+    private val FINISH_INTERVAL_TIME: Long = 2000
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,9 +163,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
-    private val FINISH_INTERVAL_TIME: Long = 2000
-    private var backPressedTime: Long = 0
 
     override fun onBackPressed() {
         val tempTime = System.currentTimeMillis()

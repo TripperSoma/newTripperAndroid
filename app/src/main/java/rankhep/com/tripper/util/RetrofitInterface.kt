@@ -34,7 +34,9 @@ interface RetrofitInterface {
 
 
     @GET("/schedule/SearchingByCategory/{version}/{beforePlaceNum}/{page}")
-    fun searchPlaceByCategory(@Path("version") version: Int, @Path("beforePlaceNum") beforePlaceNum: Int, @Path("page") page: Int = 0)
+    fun searchPlaceByCategory(@Path("version") version: Int,
+                              @Path("beforePlaceNum") beforePlaceNum: Int,
+                              @Path("page") page: Int = 0)
             : Call<List<PlaceSearchModel>>
 
 
@@ -54,7 +56,7 @@ interface RetrofitInterface {
     fun getReviewDetail(@Path("reviewnum") reviewNum: Int = 1): Call<Review>
 
     @PUT("/schedule/update")
-    fun uploadSchedult(@Body body:RequestBody): Call<PlanModel>
+    fun uploadSchedule(@Body body:RequestBody): Call<PlanModel>
 
 
 }
