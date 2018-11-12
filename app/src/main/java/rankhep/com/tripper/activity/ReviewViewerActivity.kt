@@ -65,8 +65,8 @@ class ReviewViewerActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLi
                                     .into(thumbImg)
                             reviewNameText.text = review.user
                             reviewViewerTitleText
+                            changeReviewToReviewListData()
                         }
-                        changeReviewToReviewListData()
                     }
                 })
     }
