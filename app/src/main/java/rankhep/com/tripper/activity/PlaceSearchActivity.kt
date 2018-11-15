@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_place_search.*
 import rankhep.com.dhlwn.utils.NetworkHelper
@@ -27,17 +28,26 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
 
 
         val version = intent.getIntExtra("version", 1)
-        NetworkHelper.networkInstance.searchPlaceByCategory(version, 12)
+        val seqnum = intent.getIntExtra("seqNum", 0)
+        val day = intent.getIntExtra("dayNum", 1)
+        Log.e("asd", version.toString())
+
+        NetworkHelper.networkInstance.searchPlaceByCategory(version, seqnum, day)
                 .enqueue(object : Callback<List<PlaceSearchModel>> {
                     override fun onFailure(call: Call<List<PlaceSearchModel>>, t: Throwable) {
                         t.printStackTrace()
+                        Log.e("asd", t.message)
                     }
 
                     override fun onResponse(call: Call<List<PlaceSearchModel>>, response: Response<List<PlaceSearchModel>>) {
-                        if (response.code() == 200) {
+                        if (response.isSuccessful) {
                             response.body()?.let { placeItem.addAll(it) }
                             mAdapter.notifyDataSetChanged()
+                        } else {
+
                         }
+                        Log.e("asd", response.code().toString())
+
                     }
 
                 })

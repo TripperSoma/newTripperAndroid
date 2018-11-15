@@ -33,10 +33,11 @@ interface RetrofitInterface {
     fun getMainReviewData(@Path("page") page: Int, @Path("version") version: Int): Call<List<MainReviewListModel>>
 
 
-    @GET("/schedule/SearchingByCategory/{version}/{beforePlaceNum}/{page}")
+    @GET("/schedule/SearchingByCategory/{version}/{seqnum}/{daynum}/{page}")
     fun searchPlaceByCategory(@Path("version") version: Int,
-                              @Path("beforePlaceNum") beforePlaceNum: Int,
-                              @Path("page") page: Int = 0)
+                              @Path("seqnum") seqnum: Int,
+                              @Path("daynum") dayNum: Int,
+                              @Path("page") page: Int = 1)
             : Call<List<PlaceSearchModel>>
 
 
@@ -56,7 +57,7 @@ interface RetrofitInterface {
     fun getReviewDetail(@Path("reviewnum") reviewNum: Int = 1): Call<Review>
 
     @PUT("/schedule/update")
-    fun uploadSchedule(@Body body:RequestBody): Call<PlanModel>
+    fun uploadSchedule(@Body body: RequestBody): Call<PlanModel>
 
 
 }

@@ -39,6 +39,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     private var items: ArrayList<ScheduleModel> = ArrayList<ScheduleModel>()
     private var changePosition = -1
     val tabs = ArrayList<TextView>()
+    private var selectedDay: Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,21 +80,6 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
                     })
         }
-//        firstDay.setOnClickListener {
-//            items.clear()
-//            items.addAll(planModel.dayList[0].schedulelist)
-//            mAdapter.notifyDataSetChanged()
-//        }
-//        secondDay.setOnClickListener {
-//            items.clear()
-//            items.addAll(planModel.dayList[1].schedulelist)
-//            mAdapter.notifyDataSetChanged()
-//        }
-//        thirdDay.setOnClickListener {
-//            items.clear()
-//            items.addAll(planModel.dayList[2].schedulelist)
-//            mAdapter.notifyDataSetChanged()
-//        }
     }
 
 
@@ -130,32 +116,32 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     override fun onClick(v: View) {
         when (v) {
             nightPlaceBtn -> {
-                startSearchActivity(customApplication.NIGHT_CATEGORY, false)
+                startSearchActivity(customApplication.NIGHT_CATEGORY, selectedDay, planModel.seqnum, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             playingBtn -> {
-                startSearchActivity(customApplication.PLAYING_CATEGORY, false)
+                startSearchActivity(customApplication.PLAYING_CATEGORY, selectedDay, planModel.seqnum, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             restaurantBtn -> {
-                startSearchActivity(customApplication.RESTAURANT_CATEGORY, false)
+                startSearchActivity(customApplication.RESTAURANT_CATEGORY, selectedDay, planModel.seqnum, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             touristBtn -> {
-                startSearchActivity(customApplication.TOURIST_CATEGORY, false)
+                startSearchActivity(customApplication.TOURIST_CATEGORY, selectedDay, planModel.seqnum, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             shoppingBtn -> {
-                startSearchActivity(customApplication.SHOPPING_CATEGORY, false)
+                startSearchActivity(customApplication.SHOPPING_CATEGORY, selectedDay, planModel.seqnum, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
             parkBtn -> {
-                startSearchActivity(customApplication.PARK_CATEGORY, false)
+                startSearchActivity(customApplication.PARK_CATEGORY, selectedDay, planModel.seqnum, false)
                 addContainer.visibility = View.GONE
                 addFab.visibility = View.VISIBLE
             }
@@ -173,10 +159,11 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
         }
     }
 
-    private fun startSearchActivity(category: Int, isEdit: Boolean) {
+    private fun startSearchActivity(category: Int, dayNum: Int, seqNum: Int, isEdit: Boolean) {
         val intent = Intent(this@CalenderActivity, PlaceSearchActivity::class.java)
         intent.putExtra("version", category)
-
+        intent.putExtra("dayNum", dayNum)
+        intent.putExtra("seqNum", seqNum)
         if (isEdit) {
             startActivityForResult(intent, EDIT_PLACE_REQUEST_CODE)
         } else {
@@ -243,7 +230,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     }
 
     override fun changeButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
-        startSearchActivity(item.place.type, true)
+        startSearchActivity(item.place.type, selectedDay, planModel.seqnum, true)
         changePosition = position
     }
 
@@ -255,7 +242,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
 
     private fun setTab() {
-        val param = LinearLayout.LayoutParams(resources.getDimension(R.dimen.tab_textview_size).toInt() * planModel.dayList.size, LinearLayout.LayoutParams.WRAP_CONTENT,1f)
+        val param = LinearLayout.LayoutParams(resources.getDimension(R.dimen.tab_textview_size).toInt() * planModel.dayList.size, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
         dayContainer.layoutParams = param
         planModel.dayList.forEach {
             val textView = TextView(this@CalenderActivity)
@@ -273,6 +260,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
                     mAdapter.notifyDataSetChanged()
                     setTextFocus(Integer.parseInt(it.day) - 1)
                     setTabSpace(Integer.parseInt(it.day) - 1 + 0.0f)
+                    selectedDay = Integer.parseInt(it.day)
                 }
             }
             tabs.add(textView)
