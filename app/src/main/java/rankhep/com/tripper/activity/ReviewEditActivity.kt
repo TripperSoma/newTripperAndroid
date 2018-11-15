@@ -51,24 +51,24 @@ class ReviewEditActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun setTextFocus(position: Int) {
-        tabs.forEach {
-            it.typeface = Typeface.DEFAULT
-            it.setTextColor(R.color.textGray)
-        }
-        tabs[position].typeface = Typeface.DEFAULT_BOLD
-        tabs[position].setTextColor(R.color.colorPrimary)
-    }
-
-    private fun setTabSpace(weight: Float, speed: Int = 150) {
-        val params = space.layoutParams as LinearLayout.LayoutParams
-        val startWeight = params.weight
-        var operand = params.weight - weight
-        (1..speed).forEach { i ->
-            Handler().postDelayed({
-                params.weight = startWeight - (operand / speed) * i
-                space.layoutParams = params
-            }, i.toLong())
-        }
-    }
+//    private fun setTextFocus(position: Int) {
+//        tabs.forEach {
+//            it.typeface = Typeface.DEFAULT
+//            it.setTextColor(R.color.textGray)
+//        }
+//        tabs[position].typeface = Typeface.DEFAULT_BOLD
+//        tabs[position].setTextColor(R.color.colorPrimary)
+//    }
+//
+//    private fun setTabSpace(weight: Float, speed: Int = 150) {
+//        val params = space.layoutParams as LinearLayout.LayoutParams
+//        val startWeight = params.weight
+//        var operand = params.weight - weight
+//        (1..speed).forEach { i ->
+//            Handler().postDelayed({
+//                params.weight = startWeight - (operand / speed) * i
+//                space.layoutParams = params
+//            }, i.toLong())
+//        }
+//    }
 }

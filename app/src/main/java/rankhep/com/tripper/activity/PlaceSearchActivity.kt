@@ -41,6 +41,9 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
                     }
 
                 })
+        toolbarMenuBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onItemClick(v: View, position: Int) {

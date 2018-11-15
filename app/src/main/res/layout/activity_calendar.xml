@@ -146,7 +146,8 @@
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 
-    <HorizontalScrollView
+
+    <LinearLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -154,54 +155,94 @@
         android:weightSum="3"
         app:layout_constraintTop_toBottomOf="@id/topInfoLayout">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/firstDay"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="1일차"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/dayContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+        <TextView
+            android:id="@+id/secondDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="2일차"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    tools:text="1day" />
-            </LinearLayout>
+        <TextView
+            android:id="@+id/thirdDay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="3일차"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <!--<HorizontalScrollView-->
+        <!--android:id="@+id/tabLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="3"-->
+        <!--app:layout_constraintTop_toBottomOf="@id/topInfoLayout">-->
 
-            <LinearLayout
-                android:id="@+id/tabSpaceContainer"
-                android:layout_width="120dp"
-                android:layout_height="1dp">
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#f0f"-->
+            <!--android:orientation="vertical">-->
 
-                <View
-                    android:id="@+id/space"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0" />
+            <!--<LinearLayout-->
+                <!--android:id="@+id/dayContainer"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1">-->
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                <!--<TextView-->
+                    <!--android:layout_width="120dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:gravity="center"-->
+                    <!--android:textColor="@color/colorPrimary"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--tools:text="1day" />-->
+            <!--</LinearLayout>-->
 
-                    <View
-                        android:layout_width="58dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@color/colorPrimary"
-                        android:padding="16dp" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </HorizontalScrollView>
+            <!--<LinearLayout-->
+                <!--android:id="@+id/tabSpaceContainer"-->
+                <!--android:layout_width="120dp"-->
+                <!--android:layout_height="1dp">-->
+
+                <!--<View-->
+                    <!--android:id="@+id/space"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="0" />-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<View-->
+                        <!--android:layout_width="58dp"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:background="@color/colorPrimary"-->
+                        <!--android:padding="16dp" />-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+    <!--</HorizontalScrollView>-->
 
     <View
         android:layout_width="0dp"
