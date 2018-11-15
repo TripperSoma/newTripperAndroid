@@ -59,5 +59,4 @@ interface RetrofitInterface {
     @PUT("/schedule/update")
     fun uploadSchedule(@Body body: RequestBody): Call<PlanModel>
 
-
 }

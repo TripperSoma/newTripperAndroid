@@ -19,10 +19,7 @@ import okhttp3.RequestBody
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.adapter.CalenderListAdapter
-import rankhep.com.tripper.model.Place
-import rankhep.com.tripper.model.PlanModel
-import rankhep.com.tripper.model.ScheduleModel
-import rankhep.com.tripper.model.TasteSendModel
+import rankhep.com.tripper.model.*
 import rankhep.com.tripper.util.CustomApplication
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,7 +52,6 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
     private fun getMLData() {
         val taste: TasteSendModel? = intent.getSerializableExtra("taste") as TasteSendModel
-        Log.e("taste", taste?.toString())
         taste?.let {
             val paramObject = TasteSendModel.toJson(taste)
             Log.e("asd", paramObject.toString())
@@ -189,9 +185,28 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
                 if (resultCode == Activity.RESULT_OK) {
                     val place: Place = data?.getSerializableExtra("place") as Place
                     val scheduleModel = ScheduleModel(place, items[changePosition].startTime)
-                    items[changePosition] = scheduleModel
-                    mAdapter.notifyDataSetChanged()
-                    //TODO : 서버연동
+                    val sendModel = UpdateModel.getJson(UpdateModel(items[changePosition].place.place_num,
+                            selectedDay,
+                            place.place_num,
+                            planModel.seqnum,
+                            planModel.user))
+                    NetworkHelper.networkInstance.uploadSchedule(RequestBody.create(MediaType.parse("application/json"), sendModel))
+                            .enqueue(object :Callback<PlanModel>{
+                                override fun onFailure(call: Call<PlanModel>, t: Throwable) {
+                                    t.printStackTrace()
+                                }
+
+                                override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
+                                    if(response.isSuccessful){
+                                        items[changePosition] = scheduleModel
+                                        mAdapter.notifyDataSetChanged()
+                                        items[changePosition].place.place_num
+                                    }else{
+                                        Toast.makeText(this@CalenderActivity, "변경에 실패했습니다.",Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+
+                            })
                 } else {
 
                 }
