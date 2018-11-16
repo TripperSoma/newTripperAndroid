@@ -36,7 +36,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     private var items: ArrayList<ScheduleModel> = ArrayList<ScheduleModel>()
     private var changePosition = -1
     val tabs = ArrayList<TextView>()
-    private var selectedDay: Int = 0
+    private var selectedDay: Int = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

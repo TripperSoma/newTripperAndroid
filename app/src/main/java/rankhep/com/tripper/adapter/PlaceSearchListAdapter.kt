@@ -1,6 +1,7 @@
 package rankhep.com.tripper.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,7 @@ class PlaceSearchListAdapter(private val items: ArrayList<PlaceSearchModel>, pri
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.run {
             Picasso.get().load(items[position].picture).into(thumbImg)
+            Log.e("asd",items[position].picture)
             title.text = items[position].name
             subTitle.text = items[position].city
         }

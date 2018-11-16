@@ -30,7 +30,7 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
         val version = intent.getIntExtra("version", 1)
         val seqnum = intent.getIntExtra("seqNum", 0)
         val day = intent.getIntExtra("dayNum", 1)
-        Log.e("asd", version.toString())
+        Log.e("asd", "$version : $seqnum : $day")
 
         NetworkHelper.networkInstance.searchPlaceByCategory(version, seqnum, day)
                 .enqueue(object : Callback<List<PlaceSearchModel>> {

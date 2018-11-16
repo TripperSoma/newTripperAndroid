@@ -37,7 +37,7 @@ interface RetrofitInterface {
     fun searchPlaceByCategory(@Path("version") version: Int,
                               @Path("seqnum") seqnum: Int,
                               @Path("daynum") dayNum: Int,
-                              @Path("page") page: Int = 1)
+                              @Path("page") page: Int = 0)
             : Call<List<PlaceSearchModel>>
 
 
