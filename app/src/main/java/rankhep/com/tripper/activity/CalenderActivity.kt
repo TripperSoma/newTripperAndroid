@@ -220,28 +220,13 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
         else {
             val strDatewithTime = items[items.size - 1].startTime
             val aLDT = LocalDateTime.parse(strDatewithTime).plusHours(1)
-            Log.e("asd", "Date with Time: $aLDT")
             aLDT.toString()
         }
     }
 
     private fun addSchedule() {
-        NetworkHelper.networkInstance.addSchedule(RequestBody.create(MediaType.parse("application/json"),
-                PlanModel.toJson(planModel))).enqueue(object : Callback<PlanModel> {
-            override fun onFailure(call: Call<PlanModel>, t: Throwable) {
-                t.printStackTrace()
-                Log.e("Complete Error", t.message)
-            }
-
-            override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
-                if (response.code() == 200) {
-                    startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
-                    finish()
-                } else {
-                    Toast.makeText(applicationContext, "저장에 실패하였습니다.", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
+        startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
+        finish()
     }
 
     override fun changeButtonClickedListener(v: View, position: Int, item: ScheduleModel) {

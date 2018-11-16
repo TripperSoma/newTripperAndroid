@@ -54,6 +54,25 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
         toolbarMenuBtn.setOnClickListener {
             finish()
         }
+
+        searchBtn.setOnClickListener {
+
+            NetworkHelper.networkInstance.search(searchEditText.text.toString())
+                    .enqueue(object : Callback<List<PlaceSearchModel>> {
+                        override fun onFailure(call: Call<List<PlaceSearchModel>>, t: Throwable) {
+                            t.printStackTrace()
+                            Log.e("search Error", t.message)
+                        }
+
+                        override fun onResponse(call: Call<List<PlaceSearchModel>>, response: Response<List<PlaceSearchModel>>) {
+                            if (response.isSuccessful) {
+                                placeItem.clear()
+                                response.body()?.let { placeItem.addAll(it) }
+                            }
+                        }
+
+                    })
+        }
     }
 
     override fun onItemClick(v: View, position: Int) {
