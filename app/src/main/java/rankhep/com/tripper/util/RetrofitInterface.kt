@@ -50,8 +50,8 @@ interface RetrofitInterface {
     @POST("/schedule/add")
     fun addSchedule(@Body body: RequestBody): Call<PlanModel>
 
-    @GET("/schedule/load/{userid}")
-    fun getScheduleList(@Path("userid") userid: String): Call<List<PlanModel>>
+    @GET("/schedule/load/{usernum}")
+    fun getScheduleList(@Path("usernum") usernum: Int): Call<List<TrippingListModel>>
 
     @GET("/review/load/{reviewnum}")
     fun getReviewDetail(@Path("reviewnum") reviewNum: Int = 1): Call<Review>

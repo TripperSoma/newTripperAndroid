@@ -14,35 +14,36 @@ import rankhep.com.tripper.activity.CalenderActivity
 import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.adapter.TrippingAdapter
 import rankhep.com.tripper.model.PlanModel
+import rankhep.com.tripper.model.TrippingListModel
+import rankhep.com.tripper.util.SharedPrefManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnClickListener {
 
-    override fun onChangeButtonClickedListener(v: View, position: Int, item: PlanModel) {
+    override fun onChangeButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
         //TODO : 일정 변경 액티비티 연동
         val intent  = Intent(context, CalenderActivity::class.java)
         intent.run{
-            putExtra("plan", item)
+            putExtra("planSeqNum", item.seqnum)
         }
         //캘린더 액티비티에 일정 던지면 댐
         startActivityForResult(intent, 300)
     }
 
-    override fun onReviewButtonClickedListener(v: View, position: Int, item: PlanModel) {
+    override fun onReviewButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
         //TODO : 리뷰 작성 액티비티 연결
     }
 
-    override fun onDeleteButtonClickedListener(v: View, position: Int, item: PlanModel) {
-        //TODO : 일정 삭제 서버연동
+    override fun onDeleteButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
         items.removeAt(position)
         mAdapter.notifyDataSetChanged()
 //        NetworkHelper.networkInstance.uploadSchedule()
     }
 
     private lateinit var mAdapter: TrippingAdapter
-    private val items = ArrayList<PlanModel>()
+    private val items = ArrayList<TrippingListModel>()
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.trippingToolbarMenuBtn -> {
@@ -80,17 +81,19 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        NetworkHelper.networkInstance.getScheduleList("string").enqueue(object : Callback<List<PlanModel>> {
-            override fun onFailure(call: Call<List<PlanModel>>, t: Throwable) {
+        NetworkHelper.networkInstance.getScheduleList(SharedPrefManager(view.context).getUserData().user_num).enqueue(object : Callback<List<TrippingListModel>> {
+            override fun onFailure(call: Call<List<TrippingListModel>>, t: Throwable) {
                 t.message
+                Log.e("get tripping fail", t.message)
             }
 
-            override fun onResponse(call: Call<List<PlanModel>>, response: Response<List<PlanModel>>) {
+            override fun onResponse(call: Call<List<TrippingListModel>>, response: Response<List<TrippingListModel>>) {
                 if (response.code() == 200) {
+                    items.clear()
                     response.body()?.let { items.addAll(it) }
                     mAdapter.notifyDataSetChanged()
                 } else {
-                    Log.e("asd", response.message())
+                    Log.e("get tripping fail", response.code().toString())
                 }
             }
 

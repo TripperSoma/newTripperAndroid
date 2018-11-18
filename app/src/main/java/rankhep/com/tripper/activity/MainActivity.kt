@@ -80,7 +80,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 startActivityForResult(intent, customApplication.LOGIN_REQUEST_CODE)
             }
             R.id.myPlanBtn -> {
-//                replaceFragment(trippingFragment)
+                if (dataManager.isLogin())
+                    replaceFragment(trippingFragment)
+                else
+                    Toast.makeText(applicationContext, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show()
             }
             R.id.homeBtn -> {
                 replaceFragment(mainFragment)

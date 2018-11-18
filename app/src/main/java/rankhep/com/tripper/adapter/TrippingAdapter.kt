@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import rankhep.com.tripper.R
-import rankhep.com.tripper.model.PlanModel
+import rankhep.com.tripper.model.TrippingListModel
 
-class TrippingAdapter(val items: ArrayList<PlanModel>, val listener: OnClickListener) : RecyclerView.Adapter<TrippingAdapter.ViewHolder>() {
+class TrippingAdapter(val items: ArrayList<TrippingListModel>, val listener: OnClickListener) : RecyclerView.Adapter<TrippingAdapter.ViewHolder>() {
 
     interface OnClickListener {
-        fun onDeleteButtonClickedListener(v: View, position: Int, item: PlanModel)
-        fun onChangeButtonClickedListener(v: View, position: Int, item: PlanModel)
-        fun onReviewButtonClickedListener(v: View, position: Int, item: PlanModel)
+        fun onDeleteButtonClickedListener(v: View, position: Int, item: TrippingListModel)
+        fun onChangeButtonClickedListener(v: View, position: Int, item: TrippingListModel)
+        fun onReviewButtonClickedListener(v: View, position: Int, item: TrippingListModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +40,12 @@ class TrippingAdapter(val items: ArrayList<PlanModel>, val listener: OnClickList
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.run {
-            tripTitleText.text = items[position].dayList[position].schedulelist[0].place.country
+            tripTitleText.text = items[position].title
+            if (items[position].fromdate != null && items[position].toDate != null)
+                tripDateText.text = "" + items[position].fromdate!!.split("T")[0] + items[position].toDate!!.split("T")[0]
+            else
+                tripDateText.text = "미정"
+            tripPlaceText.text = items[position].region
         }
     }
 
@@ -50,5 +55,6 @@ class TrippingAdapter(val items: ArrayList<PlanModel>, val listener: OnClickList
         val tripDeleteImg = v.findViewById<ImageView>(R.id.tripDeleteImg)
         val tripChangeImg = v.findViewById<ImageView>(R.id.tripChangeImg)
         val tripReviewImg = v.findViewById<ImageView>(R.id.tripReviewImg)
+        val tripDateText = v.findViewById<TextView>(R.id.tripPlanDateText)
     }
 }
