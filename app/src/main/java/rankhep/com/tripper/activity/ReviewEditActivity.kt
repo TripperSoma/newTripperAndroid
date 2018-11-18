@@ -43,6 +43,9 @@ class ReviewEditActivity : AppCompatActivity() {
         backBtn.setOnClickListener {
             finish()
         }
+        finishBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun getReviewData(reviewNum: Int) {

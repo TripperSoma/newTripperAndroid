@@ -65,6 +65,10 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>) : RecyclerView.Adapt
                     themeImg.setImageResource(R.drawable.ic_local_play_black_24dp)
                 }
             }
+
+            addPictureBtn.setOnClickListener {
+
+            }
         }
     }
 
