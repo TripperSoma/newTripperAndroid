@@ -8,7 +8,7 @@ data class Review(var days: List<ReviewDay>,
                   var title:String,
                   var user: String) : Serializable{
     override fun toString(): String {
-        return "Review(days=$days, seqnum=$seqnum, thumb='$thumb', user='$user')"
+        return "Review(days=$days, seqnum=$seqnum, thumb='$thumb', title='$title', user='$user')"
     }
 }
 

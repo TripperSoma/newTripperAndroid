@@ -2,11 +2,9 @@ package rankhep.com.tripper.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.os.Handler
 import android.provider.DocumentsContract
 import android.provider.MediaStore
@@ -22,13 +20,13 @@ import kotlinx.android.synthetic.main.activity_review_edit.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.json.JSONObject
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.adapter.ReviewEditAdapter
 import rankhep.com.tripper.model.PhotoResponseModel
 import rankhep.com.tripper.model.Review
 import rankhep.com.tripper.model.ReviewDetail
+import rankhep.com.tripper.model.ReviewSaveSendModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,8 +57,32 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
             finish()
         }
         finishBtn.setOnClickListener {
-            finish()
             //TODO : 완료 누르면 전부 업데이트
+            Log.e(",asd", reviewModel.toString())
+            val sendModel = ReviewSaveSendModel(reviewNum, ArrayList<ReviewDetail>(), reviewModel.seqnum)
+            reviewModel.days.forEach {
+                it.detailDTOS?.forEach { review ->
+                    sendModel.reviews.add(review)
+                }
+            }
+
+            NetworkHelper.networkInstance.uploadReview(RequestBody.create(MediaType.parse("application/json"), ReviewSaveSendModel.toJson(sendModel)))
+                    .enqueue(object : Callback<ReviewSaveSendModel> {
+                        override fun onFailure(call: Call<ReviewSaveSendModel>, t: Throwable) {
+                            t.printStackTrace()
+                            Log.e("send review error", t.message)
+                        }
+
+                        override fun onResponse(call: Call<ReviewSaveSendModel>, response: Response<ReviewSaveSendModel>) {
+                            if (response.isSuccessful) {
+                                finish()
+                                Toast.makeText(applicationContext, "저장에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(applicationContext, "저장에 실했습니다.", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                    })
         }
     }
 

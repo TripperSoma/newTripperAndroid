@@ -2,6 +2,9 @@ package rankhep.com.tripper.adapter
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,8 +29,7 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemCl
     lateinit var mAdapter: ReviewEditPhotoListAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_edit, parent, false), listener)
-
+        val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_edit, parent, false), listener,items)
         return vh
     }
 
@@ -78,7 +80,7 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemCl
         }
     }
 
-    class ViewHolder(val v: View, val listener: ItemClickedListener) : RecyclerView.ViewHolder(v) {
+    class ViewHolder(val v: View, val listener: ItemClickedListener,items: ArrayList<ReviewDetail>) : RecyclerView.ViewHolder(v) {
         val title: TextView = v.findViewById(R.id.dailyTitle)
         val timeText: TextView = v.findViewById(R.id.timeText)
         val subTitle: TextView = v.findViewById(R.id.dailySubTitle)
@@ -92,6 +94,18 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemCl
             addPictureBtn.setOnClickListener {
                 listener.addPictureBtnListener(it, adapterPosition)
             }
+
+            contentEditText.addTextChangedListener(object : TextWatcher{
+                override fun afterTextChanged(p0: Editable?) {
+                }
+
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    items[adapterPosition].content = p0.toString()
+                }
+            })
         }
     }
 
