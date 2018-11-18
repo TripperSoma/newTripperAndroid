@@ -26,6 +26,7 @@ import org.json.JSONObject
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.adapter.ReviewEditAdapter
+import rankhep.com.tripper.model.PhotoResponseModel
 import rankhep.com.tripper.model.Review
 import rankhep.com.tripper.model.ReviewDetail
 import retrofit2.Call
@@ -158,16 +159,16 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
                 val requestFile = RequestBody.create(MediaType.parse("multipart/png"), file)
                 val imgBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
                 val body = RequestBody.create(okhttp3.MultipartBody.FORM, items[requestCode].detailsnum.toString())
-                NetworkHelper.networkInstance.uploadReviewPhoto(body, imgBody).enqueue(object : Callback<String> {
-                    override fun onFailure(call: Call<String>, t: Throwable) {
+                NetworkHelper.networkInstance.uploadReviewPhoto(body, imgBody).enqueue(object : Callback<PhotoResponseModel> {
+                    override fun onFailure(call: Call<PhotoResponseModel>, t: Throwable) {
                         t.printStackTrace()
                         Log.e("upload error", t.message)
                     }
 
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                    override fun onResponse(call: Call<PhotoResponseModel>, response: Response<PhotoResponseModel>) {
                         if (response.isSuccessful) {
                             response.body()?.let {
-                                items[requestCode].photos.add(it)
+                                items[requestCode].photos.add(it.bucket)
                                 mAdapter.notifyPhotoChanged()
                             }
                         } else {

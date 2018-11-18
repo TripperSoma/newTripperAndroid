@@ -67,5 +67,5 @@ interface RetrofitInterface {
     @Multipart
     @POST("/review/uploadPhoto")
     fun uploadReviewPhoto(@Part("detailsnum") body: RequestBody,
-                          @Part img: MultipartBody.Part) : Call<String>
+                          @Part img: MultipartBody.Part) : Call<PhotoResponseModel>
 }
