@@ -1,7 +1,7 @@
 package rankhep.com.tripper.model
 
 data class ReviewDay(var day: Int,
-                     var detailDTOS: ArrayList<ReviewDetail>){
+                     var detailDTOS: ArrayList<ReviewDetail>?){
     override fun toString(): String {
         return "ReviewDay(day=$day, detailDTOS=$detailDTOS)"
     }

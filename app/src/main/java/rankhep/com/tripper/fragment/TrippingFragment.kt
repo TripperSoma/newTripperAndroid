@@ -36,7 +36,7 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
 
     override fun onReviewButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
         val intent = Intent(context, ReviewEditActivity::class.java).apply {
-            putExtra("reviewnum", 85)
+            putExtra("reviewnum", item.reviewnum)
         }
         startActivityForResult(intent, 333)
     }

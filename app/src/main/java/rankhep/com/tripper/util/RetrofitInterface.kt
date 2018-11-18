@@ -1,6 +1,7 @@
 package rankhep.com.tripper.util
 
 
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import rankhep.com.tripper.model.*
 import retrofit2.Call
@@ -47,8 +48,6 @@ interface RetrofitInterface {
     @POST("/schedule/inputPurpose")
     fun sendTaste(@Body body: RequestBody): Call<PlanModel>
 
-    @POST("/schedule/add")
-    fun addSchedule(@Body body: RequestBody): Call<PlanModel>
 
     @GET("/schedule/load/{usernum}")
     fun getScheduleList(@Path("usernum") usernum: Int): Call<List<TrippingListModel>>
@@ -60,9 +59,13 @@ interface RetrofitInterface {
     fun uploadSchedule(@Body body: RequestBody): Call<PlanModel>
 
     @GET("/search/place/{place}/{page}")
-    fun search(@Path("place") place: String, @Path("page") page: Int = 0) : Call<List<PlaceSearchModel>>
+    fun search(@Path("place") place: String, @Path("page") page: Int = 0): Call<List<PlaceSearchModel>>
 
     @GET("/schedule/loadSeq/{seqnum}")
-fun getSchedultBySeqnum(@Path("seqnum") seqnum:Int) : Call<PlanModel>
+    fun getSchedultBySeqnum(@Path("seqnum") seqnum: Int): Call<PlanModel>
 
+    @Multipart
+    @POST("/review/uploadPhoto")
+    fun uploadReviewPhoto(@Part("detailsnum") body: RequestBody,
+                          @Part img: MultipartBody.Part) : Call<String>
 }

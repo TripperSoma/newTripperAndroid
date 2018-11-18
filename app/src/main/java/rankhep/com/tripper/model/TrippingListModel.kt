@@ -5,6 +5,7 @@ import java.io.Serializable
 data class TrippingListModel(var fromdate:String?,
                              var region:String,
                              val seqnum:Int,
+                             val reviewnum:Int,
                              var title:String,
                              var toDate:String?):Serializable
 //{

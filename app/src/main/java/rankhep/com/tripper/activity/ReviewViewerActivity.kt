@@ -38,10 +38,11 @@ class ReviewViewerActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLi
     private fun initView() {
         reviewList.adapter = mAdapter
         toolbarContainer.addOnOffsetChangedListener(this@ReviewViewerActivity)
-        backBtn.setOnClickListener{
+        backBtn.setOnClickListener {
             finish()
         }
     }
+
 
     private fun getReviewData() {
         NetworkHelper.networkInstance.getReviewDetail(intent.getIntExtra("reviewNum", 1))
@@ -53,18 +54,14 @@ class ReviewViewerActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLi
 
                     override fun onResponse(call: Call<Review>, response: Response<Review>) {
                         response.body()?.let {
-
                             //TODO : 리뷰 타이틀 추가
                             review = it
-                            it.days.forEach {
-                                Log.e("asd", it.day.toString())
-                            }
                             Picasso.get().load(review.thumb)
                                     .centerCrop()
                                     .resize(thumbImg.measuredWidth, thumbImg.measuredHeight)
                                     .into(thumbImg)
                             reviewNameText.text = review.user
-                            reviewViewerTitleText
+                            Log.e("ㄸㄸㄷ", review.days.size.toString())
                             changeReviewToReviewListData()
                         }
                     }
@@ -74,10 +71,11 @@ class ReviewViewerActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLi
     private fun changeReviewToReviewListData() {
         review.days.forEach { day: ReviewDay ->
             items.add(ReviewListModel(day.day, CustomApplication.REVIEW_DAY_VIEW_TYPE))
-            Log.e("asd", review.days.size.toString())
-            day.detailDTOS.forEach { it: ReviewDetail ->
-                Log.e("asd", it.schedule.place.name)
-                items.add(ReviewListModel(it, CustomApplication.REVIEW_TOURIST_VIEW_TYPE))
+            day.detailDTOS?.let {
+                if(!it.isEmpty())
+                    it.forEach { detail: ReviewDetail ->
+                        items.add(ReviewListModel(detail, CustomApplication.REVIEW_TOURIST_VIEW_TYPE))
+                    }
             }
         }
         mAdapter.notifyDataSetChanged()

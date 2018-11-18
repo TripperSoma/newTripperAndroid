@@ -130,6 +130,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
                 response?.run {
                     when (this.code()) {
                         200 -> {
+                            items.clear()
                             this.body()?.let { items.addAll(it) }
                             mAdapter.notifyDataSetChanged()
                         }

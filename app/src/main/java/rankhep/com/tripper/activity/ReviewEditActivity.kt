@@ -1,6 +1,9 @@
 package rankhep.com.tripper.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
@@ -10,7 +13,12 @@ import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_review_edit.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import org.json.JSONObject
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.adapter.ReviewEditAdapter
@@ -19,13 +27,16 @@ import rankhep.com.tripper.model.ReviewDetail
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.util.*
 
-class ReviewEditActivity : AppCompatActivity() {
+
+class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedListener {
+
     val tabs = ArrayList<TextView>()
     var reviewNum = 0
     val items = ArrayList<ReviewDetail>()
-    var mAdapter = ReviewEditAdapter(items)
+    var mAdapter = ReviewEditAdapter(items, this)
     private lateinit var reviewModel: Review
     var selectedDay: Int = 1
 
@@ -35,16 +46,16 @@ class ReviewEditActivity : AppCompatActivity() {
 
         reviewNum = intent.getIntExtra("reviewnum", 1)
         getReviewData(reviewNum)
+        initView()
     }
 
     fun initView() {
-        setTab()
-        reviewEditList.adapter = mAdapter
         backBtn.setOnClickListener {
             finish()
         }
         finishBtn.setOnClickListener {
             finish()
+            //TODO : 완료 누르면 전부 업데이트
         }
     }
 
@@ -59,8 +70,9 @@ class ReviewEditActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         reviewModel = it
-                        items.addAll(reviewModel.days[0].detailDTOS)
-                        initView()
+                        reviewModel.days[0].detailDTOS?.let{items.addAll(it)}
+                        setTab()
+                        reviewEditList.adapter = mAdapter
                     }
                 } else {
                     Log.e("get review data error", response.code().toString())
@@ -85,7 +97,7 @@ class ReviewEditActivity : AppCompatActivity() {
                 typeface = Typeface.DEFAULT_BOLD
                 setOnClickListener { view: View ->
                     items.clear()
-                    items.addAll(reviewModel.days[it.day - 1].detailDTOS)
+                    reviewModel.days[it.day - 1].detailDTOS?.let{items.addAll(it)}
                     mAdapter.notifyDataSetChanged()
                     setTextFocus(it.day - 1)
                     setTabSpace(it.day - 1 + 0.0f)
@@ -122,4 +134,51 @@ class ReviewEditActivity : AppCompatActivity() {
             }, i.toLong())
         }
     }
+
+
+    override fun addPictureBtnListener(v: View, position: Int) {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, position)
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            try {
+                val uri: Uri = data?.data!!
+                val file = File(uri.path)
+                val requestFile = RequestBody.create(MediaType.parse("multipart/png"), file)
+                val imgBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                val paramObject = JSONObject()
+                paramObject.put("detailsnum", items[requestCode].detailsnum)
+                val body = RequestBody.create(MediaType.parse("application/json"), paramObject.toString())
+                NetworkHelper.networkInstance.uploadReviewPhoto(body, imgBody).enqueue(object : Callback<String> {
+                    override fun onFailure(call: Call<String>, t: Throwable) {
+                        t.printStackTrace()
+                        Log.e("upload error", t.message)
+                    }
+
+                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                        if (response.isSuccessful) {
+                            response.body()?.let {
+                                items[requestCode].photos.add(it)
+                                mAdapter.notifyPhotoChanged()
+                            }
+                        } else {
+                            Toast.makeText(this@ReviewEditActivity, "이미지 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                            Log.e("upload error", "" + response.code())
+                        }
+                    }
+
+                })
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+    }
+
 }
