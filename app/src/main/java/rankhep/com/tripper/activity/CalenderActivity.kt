@@ -1,5 +1,6 @@
 package rankhep.com.tripper.activity
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
@@ -47,23 +48,46 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
         mAdapter = CalenderListAdapter(items, this)
         iniView()
 
-        getMLData()
+        if (!intent.getBooleanExtra("isEdit", false))
+            getMLData()
+        else
+            getScheduleBySeqnum()
+    }
+
+    private fun getScheduleBySeqnum() {
+        NetworkHelper.networkInstance.getSchedultBySeqnum(intent.getIntExtra("planSeqNum", 1))
+                .enqueue(object : Callback<PlanModel> {
+                    override fun onFailure(call: Call<PlanModel>, t: Throwable) {
+                        t.printStackTrace()
+                        Log.e("load plan error", t.message)
+                    }
+
+                    override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
+                        if (response.code() == 200) {
+                            response.body()?.let {
+                                planModel = it
+                                items.addAll(planModel.dayList[0].schedulelist)
+                                mAdapter.notifyDataSetChanged()
+                                setTab()
+                            }
+                        }
+                    }
+
+                })
     }
 
     private fun getMLData() {
         val taste: TasteSendModel? = intent.getSerializableExtra("taste") as TasteSendModel
         taste?.let {
             val paramObject = TasteSendModel.toJson(taste)
-            Log.e("asd", paramObject.toString())
             NetworkHelper.networkInstance.sendTaste(RequestBody.create(MediaType.parse("application/json"), paramObject.toString()))
                     .enqueue(object : Callback<PlanModel> {
                         override fun onFailure(call: Call<PlanModel>, t: Throwable) {
                             t.printStackTrace()
-                            Log.e("asd", t.message)
+                            Log.e("get ml data error", t.message)
                         }
 
                         override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
-                            Log.e("taste input come", response.message() + response.code())
                             if (response.code() == 200) {
                                 response.body()?.let {
                                     planModel = it
@@ -191,18 +215,18 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
                             planModel.seqnum,
                             planModel.user))
                     NetworkHelper.networkInstance.uploadSchedule(RequestBody.create(MediaType.parse("application/json"), sendModel))
-                            .enqueue(object :Callback<PlanModel>{
+                            .enqueue(object : Callback<PlanModel> {
                                 override fun onFailure(call: Call<PlanModel>, t: Throwable) {
                                     t.printStackTrace()
                                 }
 
                                 override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
-                                    if(response.isSuccessful){
+                                    if (response.isSuccessful) {
                                         items[changePosition] = scheduleModel
                                         mAdapter.notifyDataSetChanged()
                                         items[changePosition].place.place_num
-                                    }else{
-                                        Toast.makeText(this@CalenderActivity, "변경에 실패했습니다.",Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        Toast.makeText(this@CalenderActivity, "변경에 실패했습니다.", Toast.LENGTH_SHORT).show()
                                     }
                                 }
 
@@ -273,6 +297,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun setTextFocus(position: Int) {
         tabs.forEach {
             it.setTypeface(Typeface.DEFAULT)

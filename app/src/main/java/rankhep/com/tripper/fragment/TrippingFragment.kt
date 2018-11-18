@@ -28,6 +28,7 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
         val intent  = Intent(context, CalenderActivity::class.java)
         intent.run{
             putExtra("planSeqNum", item.seqnum)
+            putExtra("isEdit", true)
         }
         //캘린더 액티비티에 일정 던지면 댐
         startActivityForResult(intent, 300)
@@ -35,10 +36,9 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
 
     override fun onReviewButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
         val intent = Intent(context, ReviewEditActivity::class.java).apply {
-            putExtra("reviewnum", 1)
+            putExtra("reviewnum", 85)
         }
         startActivityForResult(intent, 333)
-        //TODO : 리뷰 작성 액티비티 연결
     }
 
     override fun onDeleteButtonClickedListener(v: View, position: Int, item: TrippingListModel) {

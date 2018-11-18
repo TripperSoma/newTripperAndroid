@@ -62,4 +62,7 @@ interface RetrofitInterface {
     @GET("/search/place/{place}/{page}")
     fun search(@Path("place") place: String, @Path("page") page: Int = 0) : Call<List<PlaceSearchModel>>
 
+    @GET("/schedule/loadSeq/{seqnum}")
+fun getSchedultBySeqnum(@Path("seqnum") seqnum:Int) : Call<PlanModel>
+
 }
