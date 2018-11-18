@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:background="#fff"
     android:layout_marginBottom="16dp"
+    android:background="#fff"
     android:minHeight="227dp">
 
     <android.support.constraint.ConstraintLayout
@@ -26,6 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/timeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -36,6 +36,27 @@
             app:layout_constraintBottom_toBottomOf="@id/timeImage"
             app:layout_constraintLeft_toRightOf="@id/timeImage"
             app:layout_constraintTop_toTopOf="@id/timeImage" />
+
+        <ImageView
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:tint="@color/textGray"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/changeBtn"
+            android:layout_width="wrap_content"
+            app:layout_constraintRight_toLeftOf="@id/deleteBtn"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_create_black_24dp"
+            android:tint="@color/textGray"
+            android:layout_marginRight="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 
@@ -127,13 +148,14 @@
             app:layout_constraintTop_toTopOf="@id/addPictureBtn" />
 
         <EditText
+            android:id="@+id/reviewContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#fff"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="16dp"
+            android:background="#fff"
             android:hint="이치란 라멘, 어땠나요?"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/addPictureBtn" />

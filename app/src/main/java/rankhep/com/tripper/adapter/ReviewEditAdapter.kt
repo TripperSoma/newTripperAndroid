@@ -1,5 +1,6 @@
 package rankhep.com.tripper.adapter
 
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -8,33 +9,42 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import rankhep.com.tripper.R
-import rankhep.com.tripper.model.PlanModel
-import rankhep.com.tripper.model.ScheduleModel
+import rankhep.com.tripper.model.ReviewDetail
 import rankhep.com.tripper.util.CustomApplication
 
-class ReviewEditAdapter(val items:ArrayList<ScheduleModel>) : RecyclerView.Adapter<ReviewEditAdapter.ViewHolder> (){
+
+class ReviewEditAdapter(val items: ArrayList<ReviewDetail>) : RecyclerView.Adapter<ReviewEditAdapter.ViewHolder>() {
+    lateinit var mAdapter: ReviewEditPhotoListAdapter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_edit, parent, false))
         return vh
     }
 
-    override fun getItemCount(): Int  = items.size
+    override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val place = items[position].place
+        val place = items[position].schedule.place
+        mAdapter = if (items[position].photos.isEmpty())
+            ReviewEditPhotoListAdapter(ArrayList<Any>())
+        else
+            ReviewEditPhotoListAdapter(items[position].photos as ArrayList<Any>)
+
         holder.run {
             var hour: String = "22"
             var minute: String = "0"
             try {
-                hour = items[position].startTime.split("T")[1].split(":")[0]
-                minute = items[position].startTime.split("T")[1].split(":")[1]
+                hour = items[position].schedule.startTime.split("T")[1].split(":")[0]
+                minute = items[position].schedule.startTime.split("T")[1].split(":")[1]
             } catch (e: Exception) {
 
             }
-            hourEditText.setText("$hour")
-            minuteEditText.setText("${minute}")
+            timeText.text = "$hour : $minute"
             title.text = place.name
             subTitle.text = place.city
+            contentEditText.setText(items[position].content)
+            val layoutManager = LinearLayoutManager(v.context, LinearLayoutManager.HORIZONTAL, false)
+            pictureList.layoutManager = layoutManager
+            pictureList.adapter = mAdapter
             when (place.type) {
                 CustomApplication.NIGHT_CATEGORY -> {
                     themeImg.setImageResource(R.drawable.ic_brightness_3_black_24dp)
@@ -51,7 +61,6 @@ class ReviewEditAdapter(val items:ArrayList<ScheduleModel>) : RecyclerView.Adapt
                 CustomApplication.TOURIST_CATEGORY -> {
                     themeImg.setImageResource(R.drawable.ic_location_on_black_24dp)
                 }
-
                 CustomApplication.PLAYING_CATEGORY -> {
                     themeImg.setImageResource(R.drawable.ic_local_play_black_24dp)
                 }
@@ -59,14 +68,15 @@ class ReviewEditAdapter(val items:ArrayList<ScheduleModel>) : RecyclerView.Adapt
         }
     }
 
-    class ViewHolder(val v:View) : RecyclerView.ViewHolder(v){
-        val title = v.findViewById<TextView>(R.id.dailyTitle)
-        val subTitle = v.findViewById<TextView>(R.id.dailySubTitle)
-        val hourEditText = v.findViewById<EditText>(R.id.hourInputEditText)
-        val minuteEditText = v.findViewById<EditText>(R.id.minuteInputEditText)
-        val deleteBtn = v.findViewById<ImageView>(R.id.deleteBtn)
-        val changeBtn = v.findViewById<ImageView>(R.id.changeBtn)
-        val themeImg = v.findViewById<ImageView>(R.id.themeImg)
-
+    class ViewHolder(val v: View) : RecyclerView.ViewHolder(v) {
+        val title: TextView = v.findViewById(R.id.dailyTitle)
+        val timeText: TextView = v.findViewById(R.id.timeText)
+        val subTitle: TextView = v.findViewById(R.id.dailySubTitle)
+        val deleteBtn: ImageView = v.findViewById(R.id.deleteBtn)
+        val changeBtn: ImageView = v.findViewById(R.id.changeBtn)
+        val themeImg: ImageView = v.findViewById(R.id.themeImg)
+        val addPictureBtn: ImageView = v.findViewById(R.id.addPictureBtn)
+        val pictureList: RecyclerView = v.findViewById(R.id.pictureList)
+        val contentEditText: EditText = v.findViewById(R.id.reviewContent)
     }
 }

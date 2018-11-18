@@ -12,6 +12,7 @@ import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.activity.CalenderActivity
 import rankhep.com.tripper.activity.MainActivity
+import rankhep.com.tripper.activity.ReviewEditActivity
 import rankhep.com.tripper.adapter.TrippingAdapter
 import rankhep.com.tripper.model.PlanModel
 import rankhep.com.tripper.model.TrippingListModel
@@ -33,6 +34,10 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
     }
 
     override fun onReviewButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
+        val intent = Intent(context, ReviewEditActivity::class.java).apply {
+            putExtra("reviewnum", 1)
+        }
+        startActivityForResult(intent, 333)
         //TODO : 리뷰 작성 액티비티 연결
     }
 

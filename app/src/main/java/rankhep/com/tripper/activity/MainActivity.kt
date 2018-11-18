@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         myPlanBtn.setOnClickListener(this)
         homeBtn.setOnClickListener(this)
         logoutBtn.setOnClickListener(this)
+        checkUser()
     }
 
 
