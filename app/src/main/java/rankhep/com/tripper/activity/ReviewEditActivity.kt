@@ -2,10 +2,14 @@ package rankhep.com.tripper.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.TypedValue
@@ -70,7 +74,7 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
                 if (response.isSuccessful) {
                     response.body()?.let {
                         reviewModel = it
-                        reviewModel.days[0].detailDTOS?.let{items.addAll(it)}
+                        reviewModel.days[0].detailDTOS?.let { items.addAll(it) }
                         setTab()
                         reviewEditList.adapter = mAdapter
                     }
@@ -97,7 +101,7 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
                 typeface = Typeface.DEFAULT_BOLD
                 setOnClickListener { view: View ->
                     items.clear()
-                    reviewModel.days[it.day - 1].detailDTOS?.let{items.addAll(it)}
+                    reviewModel.days[it.day - 1].detailDTOS?.let { items.addAll(it) }
                     mAdapter.notifyDataSetChanged()
                     setTextFocus(it.day - 1)
                     setTabSpace(it.day - 1 + 0.0f)
@@ -149,12 +153,11 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
         if (resultCode == Activity.RESULT_OK) {
             try {
                 val uri: Uri = data?.data!!
-                val file = File(uri.path)
+                val file = File(getRealPathFromURI_API19(uri))
+
                 val requestFile = RequestBody.create(MediaType.parse("multipart/png"), file)
                 val imgBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
-                val paramObject = JSONObject()
-                paramObject.put("detailsnum", items[requestCode].detailsnum)
-                val body = RequestBody.create(MediaType.parse("application/json"), paramObject.toString())
+                val body = RequestBody.create(okhttp3.MultipartBody.FORM, items[requestCode].detailsnum.toString())
                 NetworkHelper.networkInstance.uploadReviewPhoto(body, imgBody).enqueue(object : Callback<String> {
                     override fun onFailure(call: Call<String>, t: Throwable) {
                         t.printStackTrace()
@@ -181,4 +184,26 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
         }
     }
 
+    private fun getRealPathFromURI_API19(uri: Uri): String {
+
+        var filePath = ""
+        val wholeID = DocumentsContract.getDocumentId(uri)
+
+        val id = wholeID.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+
+        val column = arrayOf<String>(MediaStore.Images.Media.DATA)
+
+        val sel = MediaStore.Images.Media._ID + "=?"
+
+        val cursor = contentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                column, sel, arrayOf<String>(id), null)
+
+        val columnIndex = cursor.getColumnIndex(column[0])
+
+        if (cursor.moveToFirst()) {
+            filePath = cursor.getString(columnIndex)
+        }
+        cursor.close()
+        return filePath
+    }
 }
