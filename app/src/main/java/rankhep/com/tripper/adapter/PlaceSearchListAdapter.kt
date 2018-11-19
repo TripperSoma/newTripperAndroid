@@ -32,8 +32,12 @@ class PlaceSearchListAdapter(private val items: ArrayList<PlaceSearchModel>, pri
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.run {
-            Picasso.get().load(items[position].picture).into(thumbImg)
-            Log.e("asd",items[position].picture)
+            try {
+                Picasso.get().load("" + items[position].picture).into(thumbImg)
+            } catch (e: Exception) {
+
+            }
+            Log.e("asd", items[position].picture)
             title.text = items[position].name
             subTitle.text = items[position].city
         }

@@ -17,6 +17,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_calendar.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
+import org.json.JSONObject
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.adapter.CalenderListAdapter
@@ -239,7 +240,13 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     }
 
     private fun addOrDelete() {
-        val sendModel = PlanModel.toJson(planModel)
+        val planModel_ = planModel
+        planModel_.dayList[selectedDay].schedulelist.clear()
+        planModel_.dayList[selectedDay].schedulelist.addAll(items)
+
+        val sendModel = PlanModel.toJson(planModel_)
+        val paramObject = JSONObject()
+        paramObject.put("modifySeqDTO", sendModel)
         NetworkHelper.networkInstance.addOrDeleteSchedule(RequestBody.create(MediaType.parse("application/json"), sendModel))
                 .enqueue(object : Callback<PlanModel> {
                     override fun onFailure(call: Call<PlanModel>, t: Throwable) {
@@ -249,10 +256,11 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
                     override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
                         if (response.isSuccessful) {
+                            response.body()?.let { planModel = it }
                             Toast.makeText(this@CalenderActivity, "성공했습니다.", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this@CalenderActivity, "실패했습니다.", Toast.LENGTH_SHORT).show()
-                            Log.e("delete or add", "" + response.code())
+                            Log.e("delete or add", "" + response.code()+response.message())
                         }
                     }
 
@@ -275,11 +283,12 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     }
 
     override fun changeButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
-        startSearchActivity(item.place.type, selectedDay, planModel.seqnum, true)
         changePosition = position
+        startSearchActivity(item.place.type, selectedDay, planModel.seqnum, true)
     }
 
     override fun deleteButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
+        Log.e("das", ""+planModel.seqnum)
         items.removeAt(position)
         mAdapter.notifyDataSetChanged()
         addOrDelete()

@@ -65,7 +65,7 @@ class AccountRegisterActivity : AppCompatActivity(), View.OnClickListener {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
                         Log.e("sd", "" + response.code() + "" + response.message())
                         when (response.code()) {
-                            400 -> Toast.makeText(applicationContext, "잘못된 요청입니다.", Toast.LENGTH_SHORT).show()
+                            400 -> Toast.makeText(applicationContext, "이메일 형식을 확인해주세요", Toast.LENGTH_SHORT).show()
                             403 -> Toast.makeText(applicationContext, "권한이 없습니다.", Toast.LENGTH_SHORT).show()
                             409 -> Toast.makeText(applicationContext, "중복된 메시지입니다.", Toast.LENGTH_SHORT).show()
                             500 -> Toast.makeText(applicationContext, "서버 에러입니다.", Toast.LENGTH_SHORT).show()

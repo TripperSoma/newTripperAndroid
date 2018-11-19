@@ -50,7 +50,7 @@ interface RetrofitInterface {
     fun uploadSchedule(@Body body: RequestBody): Call<PlanModel>
 
     @PUT("/schedule/addOrDelete")
-    fun addOrDeleteSchedule(@Body body:RequestBody) : Call<PlanModel>
+    fun addOrDeleteSchedule(@Body body: RequestBody): Call<PlanModel>
 
     @GET("/search/place/{place}/{page}")
     fun search(@Path("place") place: String, @Path("page") page: Int = 0): Call<List<PlaceSearchModel>>
@@ -64,5 +64,8 @@ interface RetrofitInterface {
                           @Part img: MultipartBody.Part): Call<PhotoResponseModel>
 
     @POST("/review/uploadContent")
-    fun uploadReview(@Body body: RequestBody):Call<ReviewSaveSendModel>
+    fun uploadReview(@Body body: RequestBody): Call<ReviewSaveSendModel>
+
+    @POST("/schedule/Delete/{seqnum}")
+    fun deleteSchedule(@Path("seqnum") seqnum: Int)
 }
