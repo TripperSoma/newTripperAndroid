@@ -200,7 +200,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
                     val scheduleModel = ScheduleModel(place, getStartDate())
                     items.add(scheduleModel)
                     mAdapter.notifyDataSetChanged()
-                    //TODO : 서버연동
+                    addOrDelete()
                 } else {
 
                 }
@@ -238,6 +238,27 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
         }
     }
 
+    private fun addOrDelete() {
+        val sendModel = PlanModel.toJson(planModel)
+        NetworkHelper.networkInstance.addOrDeleteSchedule(RequestBody.create(MediaType.parse("application/json"), sendModel))
+                .enqueue(object : Callback<PlanModel> {
+                    override fun onFailure(call: Call<PlanModel>, t: Throwable) {
+                        t.printStackTrace()
+                        Log.e("addOrDelete", t.message)
+                    }
+
+                    override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
+                        if (response.isSuccessful) {
+                            Toast.makeText(this@CalenderActivity, "성공했습니다.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this@CalenderActivity, "실패했습니다.", Toast.LENGTH_SHORT).show()
+                            Log.e("delete or add", "" + response.code())
+                        }
+                    }
+
+                })
+    }
+
     private fun getStartDate(): String {
         return if (items.isEmpty())
             LocalDateTime.parse("2018-10-13T09:00:00").toString()
@@ -261,7 +282,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     override fun deleteButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
         items.removeAt(position)
         mAdapter.notifyDataSetChanged()
-        //TODO : 서버연동
+        addOrDelete()
     }
 
 

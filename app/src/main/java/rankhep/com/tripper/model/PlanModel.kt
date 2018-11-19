@@ -8,6 +8,7 @@ data class PlanModel(val seqnum: Int,
                      val fromdate: String,
                      val toDate: String,
                      val user: String,
+                     val title:String,
                      val dayList: List<DayModel>) : Serializable {
     companion object {
         fun toJson(planModel: PlanModel): String {

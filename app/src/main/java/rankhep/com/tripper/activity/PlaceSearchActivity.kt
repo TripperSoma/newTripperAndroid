@@ -56,7 +56,6 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
         }
 
         searchBtn.setOnClickListener {
-
             NetworkHelper.networkInstance.search(searchEditText.text.toString())
                     .enqueue(object : Callback<List<PlaceSearchModel>> {
                         override fun onFailure(call: Call<List<PlaceSearchModel>>, t: Throwable) {

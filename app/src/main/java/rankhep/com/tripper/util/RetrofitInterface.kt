@@ -49,6 +49,9 @@ interface RetrofitInterface {
     @PUT("/schedule/update")
     fun uploadSchedule(@Body body: RequestBody): Call<PlanModel>
 
+    @PUT("/schedule/addOrDelete")
+    fun addOrDeleteSchedule(@Body body:RequestBody) : Call<PlanModel>
+
     @GET("/search/place/{place}/{page}")
     fun search(@Path("place") place: String, @Path("page") page: Int = 0): Call<List<PlaceSearchModel>>
 

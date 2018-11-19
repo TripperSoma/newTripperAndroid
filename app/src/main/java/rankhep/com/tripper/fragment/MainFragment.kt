@@ -77,7 +77,10 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
             }
 
             R.id.setLocationBtn -> {
-                if (SharedPrefManager(context!!).isLogin()) {
+                if (v.trip_edit_text.text.toString() != "부산") {
+                    Toast.makeText(context, "서비스 준비중입니다.", Toast.LENGTH_SHORT).show()
+
+                } else if (SharedPrefManager(context!!).isLogin()) {
                     val intent = Intent(context, SetMakeScheduleActivity::class.java)
                     startActivityForResult(intent, 555)
                     activity?.overridePendingTransition(R.anim.left_in, R.anim.left_out)
