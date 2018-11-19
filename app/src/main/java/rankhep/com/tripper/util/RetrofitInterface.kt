@@ -16,15 +16,6 @@ interface RetrofitInterface {
 
     @POST("user/create")
     fun registerUser(@Body body: RequestBody): Call<User>
-//    @Header("Content-Type") contentType: String = "application/json",
-//    @Header("Accept") Accept: String = "*/*"
-//    {
-//        "device_token": "string",
-//        "email": "string",
-//        "name": "string",
-//        "password": "string",
-//        "sex": 0
-//    }
 
     @POST("user/login/")
     fun loginUser(@Body body: RequestBody): Call<User>

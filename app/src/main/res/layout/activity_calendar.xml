@@ -146,46 +146,6 @@
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/tabLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:weightSum="3"-->
-        <!--app:layout_constraintTop_toBottomOf="@id/topInfoLayout">-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/firstDay"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:text="1일차"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="14sp"-->
-            <!--android:textStyle="bold" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/secondDay"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:text="2일차"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="14sp" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/thirdDay"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:text="3일차"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="14sp" />-->
-    <!--</LinearLayout>-->
     <HorizontalScrollView
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

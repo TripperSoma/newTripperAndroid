@@ -1,5 +1,6 @@
 package rankhep.com.tripper.activity
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
@@ -16,6 +17,8 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_review_edit.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -57,8 +60,6 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
             finish()
         }
         finishBtn.setOnClickListener {
-            //TODO : 완료 누르면 전부 업데이트
-            Log.e(",asd", reviewModel.toString())
             val sendModel = ReviewSaveSendModel(reviewNum, ArrayList<ReviewDetail>(), reviewModel.seqnum)
             reviewModel.days.forEach {
                 it.detailDTOS?.forEach { review ->
@@ -77,7 +78,7 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
                             if (response.isSuccessful) {
                                 finish()
                                 Toast.makeText(applicationContext, "저장에 성공했습니다.", Toast.LENGTH_SHORT).show()
-                            }else{
+                            } else {
                                 Toast.makeText(applicationContext, "저장에 실했습니다.", Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -164,10 +165,24 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
 
 
     override fun addPictureBtnListener(v: View, position: Int) {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent, position)
+        TedPermission.with(this)
+                .setPermissionListener(object : PermissionListener {
+                    override fun onPermissionGranted() {
+                        val intent = Intent()
+                        intent.type = "image/*"
+                        intent.action = Intent.ACTION_GET_CONTENT
+                        startActivityForResult(intent, position)
+                    }
+
+                    override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
+                        Toast.makeText(applicationContext, "권한 설정이 필요해요.", Toast.LENGTH_SHORT).show()
+                    }
+
+                })
+                .setRationaleMessage("파일 업로드를 위해 파일 저장소의 권한이 필요합니다.")
+                .setDeniedMessage("[설정] > [권한] 에서 권한을 허용할 수 있습니다..")
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check()
     }
 
 
