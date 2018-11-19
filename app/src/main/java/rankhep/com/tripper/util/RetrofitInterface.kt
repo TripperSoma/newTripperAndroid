@@ -61,11 +61,16 @@ interface RetrofitInterface {
     @Multipart
     @POST("/review/uploadPhoto")
     fun uploadReviewPhoto(@Part("detailsnum") body: RequestBody,
+                          @Part("seqnum") seqBody: RequestBody,
                           @Part img: MultipartBody.Part): Call<PhotoResponseModel>
 
     @POST("/review/uploadContent")
     fun uploadReview(@Body body: RequestBody): Call<ReviewSaveSendModel>
 
     @POST("/schedule/Delete/{seqnum}")
-    fun deleteSchedule(@Path("seqnum") seqnum: Int)
+    fun deleteSchedule(@Path("seqnum") seqnum: Int): Call<Void>
+
+    @PUT("/schedule/inputScheduleName")
+    fun sendTitle(@Body body: RequestBody): Call<Void>
+
 }

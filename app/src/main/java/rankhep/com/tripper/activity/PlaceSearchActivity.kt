@@ -41,6 +41,7 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
 
                     override fun onResponse(call: Call<List<PlaceSearchModel>>, response: Response<List<PlaceSearchModel>>) {
                         if (response.isSuccessful) {
+                            placeItem.clear()
                             response.body()?.let { placeItem.addAll(it) }
                             mAdapter.notifyDataSetChanged()
                         } else {
@@ -56,6 +57,7 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
         }
 
         searchBtn.setOnClickListener {
+            Log.e("asd", "Asdas")
             NetworkHelper.networkInstance.search(searchEditText.text.toString())
                     .enqueue(object : Callback<List<PlaceSearchModel>> {
                         override fun onFailure(call: Call<List<PlaceSearchModel>>, t: Throwable) {
@@ -67,6 +69,8 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
                             if (response.isSuccessful) {
                                 placeItem.clear()
                                 response.body()?.let { placeItem.addAll(it) }
+                            } else {
+                                Log.e("aa", "" + response.code())
                             }
                         }
 

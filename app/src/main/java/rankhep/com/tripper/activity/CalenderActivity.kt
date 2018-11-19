@@ -2,15 +2,18 @@ package rankhep.com.tripper.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -117,6 +120,20 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
         backBtn.setOnClickListener {
             finish()
+            NetworkHelper.networkInstance.deleteSchedule(planModel.seqnum).enqueue(object : Callback<Void> {
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    t.printStackTrace()
+                    Log.e("Error", t.message)
+                }
+
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    if (response.isSuccessful) {
+
+                    } else {
+                    }
+                }
+
+            })
             overridePendingTransition(R.anim.right_in, R.anim.right_out)
         }
         nightPlaceBtn.setOnClickListener(this)
@@ -260,7 +277,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
                             Toast.makeText(this@CalenderActivity, "성공했습니다.", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this@CalenderActivity, "실패했습니다.", Toast.LENGTH_SHORT).show()
-                            Log.e("delete or add", "" + response.code()+response.message())
+                            Log.e("delete or add", "" + response.code() + response.message())
                         }
                     }
 
@@ -278,8 +295,40 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     }
 
     private fun addSchedule() {
-        startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
-        finish()
+        val ad: AlertDialog.Builder = AlertDialog.Builder(CalenderActivity@ this)
+
+        ad.setTitle("일정 제목을 설정해주세요")
+        ad.setMessage("일정 제목을 설정해주세요")
+
+        val et = EditText(this)
+        et.setText("" + planModel.title)
+        ad.setView(et);
+
+        ad.setPositiveButton("Yes") { p0, p1 ->
+            val title = TitleSendModel(et.text.toString(), planModel.seqnum, planModel.user)
+            val sendModel = TitleSendModel.toJson(title)
+            NetworkHelper.networkInstance.sendTitle(RequestBody.create(MediaType.parse("application/json"), sendModel))
+                    .enqueue(object :Callback<Void>{
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            t.printStackTrace()
+                            Log.e("send title", t.message)
+                        }
+
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            if(response.isSuccessful){
+                                startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
+                                finish()
+                            }else{
+                                Log.e("send title", ""+response.code())
+                            }
+                        }
+
+                    })
+            p0!!.dismiss()
+        }
+
+        ad.setNegativeButton("No") { p0, p1 -> p0!!.dismiss() }
+        ad.show()
     }
 
     override fun changeButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
@@ -288,7 +337,7 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
     }
 
     override fun deleteButtonClickedListener(v: View, position: Int, item: ScheduleModel) {
-        Log.e("das", ""+planModel.seqnum)
+        Log.e("das", "" + planModel.seqnum)
         items.removeAt(position)
         mAdapter.notifyDataSetChanged()
         addOrDelete()

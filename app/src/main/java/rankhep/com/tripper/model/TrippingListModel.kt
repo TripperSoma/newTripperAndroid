@@ -6,7 +6,7 @@ data class TrippingListModel(var fromdate:String?,
                              var region:String,
                              val seqnum:Int,
                              val reviewnum:Int,
-                             var title:String,
+                             var title:String?,
                              var toDate:String?):Serializable
 //{
 //    "fromdate": "2018-11-18T04:22:06.776Z",

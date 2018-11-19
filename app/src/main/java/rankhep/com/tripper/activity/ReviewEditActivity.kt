@@ -196,7 +196,8 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
                 val requestFile = RequestBody.create(MediaType.parse("multipart/png"), file)
                 val imgBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
                 val body = RequestBody.create(okhttp3.MultipartBody.FORM, items[requestCode].detailsnum.toString())
-                NetworkHelper.networkInstance.uploadReviewPhoto(body, imgBody).enqueue(object : Callback<PhotoResponseModel> {
+                val seqBody = RequestBody.create(okhttp3.MultipartBody.FORM, reviewModel.seqnum.toString())
+                NetworkHelper.networkInstance.uploadReviewPhoto(body, seqBody, imgBody).enqueue(object : Callback<PhotoResponseModel> {
                     override fun onFailure(call: Call<PhotoResponseModel>, t: Throwable) {
                         t.printStackTrace()
                         Log.e("upload error", t.message)
@@ -246,7 +247,7 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
     }
 
     override fun deleteBtnClickedListener(v: View, position: Int, review: ReviewDetail) {
-        review.run{
+        review.run {
             content = ""
             photos.clear()
         }

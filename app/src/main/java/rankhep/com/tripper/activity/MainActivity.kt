@@ -107,6 +107,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             333 -> {
                 checkUser()
             }
+            900 -> {
+                replaceFragment(trippingFragment)
+            }
         }
     }
 

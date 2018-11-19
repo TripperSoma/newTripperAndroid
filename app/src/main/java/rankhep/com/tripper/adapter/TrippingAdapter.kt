@@ -40,7 +40,10 @@ class TrippingAdapter(val items: ArrayList<TrippingListModel>, val listener: OnC
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.run {
-            tripTitleText.text = items[position].title
+            if (items[position].title == null ||items[position].title == "" || items[position].title?.isEmpty()!!)
+                tripTitleText.text = "제목을 정해주세요"
+            else
+                tripTitleText.text = items[position].title
             if (items[position].fromdate != null && items[position].toDate != null)
                 tripDateText.text = "" + items[position].fromdate!!.split("T")[0] + items[position].toDate!!.split("T")[0]
             else

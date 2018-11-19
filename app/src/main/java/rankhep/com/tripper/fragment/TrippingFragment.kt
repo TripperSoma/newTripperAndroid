@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_tripping.view.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
@@ -14,7 +15,6 @@ import rankhep.com.tripper.activity.CalenderActivity
 import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.activity.ReviewEditActivity
 import rankhep.com.tripper.adapter.TrippingAdapter
-import rankhep.com.tripper.model.PlanModel
 import rankhep.com.tripper.model.TrippingListModel
 import rankhep.com.tripper.util.SharedPrefManager
 import retrofit2.Call
@@ -24,14 +24,12 @@ import retrofit2.Response
 class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnClickListener {
 
     override fun onChangeButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
-        //TODO : 일정 변경 액티비티 연동
-        val intent  = Intent(context, CalenderActivity::class.java)
-        intent.run{
+        val intent = Intent(context, CalenderActivity::class.java)
+        intent.run {
             putExtra("planSeqNum", item.seqnum)
             putExtra("isEdit", true)
         }
-        //캘린더 액티비티에 일정 던지면 댐
-        startActivityForResult(intent, 300)
+        startActivityForResult(intent, 900)
     }
 
     override fun onReviewButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
@@ -42,9 +40,23 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
     }
 
     override fun onDeleteButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
-        items.removeAt(position)
-        mAdapter.notifyDataSetChanged()
-//        NetworkHelper.networkInstance.uploadSchedule()
+
+        NetworkHelper.networkInstance.deleteSchedule(items[position].seqnum).enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                t.printStackTrace()
+                Log.e("Error", t.message)
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    items.removeAt(position)
+                    mAdapter.notifyDataSetChanged()
+                } else {
+                    Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        })
     }
 
     private lateinit var mAdapter: TrippingAdapter

@@ -87,7 +87,7 @@ class CustomGridImageView : ConstraintLayout {
             else -> {
                 secondImageView.visibility = View.VISIBLE
                 thirdImageView.visibility = View.VISIBLE
-                moreImageText.visibility = View.VISIBLE
+//                moreImageText.visibility = View.VISIBLE
             }
         }
     }

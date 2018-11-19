@@ -49,8 +49,8 @@
             android:hint="찾으시는 곳을 검색해보세요."
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/toolbarMenuBtn"
-            app:layout_constraintRight_toLeftOf="@id/searchBtn"
+            app:layout_constraintLeft_toRightOf="@+id/toolbarMenuBtn"
+            app:layout_constraintRight_toLeftOf="@+id/searchBtn"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
