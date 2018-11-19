@@ -4,7 +4,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,18 +17,19 @@ import rankhep.com.tripper.util.CustomApplication
 
 class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemClickedListener) : RecyclerView.Adapter<ReviewEditAdapter.ViewHolder>() {
 
-    fun notifyPhotoChanged(){
+    fun notifyPhotoChanged() {
         mAdapter.notifyDataSetChanged()
     }
 
     interface ItemClickedListener {
         fun addPictureBtnListener(v: View, position: Int)
+        fun deleteBtnClickedListener(v: View, position: Int, review: ReviewDetail)
     }
 
     lateinit var mAdapter: ReviewEditPhotoListAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_edit, parent, false), listener,items)
+        val vh = ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_review_edit, parent, false), listener, items)
         return vh
     }
 
@@ -46,7 +46,6 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemCl
                 hour = items[position].schedule.startTime.split("T")[1].split(":")[0]
                 minute = items[position].schedule.startTime.split("T")[1].split(":")[1]
             } catch (e: Exception) {
-
             }
             timeText.text = "$hour : $minute"
             title.text = place.name
@@ -76,11 +75,12 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemCl
                 }
             }
 
+            contentEditText.hint = "${items[position].schedule.place.name}, 어땠나요?"
 
         }
     }
 
-    class ViewHolder(val v: View, val listener: ItemClickedListener,items: ArrayList<ReviewDetail>) : RecyclerView.ViewHolder(v) {
+    class ViewHolder(val v: View, val listener: ItemClickedListener, items: ArrayList<ReviewDetail>) : RecyclerView.ViewHolder(v) {
         val title: TextView = v.findViewById(R.id.dailyTitle)
         val timeText: TextView = v.findViewById(R.id.timeText)
         val subTitle: TextView = v.findViewById(R.id.dailySubTitle)
@@ -95,7 +95,7 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemCl
                 listener.addPictureBtnListener(it, adapterPosition)
             }
 
-            contentEditText.addTextChangedListener(object : TextWatcher{
+            contentEditText.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(p0: Editable?) {
                 }
 
@@ -106,6 +106,10 @@ class ReviewEditAdapter(val items: ArrayList<ReviewDetail>, val listener: ItemCl
                     items[adapterPosition].content = p0.toString()
                 }
             })
+
+            deleteBtn.setOnClickListener {
+                listener.deleteBtnClickedListener(it,adapterPosition, items[adapterPosition])
+            }
         }
     }
 

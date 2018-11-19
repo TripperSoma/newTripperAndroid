@@ -244,4 +244,13 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
         cursor.close()
         return filePath
     }
+
+    override fun deleteBtnClickedListener(v: View, position: Int, review: ReviewDetail) {
+        review.run{
+            content = ""
+            photos.clear()
+        }
+        mAdapter.notifyPhotoChanged()
+        mAdapter.notifyDataSetChanged()
+    }
 }
