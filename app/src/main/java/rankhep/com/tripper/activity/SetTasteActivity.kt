@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_set_taste.*
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.TasteSendModel
+import rankhep.com.tripper.util.SharedPrefManager
 
 class SetTasteActivity : AppCompatActivity() {
 
@@ -25,7 +26,7 @@ class SetTasteActivity : AppCompatActivity() {
                     0,
                     shoppingProgressbar.getTaste(),
                     touristProgressbar.getTaste(),
-                    "string",
+                    SharedPrefManager(applicationContext).getUserData().name,
                     withChild.getIsChecked(),
                     withOld.getIsChecked())
             val intent = Intent(this@SetTasteActivity, CalenderActivity::class.java)

@@ -117,7 +117,7 @@ class MainFragment : Fragment(), View.OnClickListener, AppBarLayout.OnOffsetChan
 
         v.apply {
             main_toolbar_menu_btn.setImageDrawable(menuBtn)
-            main_toolbar_search_btn.setImageDrawable(searchBtn)
+//            main_toolbar_search_btn.setImageDrawable(searchBtn)
             main_toolbar_title_text.setTextColor(color)
         }
     }

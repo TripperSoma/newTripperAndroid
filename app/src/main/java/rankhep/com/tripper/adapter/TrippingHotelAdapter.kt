@@ -31,7 +31,7 @@ class TrippingHotelAdapter(val items: ArrayList<HotelModel>, val listener: OnIte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.run {
             val transformation = RoundedCornersTransformation(4, 1)
-            Picasso.get().load(items[position].piture).transform(transformation).into(backgroundImg)
+            Picasso.get().load(items[position].picture).transform(transformation).into(backgroundImg)
             hotelNameText.text = items[position].name
             locationText.text = items[position].city
         }
