@@ -33,6 +33,7 @@ class PlaceSearchListAdapter(private val items: ArrayList<PlaceSearchModel>, pri
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.run {
             try {
+                Log.e("asd","a"+ items[position].picture)
                 Picasso.get().load("" + items[position].picture).into(thumbImg)
             } catch (e: Exception) {
 

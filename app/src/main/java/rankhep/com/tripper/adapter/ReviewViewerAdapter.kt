@@ -41,7 +41,7 @@ class ReviewViewerAdapter(var items: ArrayList<ReviewListModel>) : RecyclerView.
             CustomApplication.REVIEW_TOURIST_VIEW_TYPE -> {
                 val item: ReviewDetail = items[position].content as ReviewDetail
                 (holder as TouristViewHolder).run {
-                    item.schedule.startTime?.let { timeText.text = it }
+                    item.schedule.startTime?.let { timeText.text = it.split('T')[1] }
                     touristNameText.text = item.schedule.place.name
                     touristReviewText.text = item.content
                     gridImage.setImageList(item.photos)

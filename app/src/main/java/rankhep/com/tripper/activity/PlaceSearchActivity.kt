@@ -68,6 +68,7 @@ class PlaceSearchActivity : AppCompatActivity(), PlaceSearchListAdapter.OnItemCl
                         override fun onResponse(call: Call<List<PlaceSearchModel>>, response: Response<List<PlaceSearchModel>>) {
                             if (response.isSuccessful) {
                                 placeItem.clear()
+                                mAdapter.notifyDataSetChanged()
                                 response.body()?.let { placeItem.addAll(it) }
                             } else {
                                 Log.e("aa", "" + response.code())

@@ -26,7 +26,7 @@ class SetTasteActivity : AppCompatActivity() {
                     0,
                     shoppingProgressbar.getTaste(),
                     touristProgressbar.getTaste(),
-                    SharedPrefManager(applicationContext).getUserData().name,
+                    SharedPrefManager(applicationContext).getUserData().email,
                     withChild.getIsChecked(),
                     withOld.getIsChecked())
             val intent = Intent(this@SetTasteActivity, CalenderActivity::class.java)

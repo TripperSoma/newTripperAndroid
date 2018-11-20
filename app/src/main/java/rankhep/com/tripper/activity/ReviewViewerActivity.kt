@@ -61,6 +61,7 @@ class ReviewViewerActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedLi
                                     .resize(thumbImg.measuredWidth, thumbImg.measuredHeight)
                                     .into(thumbImg)
                             reviewNameText.text = review.user
+                            reviewTitleText.text = review.title
                             Log.e("ㄸㄸㄷ", review.days.size.toString())
                             changeReviewToReviewListData()
                         }

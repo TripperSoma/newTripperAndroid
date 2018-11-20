@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Typeface
+import android.net.Network
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -84,6 +85,13 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
                         }
 
                     })
+        }
+
+        addThumbnailBtn.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(intent, 500)
         }
     }
 
@@ -188,38 +196,75 @@ class ReviewEditActivity : AppCompatActivity(), ReviewEditAdapter.ItemClickedLis
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            try {
-                val uri: Uri = data?.data!!
-                val file = File(getRealPathFromURI_API19(uri))
+        when (requestCode) {
+            500 ->{
+                Log.e("error", "제대로 들어옴1")
+                if(resultCode == Activity.RESULT_OK){
+                    val uri: Uri = data?.data!!
+                    val file = File(getRealPathFromURI_API19(uri))
+                    Log.e("error", "제대로 들어옴2 : ${uri}")
+                    val requestFile = RequestBody.create(MediaType.parse("multipart/png"), file)
+                    val imgBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                    val seqBody = RequestBody.create(okhttp3.MultipartBody.FORM, reviewModel.seqnum.toString())
+                    val emailBody = RequestBody.create(okhttp3.MultipartBody.FORM, reviewModel.user)
 
-                val requestFile = RequestBody.create(MediaType.parse("multipart/png"), file)
-                val imgBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
-                val body = RequestBody.create(okhttp3.MultipartBody.FORM, items[requestCode].detailsnum.toString())
-                val seqBody = RequestBody.create(okhttp3.MultipartBody.FORM, reviewModel.seqnum.toString())
-                NetworkHelper.networkInstance.uploadReviewPhoto(body, seqBody, imgBody).enqueue(object : Callback<PhotoResponseModel> {
-                    override fun onFailure(call: Call<PhotoResponseModel>, t: Throwable) {
-                        t.printStackTrace()
-                        Log.e("upload error", t.message)
-                    }
+                    NetworkHelper.networkInstance.uploadThumbnail(imgBody,emailBody,seqBody)
+                            .enqueue(object:Callback<PhotoResponseModel>{
+                                override fun onFailure(call: Call<PhotoResponseModel>, t: Throwable) {
+                                    t.printStackTrace()
+                                    Log.e("error", t.message)
+                                }
 
-                    override fun onResponse(call: Call<PhotoResponseModel>, response: Response<PhotoResponseModel>) {
-                        if (response.isSuccessful) {
-                            response.body()?.let {
-                                items[requestCode].photos.add(it.bucket)
-                                mAdapter.notifyPhotoChanged()
-                            }
-                        } else {
-                            Toast.makeText(this@ReviewEditActivity, "이미지 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
-                            Log.e("upload error", "" + response.code())
-                        }
-                    }
+                                override fun onResponse(call: Call<PhotoResponseModel>, response: Response<PhotoResponseModel>) {
+                                    if(response.isSuccessful){
+                                        response.body()?.let{
+                                            reviewModel.thumb = it.bucket
+                                            Toast.makeText(applicationContext,"썸네일 업로드 성공",Toast.LENGTH_SHORT).show()
+                                        }
+                                        Log.e("error", ""+response.code())
+                                    }else{
+                                        Log.e("error", ""+response.code())
+                                    }
+                                }
 
-                })
-            } catch (e: Exception) {
-                e.printStackTrace()
+                            })
+                }
             }
+            else -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    try {
+                        val uri: Uri = data?.data!!
+                        val file = File(getRealPathFromURI_API19(uri))
 
+                        val requestFile = RequestBody.create(MediaType.parse("multipart/png"), file)
+                        val imgBody = MultipartBody.Part.createFormData("file", file.name, requestFile)
+                        val body = RequestBody.create(okhttp3.MultipartBody.FORM, items[requestCode].detailsnum.toString())
+                        val seqBody = RequestBody.create(okhttp3.MultipartBody.FORM, reviewModel.seqnum.toString())
+                        NetworkHelper.networkInstance.uploadReviewPhoto(body, seqBody, imgBody).enqueue(object : Callback<PhotoResponseModel> {
+                            override fun onFailure(call: Call<PhotoResponseModel>, t: Throwable) {
+                                t.printStackTrace()
+                                Log.e("upload error", t.message)
+                            }
+
+                            override fun onResponse(call: Call<PhotoResponseModel>, response: Response<PhotoResponseModel>) {
+                                if (response.isSuccessful) {
+                                    response.body()?.let {
+                                        items[requestCode].photos.add(it.bucket)
+                                        mAdapter.notifyPhotoChanged()
+                                    }
+                                } else {
+                                    Toast.makeText(this@ReviewEditActivity, "이미지 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                                    Log.e("upload error", "" + response.code())
+                                }
+                            }
+
+                        })
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+                }
+            }
         }
     }
 
