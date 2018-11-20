@@ -1,5 +1,6 @@
 package rankhep.com.tripper.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_hotel_reservation.view.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
+import rankhep.com.tripper.activity.HotelInfoActivity
 import rankhep.com.tripper.activity.MainActivity
 import rankhep.com.tripper.adapter.TrippingHotelAdapter
 import rankhep.com.tripper.model.HotelModel
@@ -69,7 +71,11 @@ class HotelReservationFragment : Fragment(), View.OnClickListener, TrippingHotel
     }
 
     override fun onItemClicked(v: View, position: Int) {
-
+        items[position].placenum
+        val intent = Intent(context, HotelInfoActivity::class.java).apply {
+            putExtra("placenum", items[position].placenum)
+        }
+        startActivity(intent)
     }
 
 }

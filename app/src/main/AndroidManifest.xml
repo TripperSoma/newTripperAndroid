@@ -33,7 +33,8 @@
         <activity android:name=".activity.AddCompleteActivity" />
         <activity android:name=".activity.ProfileSettingActivity" />
         <activity android:name=".activity.PlaceSearchActivity" />
-        <activity android:name=".activity.ReviewEditActivity"></activity>
+        <activity android:name=".activity.ReviewEditActivity" />
+        <activity android:name=".activity.HotelInfoActivity"></activity>
     </application>
 
 </manifest>
