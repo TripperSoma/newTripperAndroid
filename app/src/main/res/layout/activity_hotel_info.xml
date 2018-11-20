@@ -83,7 +83,7 @@
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="@id/bedImg"
                 app:layout_constraintTop_toBottomOf="@id/hotelImg"
-                tools:text="정보" />
+                android:text="정보" />
 
             <TextView
                 android:id="@+id/infoText"
@@ -93,6 +93,8 @@
                 android:layout_marginTop="4dp"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/info"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/info"
