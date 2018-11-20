@@ -2,7 +2,6 @@ package rankhep.com.tripper.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -120,20 +119,21 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
         backBtn.setOnClickListener {
             finish()
-            NetworkHelper.networkInstance.deleteSchedule(planModel.seqnum).enqueue(object : Callback<Void> {
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    t.printStackTrace()
-                    Log.e("Error", t.message)
-                }
-
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    if (response.isSuccessful) {
-
-                    } else {
+            if (!intent.getBooleanExtra("isEdit", false))
+                NetworkHelper.networkInstance.deleteSchedule(planModel.seqnum).enqueue(object : Callback<Void> {
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        t.printStackTrace()
+                        Log.e("Error", t.message)
                     }
-                }
 
-            })
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        if (response.isSuccessful) {
+
+                        } else {
+                        }
+                    }
+
+                })
             overridePendingTransition(R.anim.right_in, R.anim.right_out)
         }
         nightPlaceBtn.setOnClickListener(this)
@@ -258,8 +258,8 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
     private fun addOrDelete() {
         val planModel_ = planModel
-        planModel_.dayList[selectedDay].schedulelist.clear()
-        planModel_.dayList[selectedDay].schedulelist.addAll(items)
+        planModel_.dayList[selectedDay - 1].schedulelist.clear()
+        planModel_.dayList[selectedDay - 1].schedulelist.addAll(items)
 
         val sendModel = PlanModel.toJson(planModel_)
         val paramObject = JSONObject()
@@ -273,7 +273,11 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
 
                     override fun onResponse(call: Call<PlanModel>, response: Response<PlanModel>) {
                         if (response.isSuccessful) {
-                            response.body()?.let { planModel = it }
+                            response.body()?.let {
+                                planModel = it
+                                items.clear()
+                                items.addAll(planModel.dayList[selectedDay - 1].schedulelist)
+                            }
                             Toast.makeText(this@CalenderActivity, "성공했습니다.", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this@CalenderActivity, "실패했습니다.", Toast.LENGTH_SHORT).show()
@@ -308,18 +312,18 @@ class CalenderActivity : AppCompatActivity(), View.OnClickListener, CalenderList
             val title = TitleSendModel(et.text.toString(), planModel.seqnum, planModel.user)
             val sendModel = TitleSendModel.toJson(title)
             NetworkHelper.networkInstance.sendTitle(RequestBody.create(MediaType.parse("application/json"), sendModel))
-                    .enqueue(object :Callback<Void>{
+                    .enqueue(object : Callback<Void> {
                         override fun onFailure(call: Call<Void>, t: Throwable) {
                             t.printStackTrace()
                             Log.e("send title", t.message)
                         }
 
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                            if(response.isSuccessful){
+                            if (response.isSuccessful) {
                                 startActivity(Intent(this@CalenderActivity, AddCompleteActivity::class.java))
                                 finish()
-                            }else{
-                                Log.e("send title", ""+response.code())
+                            } else {
+                                Log.e("send title", "" + response.code())
                             }
                         }
 

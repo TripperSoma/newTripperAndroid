@@ -73,4 +73,6 @@ interface RetrofitInterface {
     @PUT("/schedule/inputScheduleName")
     fun sendTitle(@Body body: RequestBody): Call<Void>
 
+    @GET("/hotel/getBusan/{pagenum}")
+    fun getHotel(@Path("pagenum") pagenum: Int = 1): Call<List<HotelModel>>
 }
