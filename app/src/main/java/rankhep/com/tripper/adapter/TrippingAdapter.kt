@@ -47,7 +47,7 @@ class TrippingAdapter(val items: ArrayList<TrippingListModel>, val listener: OnC
             if (items[position].fromdate != null && items[position].toDate != null)
                 tripDateText.text = "" + items[position].fromdate!!.split("T")[0] + items[position].toDate!!.split("T")[0]
             else
-                tripDateText.text = "미정"
+                tripDateText.text = "20xx.xx.xx ~ 20xx.xx.xx"
             tripPlaceText.text = items[position].region
         }
     }

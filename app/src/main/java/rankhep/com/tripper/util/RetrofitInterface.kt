@@ -75,4 +75,7 @@ interface RetrofitInterface {
 
     @GET("/hotel/getBusan/{pagenum}")
     fun getHotel(@Path("pagenum") pagenum: Int = 1): Call<List<HotelModel>>
+
+    @GET("schedule/isvalidmodify/{seqnum}")
+fun getIsValid(@Path("seqnum") seqnum:Int) : Call<Boolean>
 }

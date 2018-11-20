@@ -1,8 +1,10 @@
 package rankhep.com.tripper.fragment
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnClickListener {
 
     override fun onChangeButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
@@ -29,7 +32,28 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
             putExtra("planSeqNum", item.seqnum)
             putExtra("isEdit", true)
         }
-        startActivityForResult(intent, 900)
+        NetworkHelper.networkInstance.getIsValid(item.seqnum).enqueue(object : Callback<Boolean> {
+            override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                Log.e("asd", t.message)
+                t.printStackTrace()
+                Toast.makeText(context, "서버가 터진것같은데요?!" + t.message, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        if (it) {
+                            startActivityForResult(intent, 900)
+                        } else {
+                            Toast.makeText(context, "리뷰 작성중에는 일정 수정이 안됩니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {
+
+                }
+            }
+
+        })
     }
 
     override fun onReviewButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
@@ -40,23 +64,30 @@ class TrippingFragment : Fragment(), View.OnClickListener, TrippingAdapter.OnCli
     }
 
     override fun onDeleteButtonClickedListener(v: View, position: Int, item: TrippingListModel) {
+        val alert_confirm = AlertDialog.Builder(context!!)
+        alert_confirm.setMessage("일정을 삭제 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+                DialogInterface.OnClickListener { dialog, which ->
+                    NetworkHelper.networkInstance.deleteSchedule(items[position].seqnum).enqueue(object : Callback<Void> {
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            t.printStackTrace()
+                            Log.e("Error", t.message)
+                        }
 
-        NetworkHelper.networkInstance.deleteSchedule(items[position].seqnum).enqueue(object : Callback<Void> {
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                t.printStackTrace()
-                Log.e("Error", t.message)
-            }
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            if (response.isSuccessful) {
+                                items.removeAt(position)
+                                mAdapter.notifyDataSetChanged()
+                            } else {
+                                Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    items.removeAt(position)
-                    mAdapter.notifyDataSetChanged()
-                } else {
-                    Toast.makeText(context, "실패", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        })
+                    })
+                }).setNegativeButton("취소",
+                DialogInterface.OnClickListener { dialog, which ->
+                })
+        val alert = alert_confirm.create()
+        alert.show()
     }
 
     private lateinit var mAdapter: TrippingAdapter
