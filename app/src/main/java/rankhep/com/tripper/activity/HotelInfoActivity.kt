@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_hotel_info.*
+import kotlinx.android.synthetic.main.toolbar_account.*
 import rankhep.com.dhlwn.utils.NetworkHelper
 import rankhep.com.tripper.R
 import rankhep.com.tripper.model.PlaceDetailInfo
@@ -18,6 +19,9 @@ class HotelInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hotel_info)
+        backBtn.setOnClickListener {
+            finish()
+        }
 
         val placenum = intent.getIntExtra("placenum", 1)
 

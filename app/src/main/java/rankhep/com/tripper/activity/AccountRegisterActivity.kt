@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_account_register.*
+import kotlinx.android.synthetic.main.toolbar_account.*
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONObject
@@ -23,6 +24,9 @@ class AccountRegisterActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_account_register)
 
         accountRegisterFinishBtn.setOnClickListener(this)
+        backBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onClick(v: View) {
